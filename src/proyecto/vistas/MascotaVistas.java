@@ -580,7 +580,9 @@ float [] hsbColor1 = Color.RGBtoHSB(237, 215, 138, null);
         
         Mascota mascota = new Mascota();
         MascotaData md = new MascotaData();
+   
         mascota = md.buscarMascota(codigoMascotaActual);
+        
         System.out.println(mascota.getAlias());
         mascota.setAlias(JTFNombre.getText());
         mascota.setSexo(JTFSexo.getText());
@@ -589,7 +591,7 @@ float [] hsbColor1 = Color.RGBtoHSB(237, 215, 138, null);
         mascota.setColorPelo(JTFColor.getText());
         mascota.setFechaNacimiento(JDCFecha.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
         mascota.setPesoMedio(mascotaActual().getPesoMedio());
-        mascota.setPeso(Integer.parseInt(JTFPeso.getText()));
+        mascota.setPeso(Double.parseDouble(JTFPeso.getText()));
         mascota.setIdCliente(mascotaActual().getIdCliente());
         mascota.setCodigo(mascotaActual().getCodigo());
         md.modificarMascota(mascota);
@@ -623,6 +625,7 @@ if(evt.getStateChange() == ItemEvent.DESELECTED){
         if(evt.getStateChange()==ItemEvent.SELECTED){
               llenarTextos((Mascota)JCBSeleccionMascota.getSelectedItem());
           codigoMascotaActual=((Mascota)JCBSeleccionMascota.getSelectedItem()).getCodigo();
+            System.out.println("codigo:"+codigoMascotaActual);
         }  
         
           

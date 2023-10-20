@@ -5,7 +5,6 @@
  */
 package proyecto.vistas;
 
-import javax.swing.JOptionPane;
 import proyecto.conexion.ClienteData;
 import proyecto.entidades.Cliente;
 
@@ -16,8 +15,8 @@ import proyecto.entidades.Cliente;
 
 public class ClienteVista extends javax.swing.JInternalFrame {
 
-       ClienteData cliendata= new ClienteData();
- Cliente clien= new Cliente();
+
+
 
     /**
      * Creates new form Cliente
@@ -49,19 +48,19 @@ public class ClienteVista extends javax.swing.JInternalFrame {
         jtNombreAlt = new javax.swing.JTextField();
         jtDireccion = new javax.swing.JTextField();
         jtTelefono = new javax.swing.JTextField();
-        jpBuscar = new javax.swing.JPanel();
-        imgBuscar = new javax.swing.JLabel();
-        jpNuevo = new javax.swing.JPanel();
-        jlNuevo = new javax.swing.JLabel();
-        jpBorrar = new javax.swing.JPanel();
-        jlBorrar = new javax.swing.JLabel();
-        jpEditar = new javax.swing.JPanel();
-        jlEditar = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
+        jLabel9 = new javax.swing.JLabel();
+        jPanel4 = new javax.swing.JPanel();
+        jLabel10 = new javax.swing.JLabel();
+        jPanel8 = new javax.swing.JPanel();
+        jLabel12 = new javax.swing.JLabel();
+        jPanel7 = new javax.swing.JPanel();
+        jLabel11 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
-        setMaximumSize(new java.awt.Dimension(437, 440));
         setMinimumSize(new java.awt.Dimension(437, 440));
         setPreferredSize(new java.awt.Dimension(437, 440));
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         bg.setBackground(new java.awt.Color(255, 255, 255));
         bg.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -138,157 +137,121 @@ public class ClienteVista extends javax.swing.JInternalFrame {
         });
         bg.add(jtTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 260, 130, -1));
 
-        jpBuscar.setBackground(new java.awt.Color(54, 169, 213));
-        jpBuscar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jpBuscar.addMouseListener(new java.awt.event.MouseAdapter() {
+        jPanel3.setBackground(new java.awt.Color(54, 169, 213));
+        jPanel3.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jPanel3.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jpBuscarMouseClicked(evt);
+                jPanel3MouseClicked(evt);
             }
         });
 
-        imgBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyecto/iconos/icons8-search-32.png"))); // NOI18N
-        imgBuscar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        imgBuscar.addMouseListener(new java.awt.event.MouseAdapter() {
+        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyecto/iconos/icons8-search-32.png"))); // NOI18N
+        jLabel9.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jLabel9.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                imgBuscarMouseClicked(evt);
+                jLabel9MouseClicked(evt);
             }
             public void mouseReleased(java.awt.event.MouseEvent evt) {
-                imgBuscarMouseReleased(evt);
+                jLabel9MouseReleased(evt);
             }
         });
 
-        javax.swing.GroupLayout jpBuscarLayout = new javax.swing.GroupLayout(jpBuscar);
-        jpBuscar.setLayout(jpBuscarLayout);
-        jpBuscarLayout.setHorizontalGroup(
-            jpBuscarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jpBuscarLayout.createSequentialGroup()
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(18, 18, 18)
-                .addComponent(imgBuscar)
+                .addComponent(jLabel9)
                 .addContainerGap(20, Short.MAX_VALUE))
         );
-        jpBuscarLayout.setVerticalGroup(
-            jpBuscarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jpBuscarLayout.createSequentialGroup()
-                .addComponent(imgBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        bg.add(jpBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 90, 70, 30));
+        bg.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 90, 70, 30));
 
-        jpNuevo.setBackground(new java.awt.Color(54, 169, 213));
-        jpNuevo.addMouseListener(new java.awt.event.MouseAdapter() {
+        jPanel4.setBackground(new java.awt.Color(54, 169, 213));
+
+        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyecto/iconos/icons8-add-32.png"))); // NOI18N
+        jLabel10.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jpNuevoMouseClicked(evt);
+                jLabel10MouseClicked(evt);
             }
         });
 
-        jlNuevo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyecto/iconos/icons8-add-32.png"))); // NOI18N
-        jlNuevo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jlNuevo.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jlNuevoMouseClicked(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jpNuevoLayout = new javax.swing.GroupLayout(jpNuevo);
-        jpNuevo.setLayout(jpNuevoLayout);
-        jpNuevoLayout.setHorizontalGroup(
-            jpNuevoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jpNuevoLayout.createSequentialGroup()
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(18, 18, 18)
-                .addComponent(jlNuevo)
+                .addComponent(jLabel10)
                 .addContainerGap(20, Short.MAX_VALUE))
         );
-        jpNuevoLayout.setVerticalGroup(
-            jpNuevoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpNuevoLayout.createSequentialGroup()
-                .addComponent(jlNuevo)
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                .addComponent(jLabel10)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        bg.add(jpNuevo, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 330, 70, 30));
+        bg.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 350, 70, 30));
 
-        jpBorrar.setBackground(new java.awt.Color(54, 169, 213));
-        jpBorrar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jpBorrar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jpBorrarMouseClicked(evt);
-            }
-        });
+        jPanel8.setBackground(new java.awt.Color(54, 169, 213));
+        jPanel8.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
-        jlBorrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyecto/iconos/icons8-delete-32.png"))); // NOI18N
-        jlBorrar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jlBorrar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jlBorrarMouseClicked(evt);
-            }
-        });
+        jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyecto/iconos/icons8-delete-32.png"))); // NOI18N
 
-        javax.swing.GroupLayout jpBorrarLayout = new javax.swing.GroupLayout(jpBorrar);
-        jpBorrar.setLayout(jpBorrarLayout);
-        jpBorrarLayout.setHorizontalGroup(
-            jpBorrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jpBorrarLayout.createSequentialGroup()
+        javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
+        jPanel8.setLayout(jPanel8Layout);
+        jPanel8Layout.setHorizontalGroup(
+            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel8Layout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addComponent(jlBorrar)
+                .addComponent(jLabel12)
                 .addContainerGap(20, Short.MAX_VALUE))
         );
-        jpBorrarLayout.setVerticalGroup(
-            jpBorrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jpBorrarLayout.createSequentialGroup()
-                .addComponent(jlBorrar)
+        jPanel8Layout.setVerticalGroup(
+            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel8Layout.createSequentialGroup()
+                .addComponent(jLabel12)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        bg.add(jpBorrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 330, -1, 30));
+        bg.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 350, -1, 30));
 
-        jpEditar.setBackground(new java.awt.Color(54, 169, 213));
-        jpEditar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jpEditar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jpEditarMouseClicked(evt);
-            }
-        });
+        jPanel7.setBackground(new java.awt.Color(54, 169, 213));
+        jPanel7.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
-        jlEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyecto/iconos/icons8-edit-32.png"))); // NOI18N
-        jlEditar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jlEditar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jlEditarMouseClicked(evt);
-            }
-        });
+        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyecto/iconos/icons8-edit-32.png"))); // NOI18N
+        jLabel11.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
-        javax.swing.GroupLayout jpEditarLayout = new javax.swing.GroupLayout(jpEditar);
-        jpEditar.setLayout(jpEditarLayout);
-        jpEditarLayout.setHorizontalGroup(
-            jpEditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jpEditarLayout.createSequentialGroup()
+        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
+        jPanel7.setLayout(jPanel7Layout);
+        jPanel7Layout.setHorizontalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel7Layout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addComponent(jlEditar)
+                .addComponent(jLabel11)
                 .addContainerGap(28, Short.MAX_VALUE))
         );
-        jpEditarLayout.setVerticalGroup(
-            jpEditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpEditarLayout.createSequentialGroup()
-                .addComponent(jlEditar)
+        jPanel7Layout.setVerticalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel7Layout.createSequentialGroup()
+                .addComponent(jLabel11)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        bg.add(jpEditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 330, 80, 30));
+        bg.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 350, 80, 30));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyecto/iconos/istockphoto-1296848705-612x612.jpg"))); // NOI18N
         bg.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 420, 410));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(bg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(bg, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
+        getContentPane().add(bg, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 435, 418));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -310,14 +273,14 @@ public class ClienteVista extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jtTelefonoActionPerformed
 
-    private void imgBuscarMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_imgBuscarMouseReleased
+    private void jLabel9MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel9MouseReleased
     
         
         
-    }//GEN-LAST:event_imgBuscarMouseReleased
+    }//GEN-LAST:event_jLabel9MouseReleased
 
-    private void imgBuscarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_imgBuscarMouseClicked
- 
+    private void jLabel9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel9MouseClicked
+ ClienteData cliendata= new ClienteData();
 int dni = Integer.parseInt(jtDocumento.getText());
 
 Cliente cliente = cliendata.buscarClientePorDNI(dni);
@@ -334,21 +297,37 @@ if (cliente != null) {
            
    
         
-    }//GEN-LAST:event_imgBuscarMouseClicked
+    }//GEN-LAST:event_jLabel9MouseClicked
 
-    private void jpBuscarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jpBuscarMouseClicked
+    private void jPanel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel3MouseClicked
+  ClienteData cliendata= new ClienteData();
+int dni = Integer.parseInt(jtDocumento.getText());
 
-    }//GEN-LAST:event_jpBuscarMouseClicked
+Cliente cliente = cliendata.buscarClientePorDNI(dni);
 
-    private void jlNuevoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlNuevoMouseClicked
+if (cliente != null) {
+    jtDocumento.setText(String.valueOf(dni));
+    jtApellido.setText(cliente.getApellido());
+    jtNombre.setText(cliente.getNombre());
+    jtNombreAlt.setText(cliente.getNombreAlt());
+    jtDireccion.setText(cliente.getDireccion());
+       jtTelefono.setText(String.valueOf(cliente.getTelefono()));
+}
+     
 
+        
+    }//GEN-LAST:event_jPanel3MouseClicked
+
+    private void jLabel10MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel10MouseClicked
+ ClienteData cliendata= new ClienteData();
+ Cliente clien= new Cliente();
  
 clien.setDocumento(Integer.parseInt(jtDocumento.getText()));
 clien.setApellido(jtApellido.getText());
 clien.setNombre(jtNombre.getText());
 clien.setNombreAlt(jtNombreAlt.getText());
 clien.setDireccion(jtDireccion.getText());
-clien.setTelefono(Long.parseLong(jtTelefono.getText()));
+clien.setTelefono(Integer.parseInt(jtTelefono.getText()));
 cliendata.guardarCliente(clien);
 
         
@@ -360,56 +339,7 @@ cliendata.guardarCliente(clien);
        jtTelefono.setText("");   
         
         
-    }//GEN-LAST:event_jlNuevoMouseClicked
-
-    private void jpNuevoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jpNuevoMouseClicked
-    
-    }//GEN-LAST:event_jpNuevoMouseClicked
-
-    private void jlEditarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlEditarMouseClicked
-//        try {
-
-                Cliente clien1=cliendata.buscarClientePorDNI(Integer.parseInt(jtDocumento.getText()));
-                System.out.println(clien1);
-      clien1.setDocumento(Integer.parseInt(jtDocumento.getText()));
-clien1.setApellido(jtApellido.getText());
-clien1.setNombre(jtNombre.getText());
-clien1.setNombreAlt(jtNombreAlt.getText());
-clien1.setDireccion(jtDireccion.getText());
-clien1.setTelefono(Long.parseLong(jtTelefono.getText()));
-cliendata.modificarCliente(clien1);
-//        } catch (java.lang.NullPointerException ex) {
-//            JOptionPane.showMessageDialog(null, "Error al modificar cliente, revise que los datos sean correctos", "Error", JOptionPane.ERROR_MESSAGE);
-//        }
-    
-       
-    }//GEN-LAST:event_jlEditarMouseClicked
-
-    private void jpEditarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jpEditarMouseClicked
-
-    }//GEN-LAST:event_jpEditarMouseClicked
-
-    private void jlBorrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlBorrarMouseClicked
-try{
-int dni= Integer.parseInt(jtDocumento.getText());
-  
-   int id=  cliendata.buscarClientePorDNI(dni).getIdCliente();
-   cliendata.borrarCliente(id);
-}catch(NullPointerException e){
-            JOptionPane.showMessageDialog(null, "Error al eliminar cliente, revise que los datos sean correctos", "Error", JOptionPane.ERROR_MESSAGE);
-}
-  jtDocumento.setText("");
-    jtApellido.setText("");
-    jtNombre.setText("");
-    jtNombreAlt.setText("");
-    jtDireccion.setText("");
-       jtTelefono.setText("");  
-    }//GEN-LAST:event_jlBorrarMouseClicked
-
-    private void jpBorrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jpBorrarMouseClicked
-
-
-    }//GEN-LAST:event_jpBorrarMouseClicked
+    }//GEN-LAST:event_jLabel10MouseClicked
 
 
  
@@ -417,8 +347,10 @@ int dni= Integer.parseInt(jtDocumento.getText());
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel bg;
-    private javax.swing.JLabel imgBuscar;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -426,13 +358,11 @@ int dni= Integer.parseInt(jtDocumento.getText());
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jlBorrar;
-    private javax.swing.JLabel jlEditar;
-    private javax.swing.JLabel jlNuevo;
-    private javax.swing.JPanel jpBorrar;
-    private javax.swing.JPanel jpBuscar;
-    private javax.swing.JPanel jpEditar;
-    private javax.swing.JPanel jpNuevo;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel7;
+    private javax.swing.JPanel jPanel8;
     private javax.swing.JTextField jtApellido;
     private javax.swing.JTextField jtDireccion;
     private javax.swing.JTextField jtDocumento;
