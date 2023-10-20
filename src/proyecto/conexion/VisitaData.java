@@ -23,11 +23,11 @@ import proyecto.entidades.Visita;
  *
  * @author piry
  */
-public class VisistaData {
+public class VisitaData {
     private Connection con = null;
     private ClienteData clienteData = new ClienteData();
     private List<Cliente> clientes = clienteData.ClientesTodos();
-    public VisistaData(){
+    public VisitaData(){
         con = Conexion.getConexion();
     }
     
