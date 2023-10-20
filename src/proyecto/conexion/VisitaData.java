@@ -31,7 +31,7 @@ public class VisitaData {
         con = Conexion.getConexion();
     }
     
-    public void guardarVisita(Visita visita){
+    public Cliente guardarVisita(Visita visita){
         String sql = "INSET INTO visita(codigoTratamiento, codigoMascota, fechaVisita, sintomas, pesoPromedio)"
                 + "VALUES (?,?,?,?,?)";
         boolean existeCliente = false;
@@ -56,15 +56,51 @@ public class VisitaData {
                     visita.setIdVisita(rs.getInt(1));
                     JOptionPane.showMessageDialog(null, "Visita guardada");
                 }
+                
+                return cliente1;
 
             } catch (SQLException ex) {
                 JOptionPane.showMessageDialog(null, "Error al acceder a la tabla visita");
             }
         }else{
-            List<Mascota> mascotasDelCliente = cliente1.getMascotas();
-            for (Mascota mascota : mascotasDelCliente) {
-                
+            return cliente1;
+        }
+        return null;
+    }
+    public void modificarVisita(Visita visita){
+        String sql = "UPDATE visita SET codigoTratamiento = ?, codigoMascota = ?, fechaVisita = ?, sintomas = ?, pesoPromedio = ?"
+                + " WHERE idVisita = ?";
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, visita.getTratamiento().getCodigo());
+            ps.setInt(2, visita.getMascota().getCodigo());
+            ps.setDate(3, Date.valueOf(visita.getFecha()));
+            ps.setString(4, visita.getSintomas());
+            ps.setDouble(5, visita.getPesoPromedio());
+            ps.setInt(6, visita.getIdVisita());
+            int exito = ps.executeUpdate();
+            if(exito == 1){
+                JOptionPane.showMessageDialog(null, "Visita modificada");
             }
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Visita");
+        }
+    }
+    
+    public void eliminarVisita(int idVisita){
+        String sqlBorrarVisita = "DELETE FROM visita WHERE idVisita=?;";
+        try {
+            PreparedStatement ps = con.prepareStatement(sqlBorrarVisita);
+            ps.setInt(1, idVisita);
+            int exito = ps.executeUpdate();
+            if (exito == 1) {
+                JOptionPane.showMessageDialog(null, "Visita eliminada","Éxito",JOptionPane.INFORMATION_MESSAGE);
+              
+            }
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al accceder a la tabla visita");
         }
     }
     

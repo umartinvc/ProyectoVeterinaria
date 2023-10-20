@@ -26,24 +26,24 @@ public class ProyectoVeterinaria {
 
         ClienteData clienteData = new ClienteData();
 
-       Cliente cliente = new Cliente(13,"Johan", "Luc", "Calle real 1","Lop", 123456623,381335567);
+       Cliente cliente = new Cliente(8,"Johan", "Luciano", "Calle real 123","Lopez", 1234675623, 333333333);
         
-       //clienteData.guardarCliente(cliente);
-        clienteData.modificarCliente(cliente);
+       //lienteData.guardarCliente(cliente);
+        //clienteData.modificarCliente(cliente);
         //clienteData.borrarCliente(1);
         
         //clienteData.guardarCliente(cliente);
-        //System.out.println(clienteData.buscarClientePorDNI(45062053)); 
+        
 
-//        MascotaData md = new MascotaData();
-//        Mascota mascota;
-//        mascota = new Mascota("Popo", "mezcla", "macho", "rrope", "pelado", LocalDate.of(2020,1,23), 35.5, 40.0, cliente.getIdCliente());
-//        
+        MascotaData md = new MascotaData();
+        Mascota mascota;
+        mascota = new Mascota("Popo", "mezcla", "macho", "rrope", "pelado", LocalDate.of(2020,1,23), 35.5, 40.0, cliente.getIdCliente());
+        
        
         //md.guardarMascota(mascota);
-//        List<Mascota> mascotas = new ArrayList<Mascota>();
-//                mascotas = md.obtenerMascotas(8);
-//                System.out.println(mascotas);
+        List<Mascota> mascotas = new ArrayList<Mascota>();
+                mascotas = md.obtenerMascotas(8);
+                System.out.println(mascotas);
 //System.out.println(clienteData.MascotasdeCliente(8));
 
 
@@ -51,7 +51,7 @@ public class ProyectoVeterinaria {
        
   //      MascotaData md = new MascotaData();
        //md.borrarMascota(2);
-        //clienteData.ClientesTodos();
+        clienteData.ClientesTodos();
 
     }
     

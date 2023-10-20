@@ -50,7 +50,27 @@ public class TratamientoData {
         }
         
     }
-    
+    public Tratamiento buscarTratamiento(int idTratamiento){
+        String sql= "SELECT tipo, descripcion, importe, estado FROM mascota WHERE codigo_Tratamiento = ?";
+        Tratamiento tratamiento = null;
+        try{
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, idTratamiento);
+            ResultSet rs= ps.executeQuery();
+            if (rs.next()){
+                tratamiento = new Tratamiento();
+                tratamiento.setTipo(rs.getString("tipo"));
+                tratamiento.setDescripcion(rs.getString("descripcion"));
+                tratamiento.setImporte(rs.getDouble("importe"));
+                tratamiento.setActivo(rs.getBoolean("estado"));
+                
+            }
+
+        }catch (SQLException ex){
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla tratamiento");
+        }
+        return tratamiento;
+    }
     public void modificarTratamiento(Tratamiento tratamiento){
         String sql = "UPDATE tratamiento SET tipo = ?, descripcion = ?, importe = ?, estado = ?"
                 + " WHERE codigo_Tratamiento = ?";
@@ -59,8 +79,8 @@ public class TratamientoData {
             ps.setString(1, tratamiento.getTipo());
             ps.setString(2, tratamiento.getDescripcion());
             ps.setDouble(3, tratamiento.getImporte());
-            ps.setBoolean(5, tratamiento.isActivo());
-            ps.setInt(6, tratamiento.getCodigo());
+            ps.setBoolean(4, tratamiento.isActivo());
+            ps.setInt(5, tratamiento.getCodigo());
             int exito = ps.executeUpdate();
             if(exito == 1){
                 JOptionPane.showMessageDialog(null, "Tratamiento modificado");

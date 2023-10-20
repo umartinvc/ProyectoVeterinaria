@@ -70,8 +70,8 @@ public void borrarMascota(int codigo){
     }
 }
 public void modificarMascota(Mascota mascota){
-    String sql = "UPDATE mascota SET alias=?, sexo=?, especie=?, raza=?, colorPelo=?, fechaNacimiento=', pesoMedio=?, pesoActual=?, idCliente=?"
-            + "WHERE codigo=?";
+    String sql = "UPDATE mascota SET alias= ?, sexo= ?, especie=?, raza=?, colorPelo=?, fechaNacimiento=?, pesoMedio=?, pesoActual=?, idCliente=?"
+            + " WHERE codigo=?";
     try{
         PreparedStatement psMascota= con.prepareStatement(sql);
        psMascota.setString(1, mascota.getAlias());
@@ -83,6 +83,7 @@ public void modificarMascota(Mascota mascota){
         psMascota.setDouble(7, mascota.getPesoMedio());
         psMascota.setDouble(8, mascota.getPeso());
         psMascota.setInt(9, mascota.getIdCliente());
+        psMascota.setInt(10, mascota.getCodigo());
         int exito=psMascota.executeUpdate();
         if(exito==1){
             JOptionPane.showMessageDialog(null, "Mascota modificada");
@@ -127,6 +128,7 @@ public List<Mascota> obtenerMascotas(int id){
         Mascota mascota;
         while(rs.next()){
            mascota = new Mascota();
+           mascota.setCodigo(rs.getInt("codigo"));
             mascota.setAlias(rs.getString("alias"));
             mascota.setSexo(rs.getString("sexo"));
             mascota.setEspecie(rs.getString("especie"));

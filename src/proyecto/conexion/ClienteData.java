@@ -17,7 +17,7 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import proyecto.entidades.Cliente;
 import proyecto.entidades.Mascota;
-import proyecto.conexion.Conexion;
+
 /**
  *
  * @author Matìas Fernàndez
@@ -39,7 +39,7 @@ public class ClienteData {
             psCliente.setString(3, cliente.getNombre());
             psCliente.setString(4, cliente.getNombreAlt());
             psCliente.setString(5, cliente.getDireccion());
-            psCliente.setLong(6, cliente.getTelefono());
+            psCliente.setInt(6, cliente.getTelefono());
             psCliente.executeUpdate();
             ResultSet rsCliente= psCliente.getGeneratedKeys();
             if (rsCliente.next()) {
@@ -81,18 +81,17 @@ public class ClienteData {
              psModCliente.setString(3, cliente.getNombre());
              psModCliente.setString(4, cliente.getNombreAlt());
              psModCliente.setString(5, cliente.getDireccion());
-             psModCliente.setLong(6, cliente.getTelefono());
+             psModCliente.setInt(6, cliente.getTelefono());
              psModCliente.setInt(7, cliente.getIdCliente());
             int exito= psModCliente.executeUpdate();
              if (exito==1) {
-               
+                 System.out.println("ola");
                  JOptionPane.showMessageDialog(null, "El cliente se modifico con exito","Éxito",JOptionPane.INFORMATION_MESSAGE);
              }
          } catch (SQLException ex) {
      JOptionPane.showMessageDialog(null,"No se pudo modificar al cliente","ERROR",JOptionPane.ERROR_MESSAGE);
          }
     }
-    
     public Cliente buscarClientePorDNI(int dni){
     String sql = "SELECT idCliente, apellido, nombre, nombreAlt, direccion, telefono FROM cliente WHERE dni=?";
     Cliente cliente1 = null;
@@ -102,7 +101,7 @@ public class ClienteData {
         psBuscarCliente.setInt(1, dni);
         ResultSet rs = psBuscarCliente.executeQuery();
         
-        if (rs.next()) {         
+        if (rs.next()) {
             cliente1 = new Cliente();
             cliente1.setIdCliente(rs.getInt("idCliente"));
             cliente1.setDocumento(dni);
@@ -110,7 +109,7 @@ public class ClienteData {
             cliente1.setNombre(rs.getString("nombre"));
             cliente1.setNombreAlt(rs.getString("nombreAlt"));
             cliente1.setDireccion(rs.getString("direccion"));
-            cliente1.setTelefono(rs.getLong("telefono"));
+            cliente1.setTelefono(rs.getInt("telefono"));
         } else {
             cliente1 = null;
         }
@@ -121,8 +120,6 @@ public class ClienteData {
     }  
     return cliente1;
 }
-    
-    
     
     public List<Cliente>ClientesTodos(){
         String sql="SELECT idCliente, dni, apellido, nombre, nombreAlt, direccion, telefono FROM cliente";
@@ -138,7 +135,7 @@ public class ClienteData {
                 cliente.setNombre(rs.getString("nombre"));
                 cliente.setNombreAlt(rs.getString("nombreAlt"));
                 cliente.setDireccion(rs.getString("direccion"));
-                cliente.setTelefono(rs.getLong("telefono"));
+                cliente.setTelefono(rs.getInt("telefono"));
                 clientes.add(cliente);
             }
         } catch (SQLException e){
