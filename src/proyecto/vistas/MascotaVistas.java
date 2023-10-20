@@ -8,6 +8,7 @@ package proyecto.vistas;
 
 import java.awt.Color;
 import java.awt.Point;
+import java.awt.event.ItemEvent;
 
 import java.time.ZoneId;
 import java.time.ZoneOffset;
@@ -20,11 +21,13 @@ import proyecto.conexion.MascotaData;
 import proyecto.entidades.Cliente;
 import proyecto.entidades.Mascota;
 
+
 /**
  *
  * @author benja
  */
 public class MascotaVistas extends javax.swing.JInternalFrame {
+    int codigoMascotaActual;
 
     /** Creates new form Mascota */
     public MascotaVistas() {
@@ -41,12 +44,58 @@ public void cargarCombo (){
     }
 }
 public void cargarComboM (int id){
+    
     MascotaData md = new MascotaData();
     List<Mascota> mascotaslista = md.obtenerMascotas(id);
     
     for(Mascota mascota: mascotaslista){
         JCBSeleccionMascota.addItem(mascota);
+        
     }
+    
+}
+public void borrarComboM(){
+    JCBSeleccionMascota.removeAllItems();
+}
+public void limpiarComboM(int idCliente){
+        int cant;
+        cant= JCBSeleccionMascota.getItemCount();
+        for(int i=0; i<= cant; i++){
+            if (((Mascota)JCBSeleccionMascota.getItemAt(i)).getIdCliente()!=idCliente){
+                JCBSeleccionMascota.removeItem(JCBSeleccionMascota.getItemAt(i));
+            }
+        }
+}
+public void llenarTextos(Mascota mascota){
+    if(mascota != null){
+        
+    Date date = Date.from(mascota.getFechaNacimiento().atStartOfDay(ZoneId.systemDefault()).toInstant());
+    JTFNombre.setText(mascota.getAlias());
+    JTFColor.setText(mascota.getColorPelo());
+    JTFEspecie.setText(mascota.getEspecie());
+    JTFRaza.setText(mascota.getRaza());
+    JTFPeso.setText(Double.toString(mascota.getPeso()));
+    JTFSexo.setText(mascota.getSexo());
+    JDCFecha.setDate(date);
+    
+    
+        
+    }else{
+    JTFNombre.setText("");
+    JTFColor.setText("");
+    JTFEspecie.setText("");
+    JTFRaza.setText("");
+    JTFPeso.setText("");
+    JTFSexo.setText("");
+    JDCFecha.setDate(null);
+        
+    }
+    }
+public Mascota mascotaActual(){
+    MascotaData md = new MascotaData();
+    Mascota mascota = md.buscarMascota(codigoMascotaActual);
+    
+    return mascota;
 }
 float [] hsbColor1 = Color.RGBtoHSB(237, 215, 138, null);
 
@@ -86,13 +135,13 @@ float [] hsbColor1 = Color.RGBtoHSB(237, 215, 138, null);
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         JTFSexo = new javax.swing.JTextField();
-        JDCFecha = new com.toedter.calendar.JDateChooser();
         jPanel4 = new javax.swing.JPanel();
         JBGuardar2 = new javax.swing.JButton();
         JBCancelar2 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         JBGuardarN = new javax.swing.JButton();
         JBCancelar = new javax.swing.JButton();
+        JDCFecha = new com.toedter.calendar.JDateChooser();
         jLabel1 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
@@ -100,6 +149,7 @@ float [] hsbColor1 = Color.RGBtoHSB(237, 215, 138, null);
         setTitle("\t\t\tMASCOTA");
         setPreferredSize(new java.awt.Dimension(760, 492));
         setRequestFocusEnabled(false);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         BackGround.setBackground(new java.awt.Color(255, 255, 255));
         BackGround.setPreferredSize(new java.awt.Dimension(720, 480));
@@ -112,17 +162,17 @@ float [] hsbColor1 = Color.RGBtoHSB(237, 215, 138, null);
         BackGround.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 10, -1, -1));
 
         JCBSeleccionDuenio.setEnabled(false);
-        JCBSeleccionDuenio.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                JCBSeleccionDuenioActionPerformed(evt);
+        JCBSeleccionDuenio.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                JCBSeleccionDuenioItemStateChanged(evt);
             }
         });
         BackGround.add(JCBSeleccionDuenio, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 190, -1));
 
         JCBSeleccionMascota.setEnabled(false);
-        JCBSeleccionMascota.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                JCBSeleccionMascotaActionPerformed(evt);
+        JCBSeleccionMascota.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                JCBSeleccionMascotaItemStateChanged(evt);
             }
         });
         BackGround.add(JCBSeleccionMascota, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 30, 210, -1));
@@ -300,7 +350,6 @@ float [] hsbColor1 = Color.RGBtoHSB(237, 215, 138, null);
 
         BackGround.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, -1, 260));
         BackGround.add(JTFSexo, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 280, 90, -1));
-        BackGround.add(JDCFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(103, 310, 90, 40));
 
         jPanel4.setBackground(new java.awt.Color(238, 189, 138));
 
@@ -407,21 +456,13 @@ float [] hsbColor1 = Color.RGBtoHSB(237, 215, 138, null);
         );
 
         BackGround.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 280, 150, 90));
+        BackGround.add(JDCFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 310, 90, 40));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyecto/iconos/Colorful Cute Cats Illustration Desktop Wallpaper.png"))); // NOI18N
         jLabel1.setText("jLabel1");
         BackGround.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 750, 460));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(BackGround, javax.swing.GroupLayout.DEFAULT_SIZE, 750, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(BackGround, javax.swing.GroupLayout.DEFAULT_SIZE, 460, Short.MAX_VALUE)
-        );
+        getContentPane().add(BackGround, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 758, 470));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -448,13 +489,6 @@ float [] hsbColor1 = Color.RGBtoHSB(237, 215, 138, null);
     private void JTFColorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JTFColorActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_JTFColorActionPerformed
-
-    private void JCBSeleccionDuenioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JCBSeleccionDuenioActionPerformed
-       JCBSeleccionMascota.removeAllItems();
-        Cliente clienteSelect = (Cliente)(JCBSeleccionDuenio.getSelectedItem());
-       
-        cargarComboM(clienteSelect.getIdCliente());
-    }//GEN-LAST:event_JCBSeleccionDuenioActionPerformed
 
     private void JBCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBCancelarActionPerformed
        jPanel2.setVisible(false);
@@ -545,16 +579,21 @@ float [] hsbColor1 = Color.RGBtoHSB(237, 215, 138, null);
     private void JBGuardar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBGuardar2ActionPerformed
         
         Mascota mascota = new Mascota();
-        Mascota mascota1 = new Mascota();
-        mascota1= (Mascota) JCBSeleccionMascota.getSelectedItem();
         MascotaData md = new MascotaData();
-        mascota = md.buscarMascota(mascota.getCodigo());
+        mascota = md.buscarMascota(codigoMascotaActual);
+        System.out.println(mascota.getAlias());
         mascota.setAlias(JTFNombre.getText());
+        mascota.setSexo(JTFSexo.getText());
         mascota.setEspecie(JTFEspecie.getText());
         mascota.setRaza(JTFRaza.getText());
         mascota.setColorPelo(JTFColor.getText());
+        mascota.setFechaNacimiento(JDCFecha.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+        mascota.setPesoMedio(mascotaActual().getPesoMedio());
         mascota.setPeso(Integer.parseInt(JTFPeso.getText()));
-        mascota.setSexo(JTFSexo.getText());
+        mascota.setIdCliente(mascotaActual().getIdCliente());
+        mascota.setCodigo(mascotaActual().getCodigo());
+        md.modificarMascota(mascota);
+        
         
     }//GEN-LAST:event_JBGuardar2ActionPerformed
 
@@ -565,25 +604,29 @@ float [] hsbColor1 = Color.RGBtoHSB(237, 215, 138, null);
         JCBSeleccionMascota.setEnabled(false);
     }//GEN-LAST:event_JBCancelar2ActionPerformed
 
-    private void JCBSeleccionMascotaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JCBSeleccionMascotaActionPerformed
+    private void JCBSeleccionDuenioItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_JCBSeleccionDuenioItemStateChanged
+if(evt.getStateChange() == ItemEvent.SELECTED){
+   Cliente clienteSelect = (Cliente) JCBSeleccionDuenio.getSelectedItem();
+   JCBSeleccionMascota.removeAllItems();
+    cargarComboM(clienteSelect.getIdCliente());
+}
+if(evt.getStateChange() == ItemEvent.DESELECTED){
+    Cliente clienteSelect= null;
+    JCBSeleccionMascota.removeAllItems();
+}       
 
-      Mascota mascota1 = new Mascota();
-      MascotaData md = new MascotaData();
-      mascota1 = md.buscarMascota(((Mascota)JCBSeleccionMascota.getSelectedItem()).getCodigo());
+        
       
-      
-      Date date = Date.from(mascota1.getFechaNacimiento().atStartOfDay(ZoneId.systemDefault()).toInstant());
-      
-      
-        JTFNombre.setText(mascota1.getAlias());
-        JTFEspecie.setText(mascota1.getEspecie());
-        JTFRaza.setText(mascota1.getRaza());
-        JTFColor.setText(mascota1.getColorPelo());
-        JTFPeso.setText(String.valueOf(mascota1.getPeso()));
-        JTFPesoM.setText(String.valueOf(mascota1.getPesoMedio()));
-        JDCFecha.setDate(date);
-  
-    }//GEN-LAST:event_JCBSeleccionMascotaActionPerformed
+    }//GEN-LAST:event_JCBSeleccionDuenioItemStateChanged
+
+    private void JCBSeleccionMascotaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_JCBSeleccionMascotaItemStateChanged
+        if(evt.getStateChange()==ItemEvent.SELECTED){
+              llenarTextos((Mascota)JCBSeleccionMascota.getSelectedItem());
+          codigoMascotaActual=((Mascota)JCBSeleccionMascota.getSelectedItem()).getCodigo();
+        }  
+        
+          
+    }//GEN-LAST:event_JCBSeleccionMascotaItemStateChanged
     
     
     
