@@ -24,3 +24,8 @@ hs_err_pid*
 replay_pid*
 /build/
 nbproject/private/private.properties
+src/proyecto/vistas/ListaMascotasDeClienteview.form
+src/proyecto/vistas/ListaMascotasDeClienteview.java
+nbproject/private/private.properties
+nbproject/private/private.xml
+nbproject/project.properties

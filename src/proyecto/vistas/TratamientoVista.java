@@ -41,6 +41,7 @@ public class TratamientoVista extends javax.swing.JInternalFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
+        setClosable(true);
         setIconifiable(true);
         setMaximizable(true);
 
