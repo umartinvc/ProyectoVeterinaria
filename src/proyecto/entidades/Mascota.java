@@ -154,7 +154,7 @@ public class Mascota {
     }
 @Override
     public String toString() {
-        return  codigo + "," +alias + "," + especie + "," + raza + "," + sexo + "," + colorPelo ;
+        return  codigo + "," +alias;
     }
      
 }

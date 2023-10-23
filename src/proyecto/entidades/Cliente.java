@@ -124,7 +124,7 @@ public class Cliente {
 
     @Override
     public String toString() {
-        return  idCliente + "," +nombre + "," + nombreAlt + "," + direccion + "," + apellido + "," + documento + "," + telefono;
+        return  idCliente + "," +nombre + "," + apellido;
     }
     
     public boolean isEmpty(){
