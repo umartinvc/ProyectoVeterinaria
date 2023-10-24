@@ -14,6 +14,7 @@ import java.time.ZoneId;
 import java.time.ZoneOffset;
 import java.util.Date;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.tools.DocumentationTool.Location;
 import proyecto.conexion.ClienteData;
@@ -357,6 +358,11 @@ float [] hsbColor1 = Color.RGBtoHSB(237, 215, 138, null);
         JBGuardar2.setText("GUARDAR");
         JBGuardar2.setBorder(null);
         JBGuardar2.setBorderPainted(false);
+        JBGuardar2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                JBGuardar2MouseReleased(evt);
+            }
+        });
         JBGuardar2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 JBGuardar2ActionPerformed(evt);
@@ -577,17 +583,18 @@ float [] hsbColor1 = Color.RGBtoHSB(237, 215, 138, null);
     }//GEN-LAST:event_JBModificarMascotaActionPerformed
 
     private void JBGuardar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBGuardar2ActionPerformed
-        
         Mascota mascota = new Mascota();
         MascotaData md = new MascotaData();
    
         mascota = md.buscarMascota(codigoMascotaActual);
         
         System.out.println(mascota.getAlias());
+        try{
         mascota.setAlias(JTFNombre.getText());
         mascota.setSexo(JTFSexo.getText());
         mascota.setEspecie(JTFEspecie.getText());
         mascota.setRaza(JTFRaza.getText());
+        
         mascota.setColorPelo(JTFColor.getText());
         mascota.setFechaNacimiento(JDCFecha.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
         mascota.setPesoMedio(mascotaActual().getPesoMedio());
@@ -595,7 +602,10 @@ float [] hsbColor1 = Color.RGBtoHSB(237, 215, 138, null);
         mascota.setIdCliente(mascotaActual().getIdCliente());
         mascota.setCodigo(mascotaActual().getCodigo());
         md.modificarMascota(mascota);
-        
+            
+        }catch (java.lang.NullPointerException ex){
+            JOptionPane.showMessageDialog(null, "Error al modificar mascota, reviste que los datos sean correctos");
+        }
         
     }//GEN-LAST:event_JBGuardar2ActionPerformed
 
@@ -630,6 +640,10 @@ if(evt.getStateChange() == ItemEvent.DESELECTED){
         
           
     }//GEN-LAST:event_JCBSeleccionMascotaItemStateChanged
+
+    private void JBGuardar2MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JBGuardar2MouseReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_JBGuardar2MouseReleased
     
     
     
