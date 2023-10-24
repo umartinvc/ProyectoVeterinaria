@@ -33,9 +33,11 @@ public class MascotaVistas extends javax.swing.JInternalFrame {
     /** Creates new form Mascota */
     public MascotaVistas() {
         initComponents();
-        cargarCombo();
         jPanel2.setVisible(false);
         jPanel4.setVisible(false);
+        jPanel5.setVisible(false);
+        deshabilitarText();
+        
     }
 public void cargarCombo (){
     ClienteData cd = new ClienteData();
@@ -98,6 +100,26 @@ public Mascota mascotaActual(){
     
     return mascota;
 }
+public void deshabilitarText(){
+    JTFNombre.setEnabled(false);
+    JTFColor.setEnabled(false);
+    JTFEspecie.setEnabled(false);
+    JTFRaza.setEnabled(false);
+    JTFPeso.setEnabled(false);
+    JTFSexo.setEnabled(false);
+    JDCFecha.setEnabled(false);
+    JTFPesoM.setEnabled(false);
+}
+public void habilitarText(){
+    JTFNombre.setEnabled(true);
+    JTFColor.setEnabled(true);
+    JTFEspecie.setEnabled(true);
+    JTFRaza.setEnabled(true);
+    JTFPeso.setEnabled(true);
+    JTFSexo.setEnabled(true);
+    JDCFecha.setEnabled(true);
+    JTFPesoM.setEnabled(false);
+}
 float [] hsbColor1 = Color.RGBtoHSB(237, 215, 138, null);
 
     /** This method is called from within the constructor to
@@ -125,6 +147,8 @@ float [] hsbColor1 = Color.RGBtoHSB(237, 215, 138, null);
         JTFRaza = new javax.swing.JTextField();
         JTFColor = new javax.swing.JTextField();
         JTFPeso = new javax.swing.JTextField();
+        JDCFecha = new com.toedter.calendar.JDateChooser();
+        JTFSexo = new javax.swing.JTextField();
         jPanel3 = new javax.swing.JPanel();
         jLabel16 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
@@ -135,14 +159,17 @@ float [] hsbColor1 = Color.RGBtoHSB(237, 215, 138, null);
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
-        JTFSexo = new javax.swing.JTextField();
         jPanel4 = new javax.swing.JPanel();
         JBGuardar2 = new javax.swing.JButton();
         JBCancelar2 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         JBGuardarN = new javax.swing.JButton();
         JBCancelar = new javax.swing.JButton();
-        JDCFecha = new com.toedter.calendar.JDateChooser();
+        jPanel5 = new javax.swing.JPanel();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
@@ -162,6 +189,7 @@ float [] hsbColor1 = Color.RGBtoHSB(237, 215, 138, null);
         jLabel3.setText("SELECCIONE MASCOTA:");
         BackGround.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 10, -1, -1));
 
+        JCBSeleccionDuenio.setBackground(new java.awt.Color(238, 189, 138));
         JCBSeleccionDuenio.setEnabled(false);
         JCBSeleccionDuenio.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
@@ -170,6 +198,7 @@ float [] hsbColor1 = Color.RGBtoHSB(237, 215, 138, null);
         });
         BackGround.add(JCBSeleccionDuenio, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 190, -1));
 
+        JCBSeleccionMascota.setBackground(new java.awt.Color(238, 189, 138));
         JCBSeleccionMascota.setEnabled(false);
         JCBSeleccionMascota.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
@@ -263,29 +292,51 @@ float [] hsbColor1 = Color.RGBtoHSB(237, 215, 138, null);
 
         BackGround.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 330, 200, 130));
 
+        JTFNombre.setBackground(new java.awt.Color(255, 244, 192));
+        JTFNombre.setBorder(null);
         JTFNombre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 JTFNombreActionPerformed(evt);
             }
         });
-        BackGround.add(JTFNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 100, 90, -1));
+        BackGround.add(JTFNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 95, 90, 20));
 
+        JTFEspecie.setBackground(new java.awt.Color(255, 244, 192));
+        JTFEspecie.setBorder(null);
         JTFEspecie.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 JTFEspecieActionPerformed(evt);
             }
         });
-        BackGround.add(JTFEspecie, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 130, 90, -1));
-        BackGround.add(JTFPesoM, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 250, 90, -1));
-        BackGround.add(JTFRaza, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 160, 90, -1));
+        BackGround.add(JTFEspecie, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 130, 90, 20));
 
+        JTFPesoM.setBackground(new java.awt.Color(255, 244, 192));
+        JTFPesoM.setBorder(null);
+        BackGround.add(JTFPesoM, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 250, 90, 20));
+
+        JTFRaza.setBackground(new java.awt.Color(255, 244, 192));
+        JTFRaza.setBorder(null);
+        BackGround.add(JTFRaza, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 160, 90, 20));
+
+        JTFColor.setBackground(new java.awt.Color(255, 244, 192));
+        JTFColor.setBorder(null);
         JTFColor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 JTFColorActionPerformed(evt);
             }
         });
-        BackGround.add(JTFColor, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 190, 90, -1));
+        BackGround.add(JTFColor, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 190, 90, 20));
+
+        JTFPeso.setBackground(new java.awt.Color(255, 244, 192));
+        JTFPeso.setBorder(null);
         BackGround.add(JTFPeso, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 220, 90, 20));
+
+        JDCFecha.setBackground(new java.awt.Color(255, 244, 192));
+        BackGround.add(JDCFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 310, 90, 40));
+
+        JTFSexo.setBackground(new java.awt.Color(255, 244, 192));
+        JTFSexo.setBorder(null);
+        BackGround.add(JTFSexo, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 280, 90, 20));
 
         jPanel3.setBackground(new java.awt.Color(238, 189, 138));
 
@@ -328,29 +379,28 @@ float [] hsbColor1 = Color.RGBtoHSB(237, 215, 138, null);
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel16)
+                .addGap(6, 6, 6)
+                .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel17)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel5)
+                .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel6)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel7)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel8)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel9)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel11)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        BackGround.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, -1, 260));
-        BackGround.add(JTFSexo, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 280, 90, -1));
+        BackGround.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, 190, 260));
 
         jPanel4.setBackground(new java.awt.Color(238, 189, 138));
 
@@ -462,7 +512,79 @@ float [] hsbColor1 = Color.RGBtoHSB(237, 215, 138, null);
         );
 
         BackGround.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 280, 150, 90));
-        BackGround.add(JDCFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 310, 90, 40));
+
+        jPanel5.setBackground(new java.awt.Color(238, 189, 138));
+
+        jButton1.setBackground(new java.awt.Color(237, 215, 138));
+        jButton1.setText("ELIMINAR");
+        jButton1.setBorder(null);
+        jButton1.setBorderPainted(false);
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jButton1MouseExited(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jButton1MouseEntered(evt);
+            }
+        });
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jButton2.setBackground(new java.awt.Color(237, 215, 138));
+        jButton2.setText("CANCELAR");
+        jButton2.setBorder(null);
+        jButton2.setBorderPainted(false);
+        jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jButton2MouseExited(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jButton2MouseEntered(evt);
+            }
+        });
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        jLabel12.setText("SELECCIONE LA MASCOTA");
+
+        jLabel13.setText("A ELIMINAR");
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(53, 53, 53)
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel12)
+                    .addComponent(jLabel13))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel13)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
+        );
+
+        BackGround.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 60, 260, 130));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyecto/iconos/Colorful Cute Cats Illustration Desktop Wallpaper.png"))); // NOI18N
         jLabel1.setText("jLabel1");
@@ -478,6 +600,18 @@ float [] hsbColor1 = Color.RGBtoHSB(237, 215, 138, null);
        JCBSeleccionDuenio.setEnabled(true);
        JBNuevaMascota.setEnabled(false);
        jPanel2.setVisible(true);
+       JCBSeleccionDuenio.removeAllItems();
+       cargarCombo();
+       habilitarText();
+       JCBSeleccionMascota.setEnabled(false);
+       JCBSeleccionMascota.removeAllItems();
+       JTFNombre.setText("");
+       JTFColor.setText("");
+       JTFEspecie.setText("");
+       JTFRaza.setText("");
+       JTFPeso.setText("");
+       JTFSexo.setText("");
+       JDCFecha.setDate(null);
 
        
     }//GEN-LAST:event_JBNuevaMascotaActionPerformed
@@ -501,9 +635,10 @@ float [] hsbColor1 = Color.RGBtoHSB(237, 215, 138, null);
        JBNuevaMascota.setEnabled(true);
        JCBSeleccionDuenio.setEnabled(false);
        JCBSeleccionMascota.setEnabled(false);
+       deshabilitarText();
       
     }//GEN-LAST:event_JBCancelarActionPerformed
-
+// Mascota Nueva
     private void JBGuardarNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBGuardarNActionPerformed
        Cliente clienteSelect = (Cliente) (JCBSeleccionDuenio.getSelectedItem());
        Mascota mascotaNueva = new Mascota();
@@ -523,6 +658,7 @@ float [] hsbColor1 = Color.RGBtoHSB(237, 215, 138, null);
        JBNuevaMascota.setEnabled(true);
        JCBSeleccionDuenio.setEnabled(false);
        JCBSeleccionMascota.setEnabled(false);
+       JCBSeleccionDuenio.removeAllItems();
        
     }//GEN-LAST:event_JBGuardarNActionPerformed
 
@@ -568,10 +704,11 @@ float [] hsbColor1 = Color.RGBtoHSB(237, 215, 138, null);
     }//GEN-LAST:event_JBCancelarMouseExited
 
     private void JBEliminarMascotaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBEliminarMascotaActionPerformed
-     Mascota mascota = new Mascota();
-     MascotaData md = new MascotaData();
-     mascota = (Mascota) JCBSeleccionMascota.getSelectedItem();
-     md.borrarMascota(mascota.getCodigo());
+     jPanel5.setVisible(true);
+     JCBSeleccionDuenio.setEnabled(true);
+     JCBSeleccionMascota.setEnabled(true);
+     cargarCombo();
+     habilitarText();
     }//GEN-LAST:event_JBEliminarMascotaActionPerformed
 
     private void JBModificarMascotaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBModificarMascotaActionPerformed
@@ -580,29 +717,27 @@ float [] hsbColor1 = Color.RGBtoHSB(237, 215, 138, null);
         JCBSeleccionDuenio.setEnabled(true);
         JCBSeleccionMascota.setEnabled(true);
         JTFPesoM.setEnabled(false);
+        cargarCombo();
+        habilitarText();
+        
     }//GEN-LAST:event_JBModificarMascotaActionPerformed
-
+//Modificar Mascota
     private void JBGuardar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBGuardar2ActionPerformed
         Mascota mascota = new Mascota();
         MascotaData md = new MascotaData();
-   
-        mascota = md.buscarMascota(codigoMascotaActual);
-        
-        System.out.println(mascota.getAlias());
         try{
+        mascota = md.buscarMascota(codigoMascotaActual);
         mascota.setAlias(JTFNombre.getText());
         mascota.setSexo(JTFSexo.getText());
         mascota.setEspecie(JTFEspecie.getText());
         mascota.setRaza(JTFRaza.getText());
-        
         mascota.setColorPelo(JTFColor.getText());
         mascota.setFechaNacimiento(JDCFecha.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
         mascota.setPesoMedio(mascotaActual().getPesoMedio());
         mascota.setPeso(Double.parseDouble(JTFPeso.getText()));
         mascota.setIdCliente(mascotaActual().getIdCliente());
-        mascota.setCodigo(mascotaActual().getCodigo());
-        md.modificarMascota(mascota);
-            
+        mascota.setCodigo(codigoMascotaActual);
+        md.modificarMascota(mascota);    
         }catch (java.lang.NullPointerException ex){
             JOptionPane.showMessageDialog(null, "Error al modificar mascota, reviste que los datos sean correctos");
         }
@@ -614,6 +749,7 @@ float [] hsbColor1 = Color.RGBtoHSB(237, 215, 138, null);
         jPanel4.setVisible(false);
          JCBSeleccionDuenio.setEnabled(false);
         JCBSeleccionMascota.setEnabled(false);
+        deshabilitarText();
     }//GEN-LAST:event_JBCancelar2ActionPerformed
 
     private void JCBSeleccionDuenioItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_JCBSeleccionDuenioItemStateChanged
@@ -644,6 +780,36 @@ if(evt.getStateChange() == ItemEvent.DESELECTED){
     private void JBGuardar2MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JBGuardar2MouseReleased
         // TODO add your handling code here:
     }//GEN-LAST:event_JBGuardar2MouseReleased
+//Eliminar Mascota
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+     Mascota mascota = new Mascota();
+     MascotaData md = new MascotaData();
+     mascota = (Mascota) JCBSeleccionMascota.getSelectedItem();
+     md.borrarMascota(mascota.getCodigo());
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        jPanel5.setVisible(false);
+        JCBSeleccionMascota.setEnabled(false);
+        JCBSeleccionDuenio.setEnabled(false);
+        deshabilitarText();
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseEntered
+         JBGuardarN.setBackground(Color.getHSBColor(21, 42, 93));
+    }//GEN-LAST:event_jButton1MouseEntered
+
+    private void jButton2MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseEntered
+       JBGuardarN.setBackground(Color.getHSBColor(21, 42, 93));
+    }//GEN-LAST:event_jButton2MouseEntered
+
+    private void jButton1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseExited
+       JBGuardarN.setBackground(Color.getHSBColor(hsbColor1[0],hsbColor1[1],hsbColor1[2]));
+    }//GEN-LAST:event_jButton1MouseExited
+
+    private void jButton2MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseExited
+       JBGuardarN.setBackground(Color.getHSBColor(hsbColor1[0],hsbColor1[1],hsbColor1[2]));
+    }//GEN-LAST:event_jButton2MouseExited
     
     
     
@@ -667,9 +833,13 @@ if(evt.getStateChange() == ItemEvent.DESELECTED){
     private javax.swing.JTextField JTFPesoM;
     private javax.swing.JTextField JTFRaza;
     private javax.swing.JTextField JTFSexo;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel2;
@@ -684,6 +854,7 @@ if(evt.getStateChange() == ItemEvent.DESELECTED){
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
     // End of variables declaration//GEN-END:variables
 
 }
