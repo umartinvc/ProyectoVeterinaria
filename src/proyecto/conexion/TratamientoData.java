@@ -59,6 +59,7 @@ public class TratamientoData {
             ResultSet rs= ps.executeQuery();
             if (rs.next()){
                 tratamiento = new Tratamiento();
+                tratamiento.setCodigo(idTratamiento);
                 tratamiento.setTipo(rs.getString("tipo"));
                 tratamiento.setDescripcion(rs.getString("descripcion"));
                 tratamiento.setImporte(rs.getDouble("importe"));

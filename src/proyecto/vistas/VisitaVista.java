@@ -10,6 +10,7 @@ import proyecto.conexion.VisitaData;
 import proyecto.entidades.Cliente;
 import proyecto.entidades.Visita;
 import java.time.LocalDate;
+import proyecto.conexion.ClienteData;
 import proyecto.conexion.MascotaData;
 import proyecto.entidades.Mascota;
 
@@ -162,6 +163,7 @@ public class VisitaVista extends javax.swing.JInternalFrame {
     private void guardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarActionPerformed
         // TODO add your handling code here:
         Visita visita = new Visita();
+        ClienteData clienteData = new ClienteData();
         VisitaData visitaData = new VisitaData();
         MascotaData mascotaData = new MascotaData();
         Mascota mascota = new Mascota();
@@ -175,10 +177,7 @@ public class VisitaVista extends javax.swing.JInternalFrame {
         if(mascota == null){
             visitaData.guardarVisita(visita);
         }else{
-            //cliente = 
-        }
-        //cliente = visitaData.guardarVisita(visita);
-        /*if (!cliente.isEmpty()) {
+            cliente = clienteData.buscarClientePorId(mascota.getIdCliente());
             JOptionPane.showMessageDialog(null, "El cliente ya existe");
             escritorio.removeAll();
             escritorio.repaint();
@@ -186,8 +185,7 @@ public class VisitaVista extends javax.swing.JInternalFrame {
             mc.setVisible(true);
             escritorio.add(mc);
             escritorio.moveToFront(mc);
-        }*/
-
+        }
     }//GEN-LAST:event_guardarActionPerformed
 
     private void eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarActionPerformed

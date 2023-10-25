@@ -118,8 +118,37 @@ public class ClienteData {
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla cliente", "ERROR", JOptionPane.ERROR_MESSAGE);
         }  
-    return cliente1;
-}
+        return cliente1;
+    }
+    public Cliente buscarClientePorId(int idCliente) {
+        String sql = "SELECT dni, apellido, nombre, nombreAlt, direccion, telefono FROM cliente WHERE idCliente=?";
+        Cliente cliente1 = null;
+
+        try {
+            PreparedStatement psBuscarCliente = con.prepareStatement(sql);
+            psBuscarCliente.setInt(1, idCliente);
+            ResultSet rs = psBuscarCliente.executeQuery();
+
+            if (rs.next()) {
+                cliente1 = new Cliente();
+                cliente1.setIdCliente(rs.getInt("idCliente"));
+                cliente1.setDocumento(rs.getInt("dni"));
+                cliente1.setApellido(rs.getString("apellido"));
+                cliente1.setNombre(rs.getString("nombre"));
+                cliente1.setNombreAlt(rs.getString("nombreAlt"));
+                cliente1.setDireccion(rs.getString("direccion"));
+                cliente1.setTelefono(rs.getInt("telefono"));
+            } else {
+                cliente1 = null;
+            }
+
+            psBuscarCliente.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla cliente", "ERROR", JOptionPane.ERROR_MESSAGE);
+        }
+
+        return cliente1;
+    }
     
     public List<Cliente>ClientesTodos(){
         String sql="SELECT idCliente, dni, apellido, nombre, nombreAlt, direccion, telefono FROM cliente";

@@ -19,7 +19,6 @@ import proyecto.entidades.Visita;
 public class MascotasDelClienteVista extends javax.swing.JInternalFrame {
     private Cliente cliente1;
     private ClienteData clienteData = new ClienteData();
-    private boolean existeCliente;
 
     /**
      * Creates new form MascotasDelClienteVista
@@ -27,14 +26,11 @@ public class MascotasDelClienteVista extends javax.swing.JInternalFrame {
     public MascotasDelClienteVista(Cliente cliente) {
         cliente1 = cliente;
         initComponents();
-        //cargarComboMascotas();
-        cargarComboClientes();
-        existeCliente = true;
+        cargarComboClientes(true);
     }
     public MascotasDelClienteVista(){
         initComponents();
-        cargarComboClientes();
-        existeCliente = false;
+        cargarComboClientes(false);
     }
 
     /**
@@ -300,20 +296,15 @@ public class MascotasDelClienteVista extends javax.swing.JInternalFrame {
     private void mascotasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mascotasActionPerformed
         // TODO add your handling code here:
         Mascota mascotaSeleccionada = (Mascota)mascotas.getSelectedItem();
-        if(!existeCliente){
-            nombre.setText(mascotaSeleccionada.getAlias());
-            raza.setText(mascotaSeleccionada.getRaza());
-            codigo.setText(mascotaSeleccionada.getCodigo()+"");
-            sexo.setText(mascotaSeleccionada.getSexo());
-            especie.setText(mascotaSeleccionada.getEspecie());
-            colorPelo.setText(mascotaSeleccionada.getColorPelo());
-            fechaNacimiento.setDate(Date.valueOf(mascotaSeleccionada.getFechaNacimiento()));
-            peso.setText(mascotaSeleccionada.getPeso()+"");
-            pesoMedio.setText(mascotaSeleccionada.getPesoMedio()+"");
-        }else{
-            
-        }
-        
+        nombre.setText(mascotaSeleccionada.getAlias());
+        raza.setText(mascotaSeleccionada.getRaza());
+        codigo.setText(mascotaSeleccionada.getCodigo()+"");
+        sexo.setText(mascotaSeleccionada.getSexo());
+        especie.setText(mascotaSeleccionada.getEspecie());
+        colorPelo.setText(mascotaSeleccionada.getColorPelo());
+        fechaNacimiento.setDate(Date.valueOf(mascotaSeleccionada.getFechaNacimiento()));
+        peso.setText(mascotaSeleccionada.getPeso()+"");
+        pesoMedio.setText(mascotaSeleccionada.getPesoMedio()+"");
     }//GEN-LAST:event_mascotasActionPerformed
 
     private void elegirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_elegirActionPerformed
@@ -366,10 +357,15 @@ public class MascotasDelClienteVista extends javax.swing.JInternalFrame {
             mascotas.addItem(mascota);
         }
     }
-    private void cargarComboClientes(){
-        for (Cliente cliente : clienteData.ClientesTodos()) {
-            clientesCombo.addItem(cliente);
+    private void cargarComboClientes(boolean cliente1){
+        if(cliente1){
+            clientesCombo.addItem(this.cliente1);
+        }else{
+            for (Cliente cliente : clienteData.ClientesTodos()) {
+                clientesCombo.addItem(cliente);
+            }
         }
+        
     }
 
 
