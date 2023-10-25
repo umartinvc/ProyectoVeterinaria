@@ -4,10 +4,14 @@
  */
 package proyecto.vistas;
 
+import java.sql.Date;
 import javax.swing.JOptionPane;
 import proyecto.conexion.VisitaData;
 import proyecto.entidades.Cliente;
 import proyecto.entidades.Visita;
+import java.time.LocalDate;
+import proyecto.conexion.MascotaData;
+import proyecto.entidades.Mascota;
 
 /**
  *
@@ -159,9 +163,22 @@ public class VisitaVista extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         Visita visita = new Visita();
         VisitaData visitaData = new VisitaData();
+        MascotaData mascotaData = new MascotaData();
+        Mascota mascota = new Mascota();
         Cliente cliente = new Cliente();
-        cliente = visitaData.guardarVisita(visita);
-        if (!cliente.isEmpty()) {
+        visita.setCodigoTratamiento(Integer.parseInt(codigoTratamiento.getText()));
+        visita.setCodigoMascota(Integer.parseInt(codigoMascota.getText()));
+        visita.setFecha((Date) fecha.getDate());
+        visita.setSintomas(sintomas.getText());
+        visita.setPesoPromedio(Integer.parseInt(pesoPromedio.getText()));
+        mascota = mascotaData.buscarMascota(Integer.parseInt(codigoMascota.getText()));
+        if(mascota == null){
+            visitaData.guardarVisita(visita);
+        }else{
+            //cliente = 
+        }
+        //cliente = visitaData.guardarVisita(visita);
+        /*if (!cliente.isEmpty()) {
             JOptionPane.showMessageDialog(null, "El cliente ya existe");
             escritorio.removeAll();
             escritorio.repaint();
@@ -169,7 +186,7 @@ public class VisitaVista extends javax.swing.JInternalFrame {
             mc.setVisible(true);
             escritorio.add(mc);
             escritorio.moveToFront(mc);
-        }
+        }*/
 
     }//GEN-LAST:event_guardarActionPerformed
 
