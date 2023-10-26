@@ -81,6 +81,11 @@ private Tratamiento tratamientoElegido;
         });
 
         crearTratamiento.setText("CREAR TRATAMIENTO");
+        crearTratamiento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                crearTratamientoActionPerformed(evt);
+            }
+        });
 
         jLabel2.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel2.setText("LISTADO DE TRATAMIENTOS");
@@ -184,6 +189,13 @@ private Tratamiento tratamientoElegido;
             JOptionPane.showMessageDialog(this, "Por favor, seleccione una fila de la tabla.");
         }
     }//GEN-LAST:event_elegirActionPerformed
+
+    private void crearTratamientoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crearTratamientoActionPerformed
+        // TODO add your handling code here:
+        TratamientoVista tv = new TratamientoVista();
+        tv.setVisible(true);
+        MenuVeterinaria.obtenerEscritorio().add(tv);
+    }//GEN-LAST:event_crearTratamientoActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -13,6 +13,8 @@ import java.time.LocalDate;
 import proyecto.conexion.ClienteData;
 import proyecto.conexion.MascotaData;
 import proyecto.entidades.Mascota;
+import proyecto.entidades.Tratamiento;
+import proyecto.vistas.MenuVeterinaria;
 
 /**
  *
@@ -88,6 +90,11 @@ public class VisitaVista extends javax.swing.JInternalFrame {
         });
 
         buscarMascota.setText("BUSCAR");
+        buscarMascota.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buscarMascotaActionPerformed(evt);
+            }
+        });
 
         escritorio.setLayer(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
         escritorio.setLayer(codigoTratamiento, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -195,17 +202,19 @@ public class VisitaVista extends javax.swing.JInternalFrame {
         visita.setSintomas(sintomas.getText());
         visita.setPesoPromedio(Integer.parseInt(pesoPromedio.getText()));
         mascota = mascotaData.buscarMascota(Integer.parseInt(codigoMascota.getText()));
-        if(mascota == null){
+        
+        if(clienteData.buscarClientePorId(mascota.getIdCliente()) == null){
             visitaData.guardarVisita(visita);
         }else{
             cliente = clienteData.buscarClientePorId(mascota.getIdCliente());
             JOptionPane.showMessageDialog(null, "El cliente ya existe, elige su tratamiento");
             escritorio.removeAll();
             escritorio.repaint();
-            MascotasDelClienteVista mc = new MascotasDelClienteVista(cliente, visita);
+            MascotasDelClienteVista mc = new MascotasDelClienteVista(cliente);
             mc.setVisible(true);
             escritorio.add(mc);
             escritorio.moveToFront(mc);
+            
         }
     }//GEN-LAST:event_guardarActionPerformed
 
@@ -227,11 +236,21 @@ public class VisitaVista extends javax.swing.JInternalFrame {
         
         ListaDeTratamientosVista lt = new ListaDeTratamientosVista();
         lt.setVisible(true);
-        escritorio.add(lt);
-        escritorio.moveToFront(lt);
+        MenuVeterinaria.obtenerEscritorio().add(lt);
+        Tratamiento tratamiento1 = lt.obtenerTratamiento();
+        codigoTratamiento.setText(tratamiento1.getCodigo()+"");
+        //escritorio.add(lt);
+        //escritorio.moveToFront(lt);
         
         
     }//GEN-LAST:event_buscarTratamientoActionPerformed
+
+    private void buscarMascotaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarMascotaActionPerformed
+        // TODO add your handling code here:
+        MascotasDelClienteVista mc = new MascotasDelClienteVista();
+        Mascota mascota1 = mc.obtenerMascota();
+        codigoMascota.setText(mascota1.getCodigo()+"");
+    }//GEN-LAST:event_buscarMascotaActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

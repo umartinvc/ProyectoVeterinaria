@@ -179,10 +179,10 @@ ClienteVista cv= new ClienteVista();
         // TODO add your handling code here:
         jdEscritorio.removeAll();
         jdEscritorio.repaint();
-        TratamientoVista tv= new TratamientoVista();
-        tv.setVisible(true);
-        jdEscritorio.add(tv);
-        jdEscritorio.moveToFront(tv);
+        ListaDeTratamientosVista lt= new ListaDeTratamientosVista();
+        lt.setVisible(true);
+        jdEscritorio.add(lt);
+        jdEscritorio.moveToFront(lt);
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     /**
@@ -232,6 +232,10 @@ ClienteVista cv= new ClienteVista();
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JDesktopPane jdEscritorio;
+    private static javax.swing.JDesktopPane jdEscritorio;
     // End of variables declaration//GEN-END:variables
+
+    public static javax.swing.JDesktopPane obtenerEscritorio(){
+        return jdEscritorio;
+    }
 }
