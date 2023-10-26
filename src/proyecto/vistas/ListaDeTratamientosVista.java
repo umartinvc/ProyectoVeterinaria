@@ -11,6 +11,7 @@ import proyecto.conexion.TratamientoData;
 import proyecto.conexion.VisitaData;
 import proyecto.entidades.Cliente;
 import proyecto.entidades.Tratamiento;
+import proyecto.entidades.Visita;
 
 /**
  *
@@ -18,15 +19,15 @@ import proyecto.entidades.Tratamiento;
  */
 public class ListaDeTratamientosVista extends javax.swing.JInternalFrame {
 private DefaultTableModel modelo = new DefaultTableModel();
-private Cliente cliente;
+private Tratamiento tratamientoElegido;
     /**
      * Creates new form ListasDeTratamientosVista
      */
-    public ListaDeTratamientosVista(Cliente cliente1) {
-        cliente = cliente1;
+    
+    
+    public ListaDeTratamientosVista() {
         initComponents();
         armarCabecera();
-        
     }
 
     /**
@@ -45,6 +46,11 @@ private Cliente cliente;
         tablaTratamiento = new javax.swing.JTable();
         elegir = new javax.swing.JButton();
         crearTratamiento = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+
+        setClosable(true);
+        setIconifiable(true);
+        setMaximizable(true);
 
         jLabel1.setText("BUSCAR POR NOMBRE:");
 
@@ -76,11 +82,15 @@ private Cliente cliente;
 
         crearTratamiento.setText("CREAR TRATAMIENTO");
 
+        jLabel2.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel2.setText("LISTADO DE TRATAMIENTOS");
+
         jDesktopPane1.setLayer(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(buscador, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jScrollPane1, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(elegir, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(crearTratamiento, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane1.setLayer(jLabel2, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
         jDesktopPane1.setLayout(jDesktopPane1Layout);
@@ -88,13 +98,7 @@ private Cliente cliente;
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jDesktopPane1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 533, Short.MAX_VALUE)
-                .addContainerGap())
-            .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                .addGap(44, 44, 44)
-                .addComponent(jLabel1)
-                .addGap(26, 26, 26)
-                .addComponent(buscador)
+                .addComponent(jScrollPane1)
                 .addContainerGap())
             .addGroup(jDesktopPane1Layout.createSequentialGroup()
                 .addGap(89, 89, 89)
@@ -102,17 +106,29 @@ private Cliente cliente;
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(crearTratamiento)
                 .addGap(90, 90, 90))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDesktopPane1Layout.createSequentialGroup()
+                .addContainerGap(63, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addGap(18, 18, 18)
+                .addComponent(buscador, javax.swing.GroupLayout.PREFERRED_SIZE, 344, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+            .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                .addGap(178, 178, 178)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jDesktopPane1Layout.setVerticalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDesktopPane1Layout.createSequentialGroup()
-                .addGap(28, 28, 28)
+                .addContainerGap()
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
                 .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(buscador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                    .addComponent(buscador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(elegir)
                     .addComponent(crearTratamiento))
@@ -139,6 +155,7 @@ private Cliente cliente;
         for (Tratamiento tratamiento : tratamientoData.listarTratamiento()) {
             if(tratamiento.getDescripcion().startsWith(buscador.getText())){
                 modelo.addColumn(new Object []{
+                    tratamiento.getCodigo(),
                     tratamiento.getTipo(),
                     tratamiento.getDescripcion(),
                     tratamiento.getImporte(),
@@ -150,16 +167,17 @@ private Cliente cliente;
 
     private void elegirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_elegirActionPerformed
         // TODO add your handling code here:
-        VisitaData visitaData = new VisitaData();
         int filaSeleccionada = tablaTratamiento.getSelectedRow();
 
         if (filaSeleccionada != -1) {
-            String tipo = tablaTratamiento.getValueAt(filaSeleccionada, 0).toString(); 
-            String descripcion = tablaTratamiento.getValueAt(filaSeleccionada, 1).toString(); 
-            double importe = Double.parseDouble(tablaTratamiento.getValueAt(filaSeleccionada, 2).toString()); 
-            boolean activo = (boolean) tablaTratamiento.getValueAt(filaSeleccionada, 3); 
+            int codigo = Integer.parseInt(tablaTratamiento.getValueAt(filaSeleccionada, 0).toString());
+            String tipo = tablaTratamiento.getValueAt(filaSeleccionada, 1).toString(); 
+            String descripcion = tablaTratamiento.getValueAt(filaSeleccionada, 2).toString(); 
+            double importe = Double.parseDouble(tablaTratamiento.getValueAt(filaSeleccionada, 3).toString()); 
+            boolean activo = (boolean) tablaTratamiento.getValueAt(filaSeleccionada, 4); 
 
-            Tratamiento tratamiento = new Tratamiento(tipo, descripcion, importe, activo);
+            Tratamiento tratamiento = new Tratamiento(codigo, tipo, descripcion, importe, activo);
+            tratamientoElegido = tratamiento;
 
         } else {
             // El usuario no ha seleccionado ninguna fila.
@@ -174,16 +192,22 @@ private Cliente cliente;
     private javax.swing.JButton elegir;
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tablaTratamiento;
     // End of variables declaration//GEN-END:variables
 
     private void armarCabecera(){
+        modelo.addColumn("Codigo");
         modelo.addColumn("Tipo");
         modelo.addColumn("Descripcion");
         modelo.addColumn("Importe");
         modelo.addColumn("Estado");
         tablaTratamiento.setModel(modelo);
+    }
+    
+    public Tratamiento obtenerTratamiento(){
+        return this.tratamientoElegido;
     }
     
 

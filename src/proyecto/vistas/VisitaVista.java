@@ -49,6 +49,8 @@ public class VisitaVista extends javax.swing.JInternalFrame {
         pesoPromedio = new javax.swing.JTextField();
         guardar = new javax.swing.JButton();
         eliminar = new javax.swing.JButton();
+        buscarTratamiento = new javax.swing.JButton();
+        buscarMascota = new javax.swing.JButton();
 
         setClosable(true);
         setIconifiable(true);
@@ -78,6 +80,15 @@ public class VisitaVista extends javax.swing.JInternalFrame {
             }
         });
 
+        buscarTratamiento.setText("BUSCAR");
+        buscarTratamiento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buscarTratamientoActionPerformed(evt);
+            }
+        });
+
+        buscarMascota.setText("BUSCAR");
+
         escritorio.setLayer(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
         escritorio.setLayer(codigoTratamiento, javax.swing.JLayeredPane.DEFAULT_LAYER);
         escritorio.setLayer(jLabel2, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -90,6 +101,8 @@ public class VisitaVista extends javax.swing.JInternalFrame {
         escritorio.setLayer(pesoPromedio, javax.swing.JLayeredPane.DEFAULT_LAYER);
         escritorio.setLayer(guardar, javax.swing.JLayeredPane.DEFAULT_LAYER);
         escritorio.setLayer(eliminar, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        escritorio.setLayer(buscarTratamiento, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        escritorio.setLayer(buscarMascota, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout escritorioLayout = new javax.swing.GroupLayout(escritorio);
         escritorio.setLayout(escritorioLayout);
@@ -114,7 +127,11 @@ public class VisitaVista extends javax.swing.JInternalFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, escritorioLayout.createSequentialGroup()
                         .addComponent(eliminar)
                         .addGap(61, 61, 61)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(buscarTratamiento)
+                    .addComponent(buscarMascota))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
         escritorioLayout.setVerticalGroup(
             escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -122,11 +139,13 @@ public class VisitaVista extends javax.swing.JInternalFrame {
                 .addGap(20, 20, 20)
                 .addGroup(escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(codigoTratamiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(codigoTratamiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(buscarTratamiento))
                 .addGap(18, 18, 18)
                 .addGroup(escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(codigoMascota, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(codigoMascota, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(buscarMascota))
                 .addGap(20, 20, 20)
                 .addGroup(escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3)
@@ -150,7 +169,9 @@ public class VisitaVista extends javax.swing.JInternalFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(escritorio)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(escritorio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -178,10 +199,10 @@ public class VisitaVista extends javax.swing.JInternalFrame {
             visitaData.guardarVisita(visita);
         }else{
             cliente = clienteData.buscarClientePorId(mascota.getIdCliente());
-            JOptionPane.showMessageDialog(null, "El cliente ya existe");
+            JOptionPane.showMessageDialog(null, "El cliente ya existe, elige su tratamiento");
             escritorio.removeAll();
             escritorio.repaint();
-            MascotasDelClienteVista mc = new MascotasDelClienteVista(cliente);
+            MascotasDelClienteVista mc = new MascotasDelClienteVista(cliente, visita);
             mc.setVisible(true);
             escritorio.add(mc);
             escritorio.moveToFront(mc);
@@ -201,8 +222,21 @@ public class VisitaVista extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_eliminarActionPerformed
 
+    private void buscarTratamientoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarTratamientoActionPerformed
+        // TODO add your handling code here:
+        
+        ListaDeTratamientosVista lt = new ListaDeTratamientosVista();
+        lt.setVisible(true);
+        escritorio.add(lt);
+        escritorio.moveToFront(lt);
+        
+        
+    }//GEN-LAST:event_buscarTratamientoActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton buscarMascota;
+    private javax.swing.JButton buscarTratamiento;
     private javax.swing.JTextField codigoMascota;
     private javax.swing.JTextField codigoTratamiento;
     private javax.swing.JButton eliminar;

@@ -19,12 +19,14 @@ import proyecto.entidades.Visita;
 public class MascotasDelClienteVista extends javax.swing.JInternalFrame {
     private Cliente cliente1;
     private ClienteData clienteData = new ClienteData();
+    private Visita visita1;
 
     /**
      * Creates new form MascotasDelClienteVista
      */
-    public MascotasDelClienteVista(Cliente cliente) {
+    public MascotasDelClienteVista(Cliente cliente, Visita visita) {
         cliente1 = cliente;
+        visita1 = visita;
         initComponents();
         cargarComboClientes(true);
     }
@@ -309,12 +311,22 @@ public class MascotasDelClienteVista extends javax.swing.JInternalFrame {
 
     private void elegirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_elegirActionPerformed
         // TODO add your handling code here:
-        escritorio.removeAll();
-        escritorio.repaint();
-        ListaDeTratamientosVista ltv= new ListaDeTratamientosVista(cliente1);
-        ltv.setVisible(true);
-        escritorio.add(ltv);
-        escritorio.moveToFront(ltv);
+        /*if(visita1 != null){
+            escritorio.removeAll();
+            escritorio.repaint();
+            ListaDeTratamientosVista ltv= new ListaDeTratamientosVista(cliente1,visita1);
+            ltv.setVisible(true);
+            escritorio.add(ltv);
+            escritorio.moveToFront(ltv);
+        }else{
+            escritorio.removeAll();
+            escritorio.repaint();
+            ListaDeTratamientosVista ltv= new ListaDeTratamientosVista(cliente1);
+            ltv.setVisible(true);
+            escritorio.add(ltv);
+            escritorio.moveToFront(ltv);
+        }
+*/
     }//GEN-LAST:event_elegirActionPerformed
 
     private void clientesComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clientesComboActionPerformed

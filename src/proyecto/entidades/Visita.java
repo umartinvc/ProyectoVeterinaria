@@ -19,17 +19,28 @@ public class Visita {
     private Date fecha;
     private double pesoPromedio;
     private String sintomas;
+    private ServiciosAdicionales servicio;
     
     public Visita(){
         
     }
 
-    public Visita(int codigoMascota, int codigoTratamiento, Date fecha, double pesoPromedio, String sintomas) {
+    public Visita(int idVisita, int codigoMascota, int codigoTratamiento, Date fecha, double pesoPromedio, String sintomas, ServiciosAdicionales servicio) {
+        this.idVisita = idVisita;
         this.codigoMascota = codigoMascota;
         this.codigoTratamiento = codigoTratamiento;
         this.fecha = fecha;
         this.pesoPromedio = pesoPromedio;
         this.sintomas = sintomas;
+        this.servicio = servicio;
+    }
+
+    public ServiciosAdicionales getServicio() {
+        return servicio;
+    }
+
+    public void setServicio(ServiciosAdicionales servicio) {
+        this.servicio = servicio;
     }
 
     public int getIdVisita() {
