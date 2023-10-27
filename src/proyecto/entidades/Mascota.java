@@ -18,7 +18,6 @@ public class Mascota {
     private String colorPelo;
     private LocalDate fechaNacimiento;
     private double peso;
-    private double pesoMedio;
     private List<Visita> visitas;
     private int IdCliente;
     
@@ -26,7 +25,7 @@ public class Mascota {
         
     }
 
-    public Mascota(String alias, String raza, String sexo, String especie, String colorPelo, LocalDate fechaNacimiento, double peso, double pesoMedio, List<Visita> visitas, int IdCliente) {
+    public Mascota(String alias, String raza, String sexo, String especie, String colorPelo, LocalDate fechaNacimiento, double peso,  List<Visita> visitas, int IdCliente) {
         this.alias = alias;
         this.raza = raza;
         this.sexo = sexo;
@@ -34,11 +33,11 @@ public class Mascota {
         this.colorPelo = colorPelo;
         this.fechaNacimiento = fechaNacimiento;
         this.peso = peso;
-        this.pesoMedio = pesoMedio;
+      
         this.visitas = visitas;
         this.IdCliente= IdCliente;
     }
-    public Mascota(String alias, String raza, String sexo, String especie, String colorPelo, LocalDate fechaNacimiento, double peso, double pesoMedio, int IdCliente) {
+    public Mascota(String alias, String raza, String sexo, String especie, String colorPelo, LocalDate fechaNacimiento, double peso, int IdCliente) {
         this.alias = alias;
         this.raza = raza;
         this.sexo = sexo;
@@ -46,11 +45,11 @@ public class Mascota {
         this.colorPelo = colorPelo;
         this.fechaNacimiento = fechaNacimiento;
         this.peso = peso;
-        this.pesoMedio = pesoMedio;
+
         this.IdCliente= IdCliente;
     }
 
-    public Mascota(String alias, String raza, String sexo, String especie, int codigo, String colorPelo, LocalDate fechaNacimiento, double peso, double pesoMedio, List<Visita> visitas, int IdCliente) {
+    public Mascota(String alias, String raza, String sexo, String especie, int codigo, String colorPelo, LocalDate fechaNacimiento, double peso,  List<Visita> visitas, int IdCliente) {
         this.alias = alias;
         this.raza = raza;
         this.sexo = sexo;
@@ -59,10 +58,12 @@ public class Mascota {
         this.colorPelo = colorPelo;
         this.fechaNacimiento = fechaNacimiento;
         this.peso = peso;
-        this.pesoMedio = pesoMedio;
+
         this.visitas = visitas;
         this.IdCliente= IdCliente;
+
     }
+
     
 
     public String getAlias() {
@@ -129,13 +130,7 @@ public class Mascota {
         this.peso = peso;
     }
 
-    public double getPesoMedio() {
-        return pesoMedio;
-    }
-
-    public void setPesoMedio(double pesoPromedio) {
-        this.pesoMedio = pesoMedio;
-    }
+ 
 
     public List<Visita> getVisitas() {
         return visitas;
@@ -156,5 +151,47 @@ public class Mascota {
     public String toString() {
         return  codigo + "," +alias;
     }
-     
+    
+public double obtenerPesoMedio(){
+    double total=0;
+    List<Visita> listaFinal;
+    List<Visita> ultimasVisitas=null;
+    boolean trigger= false;
+    if(visitas.isEmpty()){
+        return 0.0;
+    }
+    if(visitas.size()>10)
+        {
+        ultimasVisitas = visitas.subList(visitas.size()-10, visitas.size());
+        trigger= false;
+        
+    }
+    
+     while(visitas.size()<=10 )
+    {
+        for(int a= 0; a<=(10-visitas.size()); a++){
+            Visita visita = new Visita();
+            visita.setPeso(0);
+            visitas.add(visita);
+            trigger= true;
+ 
+        }
+    }
+    
+if(trigger){
+    listaFinal=visitas;
+}else{
+    listaFinal=ultimasVisitas;
+}
+for(int a=0;  a<listaFinal.size();a++){
+    System.out.println("visita"+a+":"+listaFinal.get(a));
+        total= total+listaFinal.get(a).getPeso();
+}
+double pesoMedio=total/10;
+return pesoMedio;    
+}
+    
+
+
+    
 }

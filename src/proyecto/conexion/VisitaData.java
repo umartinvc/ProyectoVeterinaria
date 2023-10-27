@@ -32,7 +32,7 @@ public class VisitaData {
     }
     
     public Cliente guardarVisita(Visita visita){
-        String sql = "INSET INTO visita(codigoTratamiento, codigoMascota, fechaVisita, sintomas, pesoPromedio)"
+        String sql = "INSET INTO visita(codigoTratamiento, codigoMascota, fechaVisita, sintomas, peso)"
                 + "VALUES (?,?,?,?,?)";
         boolean existeCliente = false;
         Cliente cliente1 = new Cliente();
@@ -49,7 +49,7 @@ public class VisitaData {
                 ps.setInt(2, visita.getMascota().getCodigo());
                 ps.setDate(3, Date.valueOf(visita.getFecha()));
                 ps.setString(4, visita.getSintomas());
-                ps.setDouble(5, visita.getPesoPromedio());
+                ps.setDouble(5, visita.getPeso());
                 ps.executeUpdate();
                 ResultSet rs = ps.getGeneratedKeys();
                 if(rs.next()){
@@ -68,7 +68,7 @@ public class VisitaData {
         return null;
     }
     public void modificarVisita(Visita visita){
-        String sql = "UPDATE visita SET codigoTratamiento = ?, codigoMascota = ?, fechaVisita = ?, sintomas = ?, pesoPromedio = ?"
+        String sql = "UPDATE visita SET codigoTratamiento = ?, codigoMascota = ?, fechaVisita = ?, sintomas = ?, peso = ?"
                 + " WHERE idVisita = ?";
         try {
             PreparedStatement ps = con.prepareStatement(sql);
@@ -76,7 +76,7 @@ public class VisitaData {
             ps.setInt(2, visita.getMascota().getCodigo());
             ps.setDate(3, Date.valueOf(visita.getFecha()));
             ps.setString(4, visita.getSintomas());
-            ps.setDouble(5, visita.getPesoPromedio());
+            ps.setDouble(5, visita.getPeso());
             ps.setInt(6, visita.getIdVisita());
             int exito = ps.executeUpdate();
             if(exito == 1){

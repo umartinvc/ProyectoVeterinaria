@@ -91,7 +91,7 @@ public class MenuVeterinaria extends javax.swing.JFrame {
         jMenu2.setText("Mascota");
 
         jMenuItem2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyecto/iconos/icons8-pet-16.png"))); // NOI18N
-        jMenuItem2.setText("Nuevo");
+        jMenuItem2.setText("GESTION MASCOTAS");
         jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem2ActionPerformed(evt);

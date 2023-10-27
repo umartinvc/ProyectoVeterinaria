@@ -16,28 +16,34 @@ public class Visita {
      private Mascota mascota;
     private Tratamiento tratamiento;
     private LocalDate fecha;
-    private double pesoPromedio;
+    private double peso;
     private String sintomas;
     
     public Visita(){
         
     }
 
-    public Visita(Mascota mascota, Tratamiento tratamiento, LocalDate fecha, double pesoPromedio, String sintomas) {
+    public Visita(Mascota mascota, Tratamiento tratamiento, LocalDate fecha, double peso, String sintomas) {
         this.mascota = mascota;
         this.tratamiento = tratamiento;
         this.fecha = fecha;
-        this.pesoPromedio = pesoPromedio;
         this.sintomas = sintomas;
+        this.peso=peso;
+    }
+    public Visita(Mascota mascota, Tratamiento tratamiento,  double peso, String sintomas) {
+        this.mascota = mascota;
+        this.tratamiento = tratamiento;
+        this.sintomas = sintomas;
+        this.peso=peso;
     }
 
-    public Visita(int idVisita, Mascota mascota, Tratamiento tratamiento, LocalDate fecha, double pesoPromedio, String sintomas) {
+    public Visita(int idVisita, Mascota mascota, Tratamiento tratamiento, LocalDate fecha, double peso, String sintomas) {
         this.idVisita = idVisita;
         this.mascota = mascota;
         this.tratamiento = tratamiento;
         this.fecha = fecha;
-        this.pesoPromedio = pesoPromedio;
         this.sintomas = sintomas;
+        this.peso= peso;
     }
     
     public Visita(Tratamiento tratamiento){
@@ -60,6 +66,14 @@ public class Visita {
         this.mascota = mascota;
     }
 
+    public double getPeso() {
+        return peso;
+    }
+
+    public void setPeso(double peso) {
+        this.peso = peso;
+    }
+
     public Tratamiento getTratamiento() {
         return tratamiento;
     }
@@ -76,20 +90,17 @@ public class Visita {
         this.fecha = fecha;
     }
 
-    public double getPesoPromedio() {
-        return pesoPromedio;
-    }
-
-    public void setPesoPromedio(double pesoPromedio) {
-        this.pesoPromedio = pesoPromedio;
-    }
-
     public String getSintomas() {
         return sintomas;
     }
 
     public void setSintomas(String sintomas) {
         this.sintomas = sintomas;
+    }
+
+    @Override
+    public String toString() {
+        return "Visita{" + "idVisita=" + idVisita + ", tratamiento=" + tratamiento + ",peso=" +  peso +", sintomas=" + sintomas + '}';
     }
     
     

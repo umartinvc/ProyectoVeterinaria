@@ -160,7 +160,6 @@ public class ClienteData {
                 mascota.setRaza(rsListaMascota.getString("raza"));
                 mascota.setColorPelo(rsListaMascota.getString("colorPelo"));
               mascota.setFechaNacimiento(rsListaMascota.getDate("fechaNacimiento").toLocalDate());
-                mascota.setPesoMedio(rsListaMascota.getDouble("pesoMedio"));
                 mascota.setPeso(rsListaMascota.getDouble("PesoActual"));
                     mascota.setIdCliente(idCliente); 
              mascotas.add(mascota); 

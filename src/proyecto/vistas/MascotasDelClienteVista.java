@@ -309,7 +309,7 @@ public class MascotasDelClienteVista extends javax.swing.JInternalFrame {
             colorPelo.setText(mascotaSeleccionada.getColorPelo());
             fechaNacimiento.setDate(Date.valueOf(mascotaSeleccionada.getFechaNacimiento()));
             peso.setText(mascotaSeleccionada.getPeso()+"");
-            pesoMedio.setText(mascotaSeleccionada.getPesoMedio()+"");
+            pesoMedio.setText(mascotaSeleccionada.obtenerPesoMedio()+"");
         }else{
             
         }
