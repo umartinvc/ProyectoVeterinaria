@@ -33,7 +33,7 @@ public MascotaData(){
 public void guardarMascota(Mascota mascota){
    
     String sqlMascota="INSERT INTO mascota( alias, sexo, especie, raza, colorPelo, fechaNacimiento, pesoActual, idCliente)"
-            +"VALUES(?,?,?,?,?,?,?,?,?)";
+            +"VALUES(?,?,?,?,?,?,?,?)";
     try{
         PreparedStatement psMascota= con.prepareStatement(sqlMascota, Statement.RETURN_GENERATED_KEYS);
         psMascota.setString(1, mascota.getAlias());
@@ -52,7 +52,7 @@ public void guardarMascota(Mascota mascota){
         }
         psMascota.close();
     } catch(SQLException e){
-        JOptionPane.showMessageDialog(null, "Error al ingresar a la tabla mascota, asegurese de haber ingresado todos los datos");
+        JOptionPane.showMessageDialog(null, "Error al ingresar a la tabla mascota, asegurese de haber ingresado todos los datos"+e);
     }
 }
 public void borrarMascota(int codigo){

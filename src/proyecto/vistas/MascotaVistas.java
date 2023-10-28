@@ -663,7 +663,6 @@ trigger=false;
        mascotaNueva.setPeso(Double.parseDouble(JTFPeso.getText()));
        mascotaNueva.setColorPelo(JTFColor.getText());
        mascotaNueva.setSexo(JTFSexo.getText());
-       
        mascotaNueva.setFechaNacimiento(JDCFecha.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
        MascotaData md = new MascotaData();
        md.guardarMascota(mascotaNueva);
@@ -765,7 +764,7 @@ trigger= true;
         JCBSeleccionMascota.setEnabled(false);
         deshabilitarText();
     }//GEN-LAST:event_JBCancelar2ActionPerformed
-
+//al seleccionar dueño se llena el combo box de mascota
     private void JCBSeleccionDuenioItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_JCBSeleccionDuenioItemStateChanged
 if(evt.getStateChange() == ItemEvent.SELECTED){
    Cliente clienteSelect = (Cliente) JCBSeleccionDuenio.getSelectedItem();
@@ -780,7 +779,7 @@ if(evt.getStateChange() == ItemEvent.DESELECTED){
         
       
     }//GEN-LAST:event_JCBSeleccionDuenioItemStateChanged
-
+//al seleccionar una mascota se llenan los TextFields 
     private void JCBSeleccionMascotaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_JCBSeleccionMascotaItemStateChanged
         if(evt.getStateChange()==ItemEvent.SELECTED){
             MascotaData md= new MascotaData();
@@ -805,6 +804,10 @@ if(evt.getStateChange() == ItemEvent.DESELECTED){
      MascotaData md = new MascotaData();
      mascota = (Mascota) JCBSeleccionMascota.getSelectedItem();
      md.borrarMascota(mascota.getCodigo());
+     jPanel5.setVisible(false);
+        JCBSeleccionMascota.setEnabled(false);
+        JCBSeleccionDuenio.setEnabled(false);
+        deshabilitarText();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
