@@ -20,6 +20,7 @@ public class MascotasDelClienteVista extends javax.swing.JInternalFrame {
     private Cliente cliente1;
     private ClienteData clienteData = new ClienteData();
     private boolean existeCliente;
+    private Mascota mascota1;
 
     /**
      * Creates new form MascotasDelClienteVista
@@ -310,6 +311,7 @@ public class MascotasDelClienteVista extends javax.swing.JInternalFrame {
             fechaNacimiento.setDate(Date.valueOf(mascotaSeleccionada.getFechaNacimiento()));
             peso.setText(mascotaSeleccionada.getPeso()+"");
             pesoMedio.setText(mascotaSeleccionada.obtenerPesoMedio()+"");
+            mascota1 = mascotaSeleccionada;
         }else{
             
         }
@@ -320,7 +322,7 @@ public class MascotasDelClienteVista extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         escritorio.removeAll();
         escritorio.repaint();
-        ListaDeTratamientosVista ltv= new ListaDeTratamientosVista(cliente1);
+        ListaDeTratamientosVista ltv= new ListaDeTratamientosVista();
         ltv.setVisible(true);
         escritorio.add(ltv);
         escritorio.moveToFront(ltv);
@@ -370,6 +372,10 @@ public class MascotasDelClienteVista extends javax.swing.JInternalFrame {
         for (Cliente cliente : clienteData.ClientesTodos()) {
             clientesCombo.addItem(cliente);
         }
+    }
+    
+    public Mascota obtenerMascota(){
+        return this.mascota1;
     }
 
 
