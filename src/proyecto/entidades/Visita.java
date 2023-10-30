@@ -18,13 +18,13 @@ public class Visita {
     private int codigoTratamiento;
     private Date fecha;
     private double peso;
-    private String sintomas;
+    private Sintomas sintomas;
     
     public Visita(){
         
     }
 
-    public Visita(int codigoMascota, int codigoTratamiento, Date fecha, double peso, String sintomas) {
+    public Visita(int codigoMascota, int codigoTratamiento, Date fecha, double peso, Sintomas sintomas) {
         this.codigoMascota = codigoMascota;
         this.codigoTratamiento = codigoTratamiento;
         this.fecha = fecha;
@@ -36,14 +36,14 @@ public class Visita {
 
     
 
-    public Visita(int codigoMascota, int codigoTratamiento, double peso, String sintomas) {
+    public Visita(int codigoMascota, int codigoTratamiento, double peso, Sintomas sintomas) {
         this.codigoMascota = codigoMascota;
         this.codigoTratamiento = codigoTratamiento;
         this.peso = peso;
         this.sintomas = sintomas;
     }
 
-    public Visita(int idVisita, int codigoMascota, int codigoTratamiento, Date fecha, double peso, String sintomas) {
+    public Visita(int idVisita, int codigoMascota, int codigoTratamiento, Date fecha, double peso, Sintomas sintomas) {
         this.idVisita = idVisita;
         this.codigoMascota = codigoMascota;
         this.codigoTratamiento = codigoTratamiento;
@@ -97,11 +97,11 @@ public class Visita {
         this.peso = peso;
     }
 
-    public String getSintomas() {
+    public Sintomas getSintomas() {
         return sintomas;
     }
 
-    public void setSintomas(String sintomas) {
+    public void setSintomas(Sintomas sintomas) {
         this.sintomas = sintomas;
     }
 

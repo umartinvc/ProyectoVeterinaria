@@ -48,7 +48,7 @@ public class VisitaData {
             ps.setInt(1, visita.getCodigoTratamiento());
             ps.setInt(2, visita.getCodigoMascota());
             ps.setDate(3, visita.getFecha());
-            ps.setString(4, visita.getSintomas());
+            ps.setString(4, visita.getSintomas().getDescripcion());
             ps.setDouble(5, visita.getPeso());
             ps.executeUpdate();
             ResultSet rs = ps.getGeneratedKeys();
@@ -69,7 +69,7 @@ public class VisitaData {
             ps.setInt(1, visita.getCodigoTratamiento());
             ps.setInt(2, visita.getCodigoMascota());
             ps.setDate(3, visita.getFecha());
-            ps.setString(4, visita.getSintomas());
+            ps.setString(4, visita.getSintomas().getDescripcion());
             ps.setDouble(5, visita.getPeso());
             ps.setInt(6, visita.getIdVisita());
             int exito = ps.executeUpdate();

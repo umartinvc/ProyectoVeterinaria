@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 import proyecto.entidades.Mascota;
+import proyecto.entidades.Sintomas;
 import proyecto.entidades.Tratamiento;
 import proyecto.entidades.Visita;
 
@@ -204,7 +205,7 @@ public List<Visita> obtenerVisitas(int codigo){
                 int codigoTratamiento = rs.getInt("codigoTratamiento");
                 Date fecha = rs.getDate("fecha");
                 double peso = rs.getDouble("peso");
-                String sintomas = rs.getString("sintomas");
+                Sintomas sintomas = Sintomas.buscarSintomas(rs.getString("sintomas"));
 
                 Visita visita = new Visita(idVisita, codigoMascota, codigoTratamiento, fecha, peso, sintomas);
                 visitas.add(visita);

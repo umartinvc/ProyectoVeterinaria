@@ -6,10 +6,13 @@ package proyecto.vistas;
 
 import java.sql.Date;
 import java.time.LocalDate;
+import javax.swing.event.InternalFrameEvent;
+import javax.swing.event.InternalFrameListener;
 import proyecto.conexion.ClienteData;
 import proyecto.conexion.VisitaData;
 import proyecto.entidades.Cliente;
 import proyecto.entidades.Mascota;
+import proyecto.entidades.Tratamiento;
 import proyecto.entidades.Visita;
 
 /**
@@ -56,7 +59,6 @@ public class MascotasDelClienteVista extends javax.swing.JInternalFrame {
         jLabel4 = new javax.swing.JLabel();
         raza = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        pesoMedio = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         peso = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
@@ -67,7 +69,6 @@ public class MascotasDelClienteVista extends javax.swing.JInternalFrame {
         codigo = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
         colorPelo = new javax.swing.JTextField();
-        jLabel11 = new javax.swing.JLabel();
         elegir = new javax.swing.JButton();
         fechaNacimiento = new com.toedter.calendar.JDateChooser();
         jLabel12 = new javax.swing.JLabel();
@@ -99,8 +100,6 @@ public class MascotasDelClienteVista extends javax.swing.JInternalFrame {
 
         jLabel5.setText("SEXO:");
 
-        pesoMedio.setEditable(false);
-
         jLabel6.setText("ESPECIE:");
 
         peso.setEditable(false);
@@ -120,8 +119,6 @@ public class MascotasDelClienteVista extends javax.swing.JInternalFrame {
         jLabel10.setText("PESO:");
 
         colorPelo.setEditable(false);
-
-        jLabel11.setText("PESO MEDIO:");
 
         elegir.setText("ELEGIR TRATAMIENTO");
         elegir.addActionListener(new java.awt.event.ActionListener() {
@@ -147,7 +144,6 @@ public class MascotasDelClienteVista extends javax.swing.JInternalFrame {
         escritorio.setLayer(jLabel4, javax.swing.JLayeredPane.DEFAULT_LAYER);
         escritorio.setLayer(raza, javax.swing.JLayeredPane.DEFAULT_LAYER);
         escritorio.setLayer(jLabel5, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        escritorio.setLayer(pesoMedio, javax.swing.JLayeredPane.DEFAULT_LAYER);
         escritorio.setLayer(jLabel6, javax.swing.JLayeredPane.DEFAULT_LAYER);
         escritorio.setLayer(peso, javax.swing.JLayeredPane.DEFAULT_LAYER);
         escritorio.setLayer(jLabel7, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -158,7 +154,6 @@ public class MascotasDelClienteVista extends javax.swing.JInternalFrame {
         escritorio.setLayer(codigo, javax.swing.JLayeredPane.DEFAULT_LAYER);
         escritorio.setLayer(jLabel10, javax.swing.JLayeredPane.DEFAULT_LAYER);
         escritorio.setLayer(colorPelo, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        escritorio.setLayer(jLabel11, javax.swing.JLayeredPane.DEFAULT_LAYER);
         escritorio.setLayer(elegir, javax.swing.JLayeredPane.DEFAULT_LAYER);
         escritorio.setLayer(fechaNacimiento, javax.swing.JLayeredPane.DEFAULT_LAYER);
         escritorio.setLayer(jLabel12, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -168,46 +163,6 @@ public class MascotasDelClienteVista extends javax.swing.JInternalFrame {
         escritorio.setLayout(escritorioLayout);
         escritorioLayout.setHorizontalGroup(
             escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(escritorioLayout.createSequentialGroup()
-                .addGap(12, 12, 12)
-                .addGroup(escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel7)
-                    .addComponent(jLabel9)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel3))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(escritorioLayout.createSequentialGroup()
-                        .addGroup(escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(escritorioLayout.createSequentialGroup()
-                                .addGroup(escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addComponent(fechaNacimiento, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
-                                        .addComponent(codigo, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE))
-                                    .addComponent(sexo, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(55, 55, 55)
-                                .addGroup(escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel8)
-                                    .addComponent(jLabel10)
-                                    .addComponent(jLabel6)))
-                            .addGroup(escritorioLayout.createSequentialGroup()
-                                .addComponent(nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel4)))
-                        .addGap(18, 18, 18)
-                        .addGroup(escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(raza, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(especie, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(colorPelo, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(peso, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(escritorioLayout.createSequentialGroup()
-                        .addGap(36, 36, 36)
-                        .addComponent(jLabel11)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(elegir)
-                            .addComponent(pesoMedio, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(28, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, escritorioLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -226,6 +181,38 @@ public class MascotasDelClienteVista extends javax.swing.JInternalFrame {
                             .addComponent(mascotas, 0, 376, Short.MAX_VALUE)
                             .addComponent(clientesCombo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(38, 38, 38))))
+            .addGroup(escritorioLayout.createSequentialGroup()
+                .addGap(12, 12, 12)
+                .addGroup(escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel7)
+                    .addComponent(jLabel9)
+                    .addComponent(jLabel5)
+                    .addComponent(jLabel3))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(escritorioLayout.createSequentialGroup()
+                        .addGroup(escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(fechaNacimiento, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
+                                .addComponent(codigo, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE))
+                            .addComponent(sexo, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(55, 55, 55)
+                        .addGroup(escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel8)
+                            .addComponent(jLabel10)
+                            .addComponent(jLabel6)))
+                    .addGroup(escritorioLayout.createSequentialGroup()
+                        .addComponent(nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel4))
+                    .addComponent(elegir, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addGap(18, 18, 18)
+                .addGroup(escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(raza, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(especie, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(colorPelo, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(peso, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(28, Short.MAX_VALUE))
         );
         escritorioLayout.setVerticalGroup(
             escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -266,22 +253,14 @@ public class MascotasDelClienteVista extends javax.swing.JInternalFrame {
                             .addComponent(colorPelo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(18, 18, 18)
                 .addGroup(escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(escritorioLayout.createSequentialGroup()
-                        .addGroup(escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel9)
-                            .addGroup(escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jLabel10)
-                                .addComponent(peso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
-                        .addGroup(escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(pesoMedio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel11))
-                        .addGap(26, 26, 26)
-                        .addComponent(elegir)
-                        .addGap(22, 22, 22))
-                    .addGroup(escritorioLayout.createSequentialGroup()
-                        .addComponent(fechaNacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                    .addComponent(jLabel9)
+                    .addGroup(escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel10)
+                        .addComponent(peso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(fechaNacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 85, Short.MAX_VALUE)
+                .addComponent(elegir)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -301,20 +280,17 @@ public class MascotasDelClienteVista extends javax.swing.JInternalFrame {
     private void mascotasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mascotasActionPerformed
         // TODO add your handling code here:
         Mascota mascotaSeleccionada = (Mascota)mascotas.getSelectedItem();
-        if(!existeCliente){
-            nombre.setText(mascotaSeleccionada.getAlias());
-            raza.setText(mascotaSeleccionada.getRaza());
-            codigo.setText(mascotaSeleccionada.getCodigo()+"");
-            sexo.setText(mascotaSeleccionada.getSexo());
-            especie.setText(mascotaSeleccionada.getEspecie());
-            colorPelo.setText(mascotaSeleccionada.getColorPelo());
-            fechaNacimiento.setDate(Date.valueOf(mascotaSeleccionada.getFechaNacimiento()));
-            peso.setText(mascotaSeleccionada.getPeso()+"");
-            pesoMedio.setText(mascotaSeleccionada.obtenerPesoMedio()+"");
-            mascota1 = mascotaSeleccionada;
-        }else{
-            
-        }
+        
+        nombre.setText(mascotaSeleccionada.getAlias());
+        raza.setText(mascotaSeleccionada.getRaza());
+        codigo.setText(mascotaSeleccionada.getCodigo()+"");
+        sexo.setText(mascotaSeleccionada.getSexo());
+        especie.setText(mascotaSeleccionada.getEspecie());
+        colorPelo.setText(mascotaSeleccionada.getColorPelo());
+        fechaNacimiento.setDate(Date.valueOf(mascotaSeleccionada.getFechaNacimiento()));
+        peso.setText(mascotaSeleccionada.getPeso()+"");
+        mascota1 = mascotaSeleccionada;
+        
         
     }//GEN-LAST:event_mascotasActionPerformed
 
@@ -326,6 +302,48 @@ public class MascotasDelClienteVista extends javax.swing.JInternalFrame {
         ltv.setVisible(true);
         escritorio.add(ltv);
         escritorio.moveToFront(ltv);
+        // Agrega un InternalFrameListener al ListaDeTratamientosVista
+        ltv.addInternalFrameListener(new InternalFrameListener() {
+            @Override
+            public void internalFrameOpened(InternalFrameEvent e) {
+                // Este método se llama cuando se abre el JInternalFrame
+            }
+
+            @Override
+            public void internalFrameClosing(InternalFrameEvent e) {
+                // Este método se llama cuando se cierra el JInternalFrame
+                Tratamiento tratamientoElegido = ltv.obtenerTratamiento();
+                VisitaData visitaData = new VisitaData();
+                //visitaData.
+                // Realiza aquí las acciones que deseas cuando se cierra
+                // por ejemplo, actualizaciones o notificaciones.
+            }
+
+            @Override
+            public void internalFrameClosed(InternalFrameEvent e) {
+                // Este método se llama después de que el JInternalFrame se haya cerrado
+            }
+
+            @Override
+            public void internalFrameIconified(InternalFrameEvent e) {
+                // Este método se llama cuando el JInternalFrame se minimiza
+            }
+
+            @Override
+            public void internalFrameDeiconified(InternalFrameEvent e) {
+                // Este método se llama cuando el JInternalFrame se restaura desde la minimización
+            }
+
+            @Override
+            public void internalFrameActivated(InternalFrameEvent e) {
+                // Este método se llama cuando el JInternalFrame se activa (gana el foco)
+            }
+
+            @Override
+            public void internalFrameDeactivated(InternalFrameEvent e) {
+                // Este método se llama cuando el JInternalFrame se desactiva (pierde el foco)
+            }
+        });
     }//GEN-LAST:event_elegirActionPerformed
 
     private void clientesComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clientesComboActionPerformed
@@ -345,7 +363,6 @@ public class MascotasDelClienteVista extends javax.swing.JInternalFrame {
     private com.toedter.calendar.JDateChooser fechaNacimiento;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -358,7 +375,6 @@ public class MascotasDelClienteVista extends javax.swing.JInternalFrame {
     private javax.swing.JComboBox<Mascota> mascotas;
     private javax.swing.JTextField nombre;
     private javax.swing.JTextField peso;
-    private javax.swing.JTextField pesoMedio;
     private javax.swing.JTextField raza;
     private javax.swing.JTextField sexo;
     // End of variables declaration//GEN-END:variables
@@ -369,8 +385,12 @@ public class MascotasDelClienteVista extends javax.swing.JInternalFrame {
         }
     }
     private void cargarComboClientes(){
-        for (Cliente cliente : clienteData.ClientesTodos()) {
-            clientesCombo.addItem(cliente);
+        if(!existeCliente){
+            for (Cliente cliente : clienteData.ClientesTodos()) {
+                clientesCombo.addItem(cliente);
+            }
+        }else{
+            clientesCombo.addItem(cliente1);
         }
     }
     
