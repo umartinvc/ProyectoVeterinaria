@@ -11,22 +11,22 @@ package proyecto.entidades;
  */
 public class Tratamiento {
     private int codigo;
-    private String tipo;
-    private TratamientosEnum descripcion;
+    private TratamientosEnum tipo;
+    private String descripcion;
     private double importe;
     private boolean activo;
 
     public Tratamiento() {
     }
 
-    public Tratamiento(String tipo, TratamientosEnum descripcion, double importe, boolean activo) {
+    public Tratamiento(TratamientosEnum tipo, String descripcion, double importe, boolean activo) {
         this.tipo = tipo;
         this.descripcion = descripcion;
         this.importe = importe;
         this.activo = activo;
     }
 
-    public Tratamiento(int codigo, String tipo, TratamientosEnum descripcion, double importe, boolean activo) {
+    public Tratamiento(int codigo, TratamientosEnum tipo, String descripcion, double importe, boolean activo) {
         this.codigo = codigo;
         this.tipo = tipo;
         this.descripcion = descripcion;
@@ -42,19 +42,19 @@ public class Tratamiento {
         this.codigo = codigo;
     }
 
-    public String getTipo() {
+    public TratamientosEnum getTipo() {
         return tipo;
     }
 
-    public void setTipo(String tipo) {
+    public void setTipo(TratamientosEnum tipo) {
         this.tipo = tipo;
     }
 
-    public TratamientosEnum getDescripcion() {
+    public String getDescripcion() {
         return descripcion;
     }
 
-    public void setDescripcion(TratamientosEnum descripcion) {
+    public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
 
@@ -73,6 +73,13 @@ public class Tratamiento {
     public void setActivo(boolean activo) {
         this.activo = activo;
     }
+
+    @Override
+    public String toString() {
+        return "Tratamiento{" + "codigo=" + codigo + ", tipo=" + tipo + ", descripcion=" + descripcion + ", importe=" + importe + ", activo=" + activo + '}';
+    }
+    
+    
     
 
 }

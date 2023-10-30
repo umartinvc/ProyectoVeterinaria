@@ -157,18 +157,23 @@ private Tratamiento tratamientoElegido;
 
     private void buscadorKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_buscadorKeyReleased
         // TODO add your handling code here:
+        
         TratamientoData tratamientoData = new TratamientoData();
+        borrarFilas();
         for (Tratamiento tratamiento : tratamientoData.listarTratamiento()) {
-            if(tratamiento.getDescripcion().name().startsWith(buscador.getText())){
-                modelo.addColumn(new Object []{
+            //System.out.println(tratamiento.toString());
+            if (tratamiento.getTipo().name().startsWith(buscador.getText().toUpperCase().replace(" ", "_"))) {
+                modelo.addRow(new Object []{
                     tratamiento.getCodigo(),
-                    tratamiento.getTipo(),
-                    tratamiento.getDescripcion().toString(),
+                    tratamiento.getTipo().getDescripcion(),
+                    tratamiento.getDescripcion(),
                     tratamiento.getImporte(),
                     tratamiento.isActivo()
                 });
             }
         }
+        
+        
     }//GEN-LAST:event_buscadorKeyReleased
 
     private void elegirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_elegirActionPerformed
@@ -177,8 +182,8 @@ private Tratamiento tratamientoElegido;
 
         if (filaSeleccionada != -1) {
             int codigo = Integer.parseInt(tablaTratamiento.getValueAt(filaSeleccionada, 0).toString());
-            String tipo = tablaTratamiento.getValueAt(filaSeleccionada, 1).toString(); 
-            TratamientosEnum descripcion = TratamientosEnum.buscarTratamiento( tablaTratamiento.getValueAt(filaSeleccionada, 2).toString()); 
+            TratamientosEnum tipo = TratamientosEnum.buscarTratamiento(tablaTratamiento.getValueAt(filaSeleccionada, 1).toString()); 
+            String descripcion = tablaTratamiento.getValueAt(filaSeleccionada, 2).toString(); 
             double importe = Double.parseDouble(tablaTratamiento.getValueAt(filaSeleccionada, 3).toString()); 
             boolean activo = (boolean) tablaTratamiento.getValueAt(filaSeleccionada, 4); 
 
@@ -224,5 +229,9 @@ private Tratamiento tratamientoElegido;
         return this.tratamientoElegido;
     }
     
+    private void borrarFilas() {
+        DefaultTableModel model = (DefaultTableModel) tablaTratamiento.getModel();
+        model.setRowCount(0); // Elimina todas las filas de la tabla
+    }
 
 }
