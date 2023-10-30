@@ -58,7 +58,7 @@
                       <Component id="codigoTratamiento" max="32767" attributes="0"/>
                       <Component id="codigoMascota" max="32767" attributes="0"/>
                       <Component id="sintomas" alignment="0" max="32767" attributes="0"/>
-                      <Component id="pesoPromedio" pref="195" max="32767" attributes="0"/>
+                      <Component id="peso" pref="195" max="32767" attributes="0"/>
                       <Group type="102" alignment="1" attributes="0">
                           <Component id="eliminar" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="61" max="-2" attributes="0"/>
@@ -101,7 +101,7 @@
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="pesoPromedio" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="peso" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
@@ -144,10 +144,10 @@
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel5">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Peso Promedio: "/>
+            <Property name="text" type="java.lang.String" value="Peso: "/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="pesoPromedio">
+        <Component class="javax.swing.JTextField" name="peso">
         </Component>
         <Component class="javax.swing.JButton" name="guardar">
           <Properties>

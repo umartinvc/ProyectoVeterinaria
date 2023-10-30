@@ -5,6 +5,7 @@
  */
 package proyecto.entidades;
 
+import java.sql.Date;
 import java.time.LocalDate;
 
 /**
@@ -13,9 +14,9 @@ import java.time.LocalDate;
  */
 public class Visita {
     private int idVisita;
-     private Mascota mascota;
-    private Tratamiento tratamiento;
-    private LocalDate fecha;
+    private int codigoMascota;
+    private int codigoTratamiento;
+    private Date fecha;
     private double peso;
     private String sintomas;
     
@@ -23,32 +24,38 @@ public class Visita {
         
     }
 
-    public Visita(Mascota mascota, Tratamiento tratamiento, LocalDate fecha, double peso, String sintomas) {
-        this.mascota = mascota;
-        this.tratamiento = tratamiento;
+    public Visita(int codigoMascota, int codigoTratamiento, Date fecha, double peso, String sintomas) {
+        this.codigoMascota = codigoMascota;
+        this.codigoTratamiento = codigoTratamiento;
         this.fecha = fecha;
+        this.peso = peso;
         this.sintomas = sintomas;
-        this.peso=peso;
-    }
-    public Visita(Mascota mascota, Tratamiento tratamiento,  double peso, String sintomas) {
-        this.mascota = mascota;
-        this.tratamiento = tratamiento;
-        this.sintomas = sintomas;
-        this.peso=peso;
     }
 
-    public Visita(int idVisita, Mascota mascota, Tratamiento tratamiento, LocalDate fecha, double peso, String sintomas) {
-        this.idVisita = idVisita;
-        this.mascota = mascota;
-        this.tratamiento = tratamiento;
-        this.fecha = fecha;
+    
+
+    
+
+    public Visita(int codigoMascota, int codigoTratamiento, double peso, String sintomas) {
+        this.codigoMascota = codigoMascota;
+        this.codigoTratamiento = codigoTratamiento;
+        this.peso = peso;
         this.sintomas = sintomas;
-        this.peso= peso;
+    }
+
+    public Visita(int idVisita, int codigoMascota, int codigoTratamiento, Date fecha, double peso, String sintomas) {
+        this.idVisita = idVisita;
+        this.codigoMascota = codigoMascota;
+        this.codigoTratamiento = codigoTratamiento;
+        this.fecha = fecha;
+        this.peso = peso;
+        this.sintomas = sintomas;
     }
     
-    public Visita(Tratamiento tratamiento){
-        
-    }
+
+    
+
+    
 
     public int getIdVisita() {
         return idVisita;
@@ -58,12 +65,28 @@ public class Visita {
         this.idVisita = idVisita;
     }
 
-    public Mascota getMascota() {
-        return mascota;
+    public int getCodigoMascota() {
+        return codigoMascota;
     }
 
-    public void setMascota(Mascota mascota) {
-        this.mascota = mascota;
+    public void setCodigoMascota(int codigoMascota) {
+        this.codigoMascota = codigoMascota;
+    }
+
+    public int getCodigoTratamiento() {
+        return codigoTratamiento;
+    }
+
+    public void setCodigoTratamiento(int codigoTratamiento) {
+        this.codigoTratamiento = codigoTratamiento;
+    }
+
+    public Date getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(Date fecha) {
+        this.fecha = fecha;
     }
 
     public double getPeso() {
@@ -72,22 +95,6 @@ public class Visita {
 
     public void setPeso(double peso) {
         this.peso = peso;
-    }
-
-    public Tratamiento getTratamiento() {
-        return tratamiento;
-    }
-
-    public void setTratamiento(Tratamiento tratamiento) {
-        this.tratamiento = tratamiento;
-    }
-
-    public LocalDate getFecha() {
-        return fecha;
-    }
-
-    public void setFecha(LocalDate fecha) {
-        this.fecha = fecha;
     }
 
     public String getSintomas() {
@@ -100,7 +107,7 @@ public class Visita {
 
     @Override
     public String toString() {
-        return "Visita{" + "idVisita=" + idVisita + ", tratamiento=" + tratamiento + ",peso=" +  peso +", sintomas=" + sintomas + '}';
+        return "Visita{" + "idVisita=" + idVisita + ", codigoMascota=" + codigoMascota + ", codigoTratamiento=" + codigoTratamiento + ", fecha=" + fecha + ", peso=" + peso + ", sintomas=" + sintomas + '}';
     }
     
     

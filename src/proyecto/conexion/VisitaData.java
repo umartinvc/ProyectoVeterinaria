@@ -31,10 +31,10 @@ public class VisitaData {
         con = Conexion.getConexion();
     }
     
-    public Cliente guardarVisita(Visita visita){
+    public void guardarVisita(Visita visita){
         String sql = "INSET INTO visita(codigoTratamiento, codigoMascota, fechaVisita, sintomas, peso)"
                 + "VALUES (?,?,?,?,?)";
-        boolean existeCliente = false;
+        /*boolean existeCliente = false;
         Cliente cliente1 = new Cliente();
         for (Cliente cliente : clientes) {
             if(cliente.getIdCliente() == visita.getMascota().getIdCliente()){
@@ -42,39 +42,33 @@ public class VisitaData {
                 cliente1 = cliente;
             }
         }
-        if(!existeCliente){
-            try {
-                PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-                ps.setInt(1, visita.getTratamiento().getCodigo());
-                ps.setInt(2, visita.getMascota().getCodigo());
-                ps.setDate(3, Date.valueOf(visita.getFecha()));
-                ps.setString(4, visita.getSintomas());
-                ps.setDouble(5, visita.getPeso());
-                ps.executeUpdate();
-                ResultSet rs = ps.getGeneratedKeys();
-                if(rs.next()){
-                    visita.setIdVisita(rs.getInt(1));
-                    JOptionPane.showMessageDialog(null, "Visita guardada");
-                }
-                
-                return cliente1;
-
-            } catch (SQLException ex) {
-                JOptionPane.showMessageDialog(null, "Error al acceder a la tabla visita");
+        if(!existeCliente){*/
+        try {
+            PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            ps.setInt(1, visita.getCodigoTratamiento());
+            ps.setInt(2, visita.getCodigoMascota());
+            ps.setDate(3, visita.getFecha());
+            ps.setString(4, visita.getSintomas());
+            ps.setDouble(5, visita.getPeso());
+            ps.executeUpdate();
+            ResultSet rs = ps.getGeneratedKeys();
+            if(rs.next()){
+                visita.setIdVisita(rs.getInt(1));
+                JOptionPane.showMessageDialog(null, "Visita guardada");
             }
-        }else{
-            return cliente1;
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla visita");
         }
-        return null;
+        
     }
     public void modificarVisita(Visita visita){
         String sql = "UPDATE visita SET codigoTratamiento = ?, codigoMascota = ?, fechaVisita = ?, sintomas = ?, peso = ?"
                 + " WHERE idVisita = ?";
         try {
             PreparedStatement ps = con.prepareStatement(sql);
-            ps.setInt(1, visita.getTratamiento().getCodigo());
-            ps.setInt(2, visita.getMascota().getCodigo());
-            ps.setDate(3, Date.valueOf(visita.getFecha()));
+            ps.setInt(1, visita.getCodigoTratamiento());
+            ps.setInt(2, visita.getCodigoMascota());
+            ps.setDate(3, visita.getFecha());
             ps.setString(4, visita.getSintomas());
             ps.setDouble(5, visita.getPeso());
             ps.setInt(6, visita.getIdVisita());

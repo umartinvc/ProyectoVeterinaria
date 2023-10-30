@@ -48,7 +48,7 @@ public class VisitaVista extends javax.swing.JInternalFrame {
         jLabel4 = new javax.swing.JLabel();
         sintomas = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        pesoPromedio = new javax.swing.JTextField();
+        peso = new javax.swing.JTextField();
         guardar = new javax.swing.JButton();
         eliminar = new javax.swing.JButton();
         buscarTratamiento = new javax.swing.JButton();
@@ -66,7 +66,7 @@ public class VisitaVista extends javax.swing.JInternalFrame {
 
         jLabel4.setText("Sintomas:");
 
-        jLabel5.setText("Peso Promedio: ");
+        jLabel5.setText("Peso: ");
 
         guardar.setText("GUARDAR");
         guardar.addActionListener(new java.awt.event.ActionListener() {
@@ -105,7 +105,7 @@ public class VisitaVista extends javax.swing.JInternalFrame {
         escritorio.setLayer(jLabel4, javax.swing.JLayeredPane.DEFAULT_LAYER);
         escritorio.setLayer(sintomas, javax.swing.JLayeredPane.DEFAULT_LAYER);
         escritorio.setLayer(jLabel5, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        escritorio.setLayer(pesoPromedio, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        escritorio.setLayer(peso, javax.swing.JLayeredPane.DEFAULT_LAYER);
         escritorio.setLayer(guardar, javax.swing.JLayeredPane.DEFAULT_LAYER);
         escritorio.setLayer(eliminar, javax.swing.JLayeredPane.DEFAULT_LAYER);
         escritorio.setLayer(buscarTratamiento, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -130,7 +130,7 @@ public class VisitaVista extends javax.swing.JInternalFrame {
                     .addComponent(codigoTratamiento)
                     .addComponent(codigoMascota)
                     .addComponent(sintomas)
-                    .addComponent(pesoPromedio, javax.swing.GroupLayout.DEFAULT_SIZE, 195, Short.MAX_VALUE)
+                    .addComponent(peso, javax.swing.GroupLayout.DEFAULT_SIZE, 195, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, escritorioLayout.createSequentialGroup()
                         .addComponent(eliminar)
                         .addGap(61, 61, 61)))
@@ -164,7 +164,7 @@ public class VisitaVista extends javax.swing.JInternalFrame {
                 .addGap(18, 18, 18)
                 .addGroup(escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(pesoPromedio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(peso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(27, 27, 27)
                 .addGroup(escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(guardar)
@@ -200,7 +200,7 @@ public class VisitaVista extends javax.swing.JInternalFrame {
         visita.setCodigoMascota(Integer.parseInt(codigoMascota.getText()));
         visita.setFecha((Date) fecha.getDate());
         visita.setSintomas(sintomas.getText());
-        visita.setPesoPromedio(Integer.parseInt(pesoPromedio.getText()));
+        visita.setPeso(Integer.parseInt(peso.getText()));
         mascota = mascotaData.buscarMascota(Integer.parseInt(codigoMascota.getText()));
         
         if(clienteData.buscarClientePorId(mascota.getIdCliente()) == null){
@@ -267,7 +267,7 @@ public class VisitaVista extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JTextField pesoPromedio;
+    private javax.swing.JTextField peso;
     private javax.swing.JTextField sintomas;
     // End of variables declaration//GEN-END:variables
 }

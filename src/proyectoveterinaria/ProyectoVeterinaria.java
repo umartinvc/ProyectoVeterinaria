@@ -30,7 +30,7 @@ public class ProyectoVeterinaria {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-
+        /*
         ClienteData clienteData = new ClienteData();
         VisitaData vd = new VisitaData();
 
@@ -75,7 +75,7 @@ public class ProyectoVeterinaria {
     mascota.setVisitas(visitas);
     
         System.out.println("Peso medio:"+mascota.obtenerPesoMedio());
-    }
+    */}
         
     
 
