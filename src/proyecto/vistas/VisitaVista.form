@@ -65,7 +65,11 @@
                       </Group>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="buscarTratamiento" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="buscarTratamiento" min="-2" max="-2" attributes="0"/>
+                      <Component id="buscarMascota" min="-2" max="-2" attributes="0"/>
+                      <Component id="buscarSintomas" min="-2" max="-2" attributes="0"/>
+                  </Group>
                   <EmptySpace pref="19" max="32767" attributes="0"/>
               </Group>
           </Group>
@@ -83,6 +87,7 @@
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="codigoMascota" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="buscarMascota" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
@@ -93,6 +98,7 @@
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="sintomas" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="buscarSintomas" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
@@ -116,6 +122,9 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="codigoTratamiento">
+          <Properties>
+            <Property name="editable" type="boolean" value="false"/>
+          </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel2">
           <Properties>
@@ -123,6 +132,9 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="codigoMascota">
+          <Properties>
+            <Property name="editable" type="boolean" value="false"/>
+          </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel3">
           <Properties>
@@ -137,6 +149,9 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="sintomas">
+          <Properties>
+            <Property name="editable" type="boolean" value="false"/>
+          </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel5">
           <Properties>
@@ -167,6 +182,22 @@
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buscarTratamientoActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="buscarMascota">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="BUSCAR"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buscarMascotaActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="buscarSintomas">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="BUSCAR"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buscarSintomasActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>

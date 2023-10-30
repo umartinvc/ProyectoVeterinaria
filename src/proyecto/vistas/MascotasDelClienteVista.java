@@ -40,6 +40,14 @@ public class MascotasDelClienteVista extends javax.swing.JInternalFrame {
         cargarComboClientes();
         existeCliente = false;
     }
+    public MascotasDelClienteVista(boolean soloMascotas){
+        initComponents();
+        cargarComboClientes();
+        existeCliente = false;
+        if(soloMascotas){
+            elegir.setEnabled(false);
+        }
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.

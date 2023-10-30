@@ -11,6 +11,7 @@ import proyecto.conexion.TratamientoData;
 import proyecto.conexion.VisitaData;
 import proyecto.entidades.Cliente;
 import proyecto.entidades.Tratamiento;
+import proyecto.entidades.TratamientosEnum;
 import proyecto.entidades.Visita;
 
 /**
@@ -158,11 +159,11 @@ private Tratamiento tratamientoElegido;
         // TODO add your handling code here:
         TratamientoData tratamientoData = new TratamientoData();
         for (Tratamiento tratamiento : tratamientoData.listarTratamiento()) {
-            if(tratamiento.getDescripcion().startsWith(buscador.getText())){
+            if(tratamiento.getDescripcion().name().startsWith(buscador.getText())){
                 modelo.addColumn(new Object []{
                     tratamiento.getCodigo(),
                     tratamiento.getTipo(),
-                    tratamiento.getDescripcion(),
+                    tratamiento.getDescripcion().toString(),
                     tratamiento.getImporte(),
                     tratamiento.isActivo()
                 });
@@ -177,7 +178,7 @@ private Tratamiento tratamientoElegido;
         if (filaSeleccionada != -1) {
             int codigo = Integer.parseInt(tablaTratamiento.getValueAt(filaSeleccionada, 0).toString());
             String tipo = tablaTratamiento.getValueAt(filaSeleccionada, 1).toString(); 
-            String descripcion = tablaTratamiento.getValueAt(filaSeleccionada, 2).toString(); 
+            TratamientosEnum descripcion = TratamientosEnum.buscarTratamiento( tablaTratamiento.getValueAt(filaSeleccionada, 2).toString()); 
             double importe = Double.parseDouble(tablaTratamiento.getValueAt(filaSeleccionada, 3).toString()); 
             boolean activo = (boolean) tablaTratamiento.getValueAt(filaSeleccionada, 4); 
 

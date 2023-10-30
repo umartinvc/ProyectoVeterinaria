@@ -12,21 +12,21 @@ package proyecto.entidades;
 public class Tratamiento {
     private int codigo;
     private String tipo;
-    private String descripcion;
+    private TratamientosEnum descripcion;
     private double importe;
     private boolean activo;
 
     public Tratamiento() {
     }
 
-    public Tratamiento(String tipo, String descripcion, double importe, boolean activo) {
+    public Tratamiento(String tipo, TratamientosEnum descripcion, double importe, boolean activo) {
         this.tipo = tipo;
         this.descripcion = descripcion;
         this.importe = importe;
         this.activo = activo;
     }
 
-    public Tratamiento(int codigo, String tipo, String descripcion, double importe, boolean activo) {
+    public Tratamiento(int codigo, String tipo, TratamientosEnum descripcion, double importe, boolean activo) {
         this.codigo = codigo;
         this.tipo = tipo;
         this.descripcion = descripcion;
@@ -50,11 +50,11 @@ public class Tratamiento {
         this.tipo = tipo;
     }
 
-    public String getDescripcion() {
+    public TratamientosEnum getDescripcion() {
         return descripcion;
     }
 
-    public void setDescripcion(String descripcion) {
+    public void setDescripcion(TratamientosEnum descripcion) {
         this.descripcion = descripcion;
     }
 

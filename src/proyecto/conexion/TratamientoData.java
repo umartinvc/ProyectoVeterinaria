@@ -15,6 +15,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import proyecto.entidades.Tratamiento;
+import proyecto.entidades.TratamientosEnum;
 
 /**
  *
@@ -33,7 +34,7 @@ public class TratamientoData {
         try {
             PreparedStatement ps1 = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps1.setString(1, tratamiento.getTipo());
-            ps1.setString(2, tratamiento.getDescripcion());
+            ps1.setString(2, tratamiento.getDescripcion().toString());
             ps1.setDouble(3, tratamiento.getImporte());
             ps1.setBoolean(4, tratamiento.isActivo());
             ps1.executeUpdate();
@@ -61,7 +62,7 @@ public class TratamientoData {
                 tratamiento = new Tratamiento();
                 tratamiento.setCodigo(idTratamiento);
                 tratamiento.setTipo(rs.getString("tipo"));
-                tratamiento.setDescripcion(rs.getString("descripcion"));
+                tratamiento.setDescripcion(TratamientosEnum.buscarTratamiento(rs.getString("descripcion")));
                 tratamiento.setImporte(rs.getDouble("importe"));
                 tratamiento.setActivo(rs.getBoolean("estado"));
                 
@@ -78,7 +79,7 @@ public class TratamientoData {
         try {
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setString(1, tratamiento.getTipo());
-            ps.setString(2, tratamiento.getDescripcion());
+            ps.setString(2, tratamiento.getDescripcion().getDescripcion());
             ps.setDouble(3, tratamiento.getImporte());
             ps.setBoolean(4, tratamiento.isActivo());
             ps.setInt(5, tratamiento.getCodigo());
@@ -119,7 +120,7 @@ public class TratamientoData {
                 Tratamiento tratamiento = new Tratamiento();
                 tratamiento.setCodigo(rs.getInt("codigo_Tratamiento"));
                 tratamiento.setTipo(rs.getString("tipo"));
-                tratamiento.setDescripcion(rs.getString("descripcion"));
+                tratamiento.setDescripcion(TratamientosEnum.buscarTratamiento(rs.getString("descripcion")));
                 tratamiento.setImporte(rs.getDouble("importe"));
                 tratamiento.setActivo(rs.getBoolean("estado"));
                 tratamientos.add(tratamiento);
