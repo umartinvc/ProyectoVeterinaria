@@ -18,14 +18,14 @@ public class Cliente {
     private String direccion;
     private String apellido;
     private int documento;
-    private int telefono;
+    private long telefono;
     private List<Mascota> mascotas;
     
     public Cliente(){
         
     }
 
-    public Cliente(String nombre, String nombreAlt, String direccion, String apellido, int documento, int telefono) {
+    public Cliente(String nombre, String nombreAlt, String direccion, String apellido, int documento, long telefono) {
         this.nombre = nombre;
         this.nombreAlt = nombreAlt;
         this.direccion = direccion;
@@ -35,7 +35,7 @@ public class Cliente {
    
     }
 
-    public Cliente(int idCliente, String nombre, String nombreAlt, String direccion, String apellido, int documento, int telefono, List<Mascota> mascotas) {
+    public Cliente(int idCliente, String nombre, String nombreAlt, String direccion, String apellido, int documento, long telefono, List<Mascota> mascotas) {
         this.idCliente = idCliente;
         this.nombre = nombre;
         this.nombreAlt = nombreAlt;
@@ -46,7 +46,7 @@ public class Cliente {
         this.mascotas = mascotas;
     }
 
-    public Cliente(int idCliente, String nombre, String nombreAlt, String direccion, String apellido, int documento, int telefono) {
+    public Cliente(int idCliente, String nombre, String nombreAlt, String direccion, String apellido, int documento, long telefono) {
         this.idCliente = idCliente;
         this.nombre = nombre;
         this.nombreAlt = nombreAlt;
@@ -114,17 +114,17 @@ public class Cliente {
         this.documento = documento;
     }
 
-    public int getTelefono() {
+    public long getTelefono() {
         return telefono;
     }
 
-    public void setTelefono(int telefono) {
+    public void setTelefono(long telefono) {
         this.telefono = telefono;
     }
 
     @Override
     public String toString() {
-        return  idCliente + "," +nombre + "," + apellido;
+        return  idCliente + "," +nombre + "," + nombreAlt + "," + direccion + "," + apellido + "," + documento + "," + telefono;
     }
     
     public boolean isEmpty(){

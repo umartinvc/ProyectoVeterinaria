@@ -33,6 +33,7 @@ public class MenuVeterinaria extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         Cliente = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItem5 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
@@ -84,13 +85,22 @@ public class MenuVeterinaria extends javax.swing.JFrame {
         });
 
         jMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyecto/iconos/icons8-client-16.png"))); // NOI18N
-        jMenuItem1.setText("Nuevo");
+        jMenuItem1.setText("Administrar Clientes");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem1ActionPerformed(evt);
             }
         });
         Cliente.add(jMenuItem1);
+
+        jMenuItem5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyecto/iconos/icons8-list-16.png"))); // NOI18N
+        jMenuItem5.setText("Lista de Mascotas de Clientes");
+        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem5ActionPerformed(evt);
+            }
+        });
+        Cliente.add(jMenuItem5);
 
         jMenuBar1.add(Cliente);
 
@@ -191,6 +201,15 @@ ClienteVista cv= new ClienteVista();
         jdEscritorio.moveToFront(lt);
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
+    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+jdEscritorio.removeAll();
+        jdEscritorio.repaint();
+        ListaMascotasDeClienteview lmv= new  ListaMascotasDeClienteview();
+        lmv.setVisible(true);
+        jdEscritorio.add(lmv);
+        jdEscritorio.moveToFront(lmv);
+    }//GEN-LAST:event_jMenuItem5ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -237,6 +256,7 @@ ClienteVista cv= new ClienteVista();
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JPanel jPanel1;
     private static javax.swing.JDesktopPane jdEscritorio;
     // End of variables declaration//GEN-END:variables
