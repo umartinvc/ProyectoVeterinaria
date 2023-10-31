@@ -10,11 +10,14 @@ import proyecto.conexion.VisitaData;
 import proyecto.entidades.Cliente;
 import proyecto.entidades.Visita;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.event.InternalFrameEvent;
 import javax.swing.event.InternalFrameListener;
 import proyecto.conexion.ClienteData;
 import proyecto.conexion.MascotaData;
 import proyecto.entidades.Mascota;
+import proyecto.entidades.ServiciosAdicionales;
 import proyecto.entidades.Sintomas;
 import proyecto.entidades.Tratamiento;
 import proyecto.vistas.MenuVeterinaria;
@@ -24,11 +27,15 @@ import proyecto.vistas.MenuVeterinaria;
  * @author piry
  */
 public class VisitaVista extends javax.swing.JInternalFrame {
-
+    private List<ServiciosAdicionales> serviciosAdicionales1;
+    private double importe, importeAnteriorTratamiento;
     /**
      * Creates new form VisitaVista
      */
     public VisitaVista() {
+        importe = 0;
+        importeAnteriorTratamiento = 0;
+        serviciosAdicionales1 = new ArrayList<>();
         initComponents();
     }
 
@@ -52,11 +59,17 @@ public class VisitaVista extends javax.swing.JInternalFrame {
         sintomas = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         peso = new javax.swing.JTextField();
-        guardar = new javax.swing.JButton();
         eliminar = new javax.swing.JButton();
         buscarTratamiento = new javax.swing.JButton();
         buscarMascota = new javax.swing.JButton();
         buscarSintomas = new javax.swing.JButton();
+        serviciosA = new javax.swing.JButton();
+        serviciosCombo = new javax.swing.JComboBox<>();
+        jLabel6 = new javax.swing.JLabel();
+        guardar = new javax.swing.JButton();
+        jLabel7 = new javax.swing.JLabel();
+        importeTotal = new javax.swing.JTextField();
+        modificar = new javax.swing.JButton();
 
         setClosable(true);
         setIconifiable(true);
@@ -78,12 +91,7 @@ public class VisitaVista extends javax.swing.JInternalFrame {
 
         jLabel5.setText("Peso: ");
 
-        guardar.setText("GUARDAR");
-        guardar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                guardarActionPerformed(evt);
-            }
-        });
+        peso.setEditable(false);
 
         eliminar.setText("ELIMINAR");
         eliminar.addActionListener(new java.awt.event.ActionListener() {
@@ -113,6 +121,33 @@ public class VisitaVista extends javax.swing.JInternalFrame {
             }
         });
 
+        serviciosA.setText("SERVICIOS ADICIONALES");
+        serviciosA.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                serviciosAActionPerformed(evt);
+            }
+        });
+
+        jLabel6.setText("Servicios Adicionales:");
+
+        guardar.setText("GUARDAR");
+        guardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                guardarActionPerformed(evt);
+            }
+        });
+
+        jLabel7.setText("Importe Total:");
+
+        importeTotal.setEditable(false);
+
+        modificar.setText("MODIFICAR");
+        modificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                modificarActionPerformed(evt);
+            }
+        });
+
         escritorio.setLayer(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
         escritorio.setLayer(codigoTratamiento, javax.swing.JLayeredPane.DEFAULT_LAYER);
         escritorio.setLayer(jLabel2, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -123,11 +158,17 @@ public class VisitaVista extends javax.swing.JInternalFrame {
         escritorio.setLayer(sintomas, javax.swing.JLayeredPane.DEFAULT_LAYER);
         escritorio.setLayer(jLabel5, javax.swing.JLayeredPane.DEFAULT_LAYER);
         escritorio.setLayer(peso, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        escritorio.setLayer(guardar, javax.swing.JLayeredPane.DEFAULT_LAYER);
         escritorio.setLayer(eliminar, javax.swing.JLayeredPane.DEFAULT_LAYER);
         escritorio.setLayer(buscarTratamiento, javax.swing.JLayeredPane.DEFAULT_LAYER);
         escritorio.setLayer(buscarMascota, javax.swing.JLayeredPane.DEFAULT_LAYER);
         escritorio.setLayer(buscarSintomas, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        escritorio.setLayer(serviciosA, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        escritorio.setLayer(serviciosCombo, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        escritorio.setLayer(jLabel6, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        escritorio.setLayer(guardar, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        escritorio.setLayer(jLabel7, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        escritorio.setLayer(importeTotal, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        escritorio.setLayer(modificar, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout escritorioLayout = new javax.swing.GroupLayout(escritorio);
         escritorio.setLayout(escritorioLayout);
@@ -136,28 +177,40 @@ public class VisitaVista extends javax.swing.JInternalFrame {
             .addGroup(escritorioLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel5)
-                    .addComponent(guardar, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(fecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(codigoTratamiento)
-                    .addComponent(codigoMascota)
-                    .addComponent(sintomas)
-                    .addComponent(peso, javax.swing.GroupLayout.DEFAULT_SIZE, 195, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, escritorioLayout.createSequentialGroup()
-                        .addComponent(eliminar)
-                        .addGap(61, 61, 61)))
-                .addGap(18, 18, 18)
-                .addGroup(escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(buscarTratamiento)
-                    .addComponent(buscarMascota)
-                    .addComponent(buscarSintomas))
-                .addContainerGap(19, Short.MAX_VALUE))
+                    .addGroup(escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jLabel1)
+                        .addComponent(jLabel2)
+                        .addComponent(jLabel3)
+                        .addComponent(jLabel4)
+                        .addComponent(jLabel5)
+                        .addComponent(jLabel6)
+                        .addComponent(guardar, javax.swing.GroupLayout.Alignment.TRAILING))
+                    .addComponent(jLabel7))
+                .addGroup(escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, escritorioLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(serviciosA)
+                            .addGroup(escritorioLayout.createSequentialGroup()
+                                .addGroup(escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(importeTotal, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(serviciosCombo, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(fecha, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(codigoTratamiento, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(codigoMascota, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(sintomas, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(peso, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 195, Short.MAX_VALUE))
+                                .addGap(18, 18, 18)
+                                .addGroup(escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(buscarTratamiento)
+                                    .addComponent(buscarMascota)
+                                    .addComponent(buscarSintomas)))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, escritorioLayout.createSequentialGroup()
+                        .addGap(51, 51, 51)
+                        .addComponent(modificar)
+                        .addGap(53, 53, 53)
+                        .addComponent(eliminar)))
+                .addContainerGap(56, Short.MAX_VALUE))
         );
         escritorioLayout.setVerticalGroup(
             escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -185,24 +238,36 @@ public class VisitaVista extends javax.swing.JInternalFrame {
                 .addGroup(escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(peso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(27, 27, 27)
+                .addGap(18, 18, 18)
                 .addGroup(escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(serviciosCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6))
+                .addGap(18, 18, 18)
+                .addGroup(escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(importeTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel7))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
+                .addComponent(serviciosA)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(eliminar)
                     .addComponent(guardar)
-                    .addComponent(eliminar))
-                .addContainerGap(22, Short.MAX_VALUE))
+                    .addComponent(modificar))
+                .addGap(32, 32, 32))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(escritorio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(escritorio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(escritorio)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(escritorio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         pack();
@@ -211,31 +276,26 @@ public class VisitaVista extends javax.swing.JInternalFrame {
     private void guardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarActionPerformed
         // TODO add your handling code here:
         Visita visita = new Visita();
-        ClienteData clienteData = new ClienteData();
-        VisitaData visitaData = new VisitaData();
-        MascotaData mascotaData = new MascotaData();
-        Mascota mascota = new Mascota();
-        Cliente cliente = new Cliente();
-        visita.setCodigoTratamiento(Integer.parseInt(codigoTratamiento.getText()));
-        visita.setCodigoMascota(Integer.parseInt(codigoMascota.getText()));
-        visita.setFecha((Date) fecha.getDate());
-        visita.setSintomas(Sintomas.buscarSintomas(sintomas.getText()));
-        visita.setPeso(Integer.parseInt(peso.getText()));
-        mascota = mascotaData.buscarMascota(Integer.parseInt(codigoMascota.getText()));
-        
-        if(clienteData.buscarClientePorId(mascota.getIdCliente()) == null){
-            visitaData.guardarVisita(visita);
-        }else{
-            cliente = clienteData.buscarClientePorId(mascota.getIdCliente());
-            JOptionPane.showMessageDialog(null, "El cliente ya existe, elige su tratamiento");
-            escritorio.removeAll();
-            escritorio.repaint();
-            MascotasDelClienteVista mc = new MascotasDelClienteVista(cliente);
-            mc.setVisible(true);
-            escritorio.add(mc);
-            escritorio.moveToFront(mc);
-            
-        }
+        try{
+            VisitaData visitaData = new VisitaData();
+            visita.setCodigoTratamiento(Integer.parseInt(codigoTratamiento.getText()));
+            visita.setCodigoMascota(Integer.parseInt(codigoMascota.getText()));
+            java.util.Date utilDate = (java.util.Date) fecha.getDate();
+            java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
+            visita.setFecha(sqlDate);
+            visita.setSintomas(Sintomas.buscarSintomas(sintomas.getText()));
+            visita.setPeso(Double.parseDouble(peso.getText()));
+            visita.setImporteTotal(Double.parseDouble(importeTotal.getText()));
+            Visita visitaEncontrada = visitaData.buscarVisita2(visita);
+
+            if(visitaEncontrada == null){
+                visitaData.guardarVisita(visita);
+            }else{
+                JOptionPane.showMessageDialog(null, "La visita ya existe");
+            }
+        }catch (Exception e){
+            JOptionPane.showMessageDialog(null, "Ingrese los valores por favor");
+        }    
     }//GEN-LAST:event_guardarActionPerformed
 
     private void eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarActionPerformed
@@ -253,10 +313,11 @@ public class VisitaVista extends javax.swing.JInternalFrame {
 
     private void buscarTratamientoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarTratamientoActionPerformed
         // TODO add your handling code here:
-        
+        importe -= importeAnteriorTratamiento;
         ListaDeTratamientosVista lt = new ListaDeTratamientosVista();
         lt.setVisible(true);
         MenuVeterinaria.obtenerEscritorio().add(lt);
+        lt.toFront();
         lt.addInternalFrameListener(new InternalFrameListener() {
             @Override
             public void internalFrameOpened(InternalFrameEvent e) {
@@ -269,12 +330,22 @@ public class VisitaVista extends javax.swing.JInternalFrame {
                 Tratamiento tratamiento1 = lt.obtenerTratamiento();
                 if(tratamiento1 != null){
                     codigoTratamiento.setText(tratamiento1.getCodigo()+"");
+                    importe += tratamiento1.getImporte();
+                    importeAnteriorTratamiento = tratamiento1.getImporte();
+                    importeTotal.setText(importe+"");
                 }
             }
 
             @Override
             public void internalFrameClosed(InternalFrameEvent e) {
                 // Este método se llama después de que el JInternalFrame se haya cerrado
+                Tratamiento tratamiento1 = lt.obtenerTratamiento();
+                if(tratamiento1 != null){
+                    codigoTratamiento.setText(tratamiento1.getCodigo()+"");
+                    importe += tratamiento1.getImporte();
+                    importeAnteriorTratamiento = tratamiento1.getImporte();
+                    importeTotal.setText(importe+"");
+                }
             }
 
             @Override
@@ -297,18 +368,15 @@ public class VisitaVista extends javax.swing.JInternalFrame {
                 // Este método se llama cuando el JInternalFrame se desactiva (pierde el foco)
             }
         });
-        //escritorio.add(lt);
-        //escritorio.moveToFront(lt);
-        
-        
     }//GEN-LAST:event_buscarTratamientoActionPerformed
 
     private void buscarMascotaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarMascotaActionPerformed
         // TODO add your handling code here:
-        MascotasDelClienteVista mascotas = new MascotasDelClienteVista(true);
-        mascotas.setVisible(true);
-        MenuVeterinaria.obtenerEscritorio().add(mascotas);
-        mascotas.addInternalFrameListener(new InternalFrameListener() {
+        MascotasDelClienteVista mascotas1 = new MascotasDelClienteVista();
+        mascotas1.setVisible(true);
+        MenuVeterinaria.obtenerEscritorio().add(mascotas1);
+        mascotas1.toFront();
+        mascotas1.addInternalFrameListener(new InternalFrameListener() {
             @Override
             public void internalFrameOpened(InternalFrameEvent e) {
                 // Este método se llama cuando se abre el JInternalFrame
@@ -318,9 +386,10 @@ public class VisitaVista extends javax.swing.JInternalFrame {
             public void internalFrameClosing(InternalFrameEvent e) {
                 // Este método se llama cuando se cierra el JInternalFrame
                 // Realiza aquí las acciones que deseas cuando se cierra
-                Mascota mascota1 = mascotas.obtenerMascota();
+                Mascota mascota1 = mascotas1.obtenerMascota();
                 if(mascota1 != null){
                     codigoMascota.setText(mascota1.getCodigo()+"");
+                    peso.setText(mascota1.getPeso()+"");
                 }
             }
 
@@ -356,6 +425,7 @@ public class VisitaVista extends javax.swing.JInternalFrame {
         SintomasVista sv = new SintomasVista();
         sv.setVisible(true);
         MenuVeterinaria.obtenerEscritorio().add(sv);
+        sv.toFront();
         sv.addInternalFrameListener(new InternalFrameListener() {
             @Override
             public void internalFrameOpened(InternalFrameEvent e) {
@@ -399,6 +469,93 @@ public class VisitaVista extends javax.swing.JInternalFrame {
         });
     }//GEN-LAST:event_buscarSintomasActionPerformed
 
+    private void serviciosAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_serviciosAActionPerformed
+        // TODO add your handling code here:
+        ServiciosAdicionalesVista sa = new ServiciosAdicionalesVista();
+        sa.setVisible(true);
+        MenuVeterinaria.obtenerEscritorio().add(sa);
+        sa.toFront();
+        sa.addInternalFrameListener(new InternalFrameListener() {
+            @Override
+            public void internalFrameOpened(InternalFrameEvent e) {
+                // Este método se llama cuando se abre el JInternalFrame
+            }
+
+            @Override
+            public void internalFrameClosing(InternalFrameEvent e) {
+                // Este método se llama cuando se cierra el JInternalFrame
+                if(sa.obtenerServiciosAdicionales()!=null){
+                    serviciosAdicionales1 = sa.obtenerServiciosAdicionales();
+                    cargarComboServicios();
+                }
+            }
+
+            @Override
+            public void internalFrameClosed(InternalFrameEvent e) {
+                // Este método se llama después de que el JInternalFrame se haya cerrado
+            }
+
+            @Override
+            public void internalFrameIconified(InternalFrameEvent e) {
+                // Este método se llama cuando el JInternalFrame se minimiza
+            }
+
+            @Override
+            public void internalFrameDeiconified(InternalFrameEvent e) {
+                // Este método se llama cuando el JInternalFrame se restaura desde la minimización
+            }
+
+            @Override
+            public void internalFrameActivated(InternalFrameEvent e) {
+                // Este método se llama cuando el JInternalFrame se activa (gana el foco)
+            }
+
+            @Override
+            public void internalFrameDeactivated(InternalFrameEvent e) {
+                // Este método se llama cuando el JInternalFrame se desactiva (pierde el foco)
+            }
+        });
+    }//GEN-LAST:event_serviciosAActionPerformed
+
+    private void modificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modificarActionPerformed
+        // TODO add your handling code here:
+        Visita visita = new Visita();
+        try{
+            VisitaData visitaData = new VisitaData();
+            visita.setCodigoTratamiento(Integer.parseInt(codigoTratamiento.getText()));
+            visita.setCodigoMascota(Integer.parseInt(codigoMascota.getText()));
+            java.util.Date utilDate = (java.util.Date) fecha.getDate();
+            java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
+            visita.setFecha(sqlDate);
+            visita.setSintomas(Sintomas.buscarSintomas(sintomas.getText()));
+            visita.setPeso(Double.parseDouble(peso.getText()));
+            visita.setImporteTotal(Double.parseDouble(importeTotal.getText()));
+            String idVisita = JOptionPane.showInputDialog("Ingrese el ID de la visita:");
+        
+            if (idVisita != null && !idVisita.isEmpty()) {
+                try {
+                    int id = Integer.parseInt(idVisita);
+                    visita.setIdVisita(id);
+                } catch (NumberFormatException e) {
+                    JOptionPane.showMessageDialog(null, "Por favor, ingrese un número válido para el ID de la visita.", "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "Operación cancelada.");
+            }
+            Visita visitaEncontrada = visitaData.buscarVisita2(visita);
+            if(visitaEncontrada != null){
+                visitaData.modificarVisita(visita);
+            }else{
+                JOptionPane.showMessageDialog(null, "La visita no existe");
+            }
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, "Por favor ingrese los valores");
+        }
+        
+
+        
+    }//GEN-LAST:event_modificarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buscarMascota;
@@ -410,12 +567,27 @@ public class VisitaVista extends javax.swing.JInternalFrame {
     private javax.swing.JDesktopPane escritorio;
     private com.toedter.calendar.JDateChooser fecha;
     private javax.swing.JButton guardar;
+    private javax.swing.JTextField importeTotal;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JButton modificar;
     private javax.swing.JTextField peso;
+    private javax.swing.JButton serviciosA;
+    private javax.swing.JComboBox<ServiciosAdicionales> serviciosCombo;
     private javax.swing.JTextField sintomas;
     // End of variables declaration//GEN-END:variables
+
+    private void cargarComboServicios(){
+        double importeAuxiliar = 0;
+        for (ServiciosAdicionales servicioAdicional : serviciosAdicionales1) {
+            serviciosCombo.addItem(servicioAdicional);
+            importe += servicioAdicional.getImporte();
+            importeTotal.setText(importe+"");
+        }
+    }
 }

@@ -30,6 +30,13 @@ private Tratamiento tratamientoElegido;
         initComponents();
         armarCabecera();
     }
+    public ListaDeTratamientosVista(boolean noElegir) {
+        initComponents();
+        armarCabecera();
+        if(noElegir){
+            elegir.setEnabled(false);
+        }
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -202,6 +209,7 @@ private Tratamiento tratamientoElegido;
         TratamientoVista tv = new TratamientoVista();
         tv.setVisible(true);
         MenuVeterinaria.obtenerEscritorio().add(tv);
+        tv.toFront();
     }//GEN-LAST:event_crearTratamientoActionPerformed
 
 

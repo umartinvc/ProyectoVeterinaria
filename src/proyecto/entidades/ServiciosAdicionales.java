@@ -9,20 +9,30 @@ package proyecto.entidades;
  * @author piry
  */
 public enum ServiciosAdicionales {
-    BAÑO("Baño de la mascota", 25.0, true),
-    PELUQUERIA("Peluquería canina", 35.0, true),
-    DENTAL("Limpieza dental", 50.0, true),
-    VACUNAS("Vacunación", 20.0, true),
-    HOSPEDAJE("Hospedaje de mascotas", 15.0, false);
+    BAÑO_DE_LA_MASCOTA("Baño de la mascota", 25.0, true),
+    PELUQUERIA_CANINA("Peluquería canina", 35.0, true),
+    LIMPIEZA_DENTAL("Limpieza dental", 50.0, true),
+    VACUNACION("Vacunación", 20.0, true),
+    HOSPEDAJE_DE_MASCOTAS("Hospedaje de mascotas", 15.0, false);
 
-    private final String descripcion;
-    private final double importe;
-    private final boolean admiteContado;
+    private String descripcion;
+    private double importe;
+    private boolean admiteContado;
 
     ServiciosAdicionales(String descripcion, double importe, boolean admiteContado) {
         this.descripcion = descripcion;
         this.importe = importe;
         this.admiteContado = admiteContado;
+    }
+    
+    public static ServiciosAdicionales buscarServicio(String descripcion) {
+        for (ServiciosAdicionales servicio : ServiciosAdicionales.values()) {
+            if (servicio.descripcion.equalsIgnoreCase(descripcion)) {
+                return servicio;
+            }
+        }
+        // Devuelve null si no se encuentra ningún servicio con la descripción dada
+        return null;
     }
 
     public String getDescripcion() {
@@ -35,5 +45,11 @@ public enum ServiciosAdicionales {
 
     public boolean admiteContado() {
         return admiteContado;
+    }
+    
+    @Override
+    public String toString() {
+        // Reemplaza guiones bajos con espacios en la descripción al mostrarla en el combo box
+        return descripcion.replace("_", " ");
     }
 }

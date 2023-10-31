@@ -19,23 +19,21 @@ public class Visita {
     private Date fecha;
     private double peso;
     private Sintomas sintomas;
+    private double importeTotal;
     
     public Visita(){
         
     }
 
-    public Visita(int codigoMascota, int codigoTratamiento, Date fecha, double peso, Sintomas sintomas) {
+    public Visita(int codigoMascota, int codigoTratamiento, Date fecha, double peso, Sintomas sintomas, double importeTotal) {
         this.codigoMascota = codigoMascota;
         this.codigoTratamiento = codigoTratamiento;
         this.fecha = fecha;
         this.peso = peso;
         this.sintomas = sintomas;
+        this.importeTotal = importeTotal;
     }
-
     
-
-    
-
     public Visita(int codigoMascota, int codigoTratamiento, double peso, Sintomas sintomas) {
         this.codigoMascota = codigoMascota;
         this.codigoTratamiento = codigoTratamiento;
@@ -43,19 +41,15 @@ public class Visita {
         this.sintomas = sintomas;
     }
 
-    public Visita(int idVisita, int codigoMascota, int codigoTratamiento, Date fecha, double peso, Sintomas sintomas) {
+    public Visita(int idVisita, int codigoMascota, int codigoTratamiento, Date fecha, double peso, Sintomas sintomas, double importeTotal) {
         this.idVisita = idVisita;
         this.codigoMascota = codigoMascota;
         this.codigoTratamiento = codigoTratamiento;
         this.fecha = fecha;
         this.peso = peso;
         this.sintomas = sintomas;
+        this.importeTotal = importeTotal;
     }
-    
-
-    
-
-    
 
     public int getIdVisita() {
         return idVisita;
@@ -104,6 +98,16 @@ public class Visita {
     public void setSintomas(Sintomas sintomas) {
         this.sintomas = sintomas;
     }
+
+    public double getImporteTotal() {
+        return importeTotal;
+    }
+
+    public void setImporteTotal(double importeTotal) {
+        this.importeTotal = importeTotal;
+    }
+    
+    
 
     @Override
     public String toString() {
