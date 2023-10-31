@@ -19,9 +19,13 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import proyecto.entidades.Cliente;
 import proyecto.entidades.Mascota;
+<<<<<<< HEAD
 import proyecto.entidades.Sintomas;
 import proyecto.entidades.Visita;
 
+=======
+import proyecto.conexion.Conexion;
+>>>>>>> 59d1c474ca6127ca2f8d593a3a2582071b3ed3b7
 /**
  *
  * @author Matìas Fernàndez
@@ -43,7 +47,7 @@ public class ClienteData {
             psCliente.setString(3, cliente.getNombre());
             psCliente.setString(4, cliente.getNombreAlt());
             psCliente.setString(5, cliente.getDireccion());
-            psCliente.setInt(6, cliente.getTelefono());
+            psCliente.setLong(6, cliente.getTelefono());
             psCliente.executeUpdate();
             ResultSet rsCliente= psCliente.getGeneratedKeys();
             if (rsCliente.next()) {
@@ -85,74 +89,48 @@ public class ClienteData {
              psModCliente.setString(3, cliente.getNombre());
              psModCliente.setString(4, cliente.getNombreAlt());
              psModCliente.setString(5, cliente.getDireccion());
-             psModCliente.setInt(6, cliente.getTelefono());
+             psModCliente.setLong(6, cliente.getTelefono());
              psModCliente.setInt(7, cliente.getIdCliente());
             int exito= psModCliente.executeUpdate();
              if (exito==1) {
-                 System.out.println("ola");
+               
                  JOptionPane.showMessageDialog(null, "El cliente se modifico con exito","Éxito",JOptionPane.INFORMATION_MESSAGE);
              }
          } catch (SQLException ex) {
      JOptionPane.showMessageDialog(null,"No se pudo modificar al cliente","ERROR",JOptionPane.ERROR_MESSAGE);
          }
     }
+    
     public Cliente buscarClientePorDNI(int dni){
-        String sql = "SELECT idCliente, apellido, nombre, nombreAlt, direccion, telefono FROM cliente WHERE dni=?";
-        Cliente cliente1 = null;
-
-        try {
-            PreparedStatement psBuscarCliente = con.prepareStatement(sql);
-            psBuscarCliente.setInt(1, dni);
-            ResultSet rs = psBuscarCliente.executeQuery();
-
-            if (rs.next()) {
-                cliente1 = new Cliente();
-                cliente1.setIdCliente(rs.getInt("idCliente"));
-                cliente1.setDocumento(dni);
-                cliente1.setApellido(rs.getString("apellido"));
-                cliente1.setNombre(rs.getString("nombre"));
-                cliente1.setNombreAlt(rs.getString("nombreAlt"));
-                cliente1.setDireccion(rs.getString("direccion"));
-                cliente1.setTelefono(rs.getInt("telefono"));
-            } else {
-                cliente1 = null;
-            }
-
-            psBuscarCliente.close();
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla cliente", "ERROR", JOptionPane.ERROR_MESSAGE);
-        }  
-        return cliente1;
-    }
-    public Cliente buscarClientePorId(int idCliente) {
-        String sql = "SELECT dni, apellido, nombre, nombreAlt, direccion, telefono FROM cliente WHERE idCliente=?";
-        Cliente cliente1 = null;
-
-        try {
-            PreparedStatement psBuscarCliente = con.prepareStatement(sql);
-            psBuscarCliente.setInt(1, idCliente);
-            ResultSet rs = psBuscarCliente.executeQuery();
-
-            if (rs.next()) {
-                cliente1 = new Cliente();
-                cliente1.setIdCliente(rs.getInt("idCliente"));
-                cliente1.setDocumento(rs.getInt("dni"));
-                cliente1.setApellido(rs.getString("apellido"));
-                cliente1.setNombre(rs.getString("nombre"));
-                cliente1.setNombreAlt(rs.getString("nombreAlt"));
-                cliente1.setDireccion(rs.getString("direccion"));
-                cliente1.setTelefono(rs.getInt("telefono"));
-            } else {
-                cliente1 = null;
-            }
-
-            psBuscarCliente.close();
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla cliente", "ERROR", JOptionPane.ERROR_MESSAGE);
+    String sql = "SELECT idCliente, apellido, nombre, nombreAlt, direccion, telefono FROM cliente WHERE dni=?";
+    Cliente cliente1 = null;
+    
+    try {
+        PreparedStatement psBuscarCliente = con.prepareStatement(sql);
+        psBuscarCliente.setInt(1, dni);
+        ResultSet rs = psBuscarCliente.executeQuery();
+        
+        if (rs.next()) {         
+            cliente1 = new Cliente();
+            cliente1.setIdCliente(rs.getInt("idCliente"));
+            cliente1.setDocumento(dni);
+            cliente1.setApellido(rs.getString("apellido"));
+            cliente1.setNombre(rs.getString("nombre"));
+            cliente1.setNombreAlt(rs.getString("nombreAlt"));
+            cliente1.setDireccion(rs.getString("direccion"));
+            cliente1.setTelefono(rs.getLong("telefono"));
+        } else {
+            cliente1 = null;
         }
-
-        return cliente1;
-    }
+        
+        psBuscarCliente.close();
+    } catch (SQLException ex) {
+        JOptionPane.showMessageDialog(null, "Error al acceder a la tabla cliente", "ERROR", JOptionPane.ERROR_MESSAGE);
+    }  
+    return cliente1;
+}
+    
+    
     
     public List<Cliente>ClientesTodos(){
         String sql="SELECT idCliente, dni, apellido, nombre, nombreAlt, direccion, telefono FROM cliente";
@@ -168,7 +146,7 @@ public class ClienteData {
                 cliente.setNombre(rs.getString("nombre"));
                 cliente.setNombreAlt(rs.getString("nombreAlt"));
                 cliente.setDireccion(rs.getString("direccion"));
-                cliente.setTelefono(rs.getInt("telefono"));
+                cliente.setTelefono(rs.getLong("telefono"));
                 clientes.add(cliente);
             }
         } catch (SQLException e){

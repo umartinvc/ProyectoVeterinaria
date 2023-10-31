@@ -338,6 +338,11 @@ float [] hsbColor1 = Color.RGBtoHSB(237, 215, 138, null);
 
         JTFPeso.setBackground(new java.awt.Color(255, 244, 192));
         JTFPeso.setBorder(null);
+        JTFPeso.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                JTFPesoKeyTyped(evt);
+            }
+        });
         BackGround.add(JTFPeso, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 220, 90, 20));
 
         JDCFecha.setBackground(new java.awt.Color(255, 244, 192));
@@ -421,6 +426,12 @@ float [] hsbColor1 = Color.RGBtoHSB(237, 215, 138, null);
             public void mouseReleased(java.awt.event.MouseEvent evt) {
                 JBGuardar2MouseReleased(evt);
             }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                JBGuardar2MouseExited(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                JBGuardar2MouseEntered(evt);
+            }
         });
         JBGuardar2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -432,6 +443,14 @@ float [] hsbColor1 = Color.RGBtoHSB(237, 215, 138, null);
         JBCancelar2.setText("CANCELAR");
         JBCancelar2.setBorder(null);
         JBCancelar2.setBorderPainted(false);
+        JBCancelar2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                JBCancelar2MouseExited(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                JBCancelar2MouseEntered(evt);
+            }
+        });
         JBCancelar2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 JBCancelar2ActionPerformed(evt);
@@ -597,7 +616,7 @@ float [] hsbColor1 = Color.RGBtoHSB(237, 215, 138, null);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyecto/iconos/Colorful Cute Cats Illustration Desktop Wallpaper.png"))); // NOI18N
         jLabel1.setText("jLabel1");
-        BackGround.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 750, 460));
+        BackGround.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 750, 460));
 
         getContentPane().add(BackGround, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 758, 470));
 
@@ -818,20 +837,47 @@ if(evt.getStateChange() == ItemEvent.DESELECTED){
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseEntered
-         JBGuardarN.setBackground(Color.getHSBColor(21, 42, 93));
+         jButton1.setBackground(Color.getHSBColor(21, 42, 93));
     }//GEN-LAST:event_jButton1MouseEntered
 
     private void jButton2MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseEntered
-       JBGuardarN.setBackground(Color.getHSBColor(21, 42, 93));
+       jButton2.setBackground(Color.getHSBColor(21, 42, 93));
     }//GEN-LAST:event_jButton2MouseEntered
 
     private void jButton1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseExited
-       JBGuardarN.setBackground(Color.getHSBColor(hsbColor1[0],hsbColor1[1],hsbColor1[2]));
+       jButton1.setBackground(Color.getHSBColor(hsbColor1[0],hsbColor1[1],hsbColor1[2]));
     }//GEN-LAST:event_jButton1MouseExited
 
     private void jButton2MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseExited
-       JBGuardarN.setBackground(Color.getHSBColor(hsbColor1[0],hsbColor1[1],hsbColor1[2]));
+       jButton2.setBackground(Color.getHSBColor(hsbColor1[0],hsbColor1[1],hsbColor1[2]));
     }//GEN-LAST:event_jButton2MouseExited
+
+    private void JBGuardar2MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JBGuardar2MouseEntered
+      JBGuardar2.setBackground(Color.getHSBColor(21, 42, 93));
+    }//GEN-LAST:event_JBGuardar2MouseEntered
+
+    private void JBGuardar2MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JBGuardar2MouseExited
+     JBGuardar2.setBackground(Color.getHSBColor(hsbColor1[0],hsbColor1[1],hsbColor1[2]));
+    }//GEN-LAST:event_JBGuardar2MouseExited
+
+    private void JBCancelar2MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JBCancelar2MouseEntered
+        JBCancelar2.setBackground(Color.getHSBColor(21, 42, 93));
+    }//GEN-LAST:event_JBCancelar2MouseEntered
+
+    private void JBCancelar2MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JBCancelar2MouseExited
+       JBCancelar2.setBackground(Color.getHSBColor(hsbColor1[0],hsbColor1[1],hsbColor1[2]));
+    }//GEN-LAST:event_JBCancelar2MouseExited
+
+    private void JTFPesoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JTFPesoKeyTyped
+        int key = evt.getKeyChar();
+
+    boolean numeros = key >= 48 && key <= 57;
+        
+    if (!numeros)
+    {
+        evt.consume();
+    }
+    }//GEN-LAST:event_JTFPesoKeyTyped
     
     
     
