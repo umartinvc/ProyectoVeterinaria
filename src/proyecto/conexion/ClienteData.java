@@ -19,13 +19,12 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import proyecto.entidades.Cliente;
 import proyecto.entidades.Mascota;
-<<<<<<< HEAD
 import proyecto.entidades.Sintomas;
 import proyecto.entidades.Visita;
-
-=======
+import proyecto.entidades.Sintomas;
+import proyecto.entidades.Visita;
 import proyecto.conexion.Conexion;
->>>>>>> 59d1c474ca6127ca2f8d593a3a2582071b3ed3b7
+
 /**
  *
  * @author Matìas Fernàndez
@@ -200,12 +199,6 @@ public class ClienteData {
 
                 mascota = new Mascota();
                 mascota.setAlias(rs.getString("alias"));
-                mascota.setSexo(rs.getString("sexo"));
-                mascota.setEspecie(rs.getString("especie"));
-                mascota.setRaza(rs.getString("raza"));
-                mascota.setColorPelo(rs.getString("colorPelo"));
-                mascota.setFechaNacimiento(rs.getDate("fechaNacimiento").toLocalDate());
-                mascota.setPeso(rs.getDouble("pesoActual"));
                 mascota.setIdCliente(idCliente);
 
                 if (visitaId > 0) {
