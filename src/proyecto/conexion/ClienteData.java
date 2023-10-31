@@ -181,7 +181,7 @@ public class ClienteData {
         return mascotas;
     }
     public List<Mascota> MascotasdeCliente2(int idCliente) {
-        String sql = "SELECT m.codigo AS mascota_codigo, m.alias, m.sexo, m.especie, m.raza, m.colorPelo, m.fechaNacimiento, m.PesoActual, v.idVisita, v.fechaVisita, v.sintomas, v.peso, v.importeTotal " +
+        String sql = "SELECT m.codigo AS mascota_codigo, m.alias, m.sexo, m.especie, m.raza, m.colorPelo, m.fechaNacimiento, m.PesoActual, m.idCliente, v.idVisita, v.fechaVisita, v.sintomas, v.peso, v.importeTotal " +
                      "FROM mascota AS m " +
                      "LEFT JOIN visita AS v ON m.codigo = v.codigoMascota " +
                      "WHERE m.idCliente = ?";
@@ -195,15 +195,15 @@ public class ClienteData {
 
             while (rs.next()) {
                 
-                int visitaId = rs.getInt("idVisita");
+                int visitaId = rs.getInt("v.idVisita");
 
                 mascota = new Mascota();
-                mascota.setAlias(rs.getString("alias"));
-                mascota.setIdCliente(idCliente);
+                mascota.setAlias(rs.getString("m.alias"));
+                mascota.setIdCliente(rs.getInt("m.idCliente"));
 
                 if (visitaId > 0) {
                     Visita visitaEncontrada = new Visita();
-                    visitaEncontrada.setIdVisita(rs.getInt("idVisita"));
+                    visitaEncontrada.setIdVisita(rs.getInt("v.idVisita"));
                     visitaEncontrada.setCodigoTratamiento(rs.getInt("codigoTratamiento"));
                     visitaEncontrada.setCodigoMascota(rs.getInt("codigoMascota"));
                     visitaEncontrada.setFecha(rs.getDate("fechaVisita"));

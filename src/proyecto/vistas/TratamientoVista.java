@@ -56,6 +56,8 @@ private double importe, importeAnteriorTratamiento;
         jLabel6.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel6.setText("Tipo:");
 
+        tipo.setEditable(false);
+
         buscar.setText("BUSCAR");
         buscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
