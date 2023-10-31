@@ -33,8 +33,8 @@ public class TratamientoData {
                 + "VALUES (?,?,?,?)";
         try {
             PreparedStatement ps1 = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            ps1.setString(1, tratamiento.getTipo().getDescripcion());
-            ps1.setString(2, tratamiento.getDescripcion().toString());
+            ps1.setString(1, tratamiento.getTipo().toString());
+            ps1.setString(2, tratamiento.getDescripcion());
             ps1.setDouble(3, tratamiento.getImporte());
             ps1.setBoolean(4, tratamiento.isActivo());
             ps1.executeUpdate();
@@ -78,7 +78,7 @@ public class TratamientoData {
                 + " WHERE codigo_Tratamiento = ?";
         try {
             PreparedStatement ps = con.prepareStatement(sql);
-            ps.setString(1, tratamiento.getTipo().getDescripcion());
+            ps.setString(1, tratamiento.getTipo().toString());
             ps.setString(2, tratamiento.getDescripcion());
             ps.setDouble(3, tratamiento.getImporte());
             ps.setBoolean(4, tratamiento.isActivo());

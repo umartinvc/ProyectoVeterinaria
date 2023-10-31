@@ -181,7 +181,7 @@ ClienteVista cv= new ClienteVista();
         // TODO add your handling code here:
         jdEscritorio.removeAll();
         jdEscritorio.repaint();
-        ListaDeTratamientosVista lt= new ListaDeTratamientosVista();
+        ListaDeTratamientosVista lt= new ListaDeTratamientosVista(true);
         lt.setVisible(true);
         jdEscritorio.add(lt);
         jdEscritorio.moveToFront(lt);
