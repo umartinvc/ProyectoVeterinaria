@@ -43,6 +43,8 @@ private DefaultTableModel modelo = new DefaultTableModel();
         jLabel4 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
+        setClosable(true);
+
         bgList.setBackground(new java.awt.Color(255, 255, 255));
         bgList.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 

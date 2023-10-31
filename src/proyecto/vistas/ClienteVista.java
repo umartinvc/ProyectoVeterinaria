@@ -147,7 +147,7 @@ public class ClienteVista extends javax.swing.JInternalFrame {
         });
 
         imgBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyecto/iconos/icons8-search-32.png"))); // NOI18N
-        imgBuscar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        imgBuscar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         imgBuscar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 imgBuscarMouseClicked(evt);
