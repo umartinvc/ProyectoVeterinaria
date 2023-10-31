@@ -46,4 +46,10 @@ public enum ServiciosAdicionales {
     public boolean admiteContado() {
         return admiteContado;
     }
+    
+    @Override
+    public String toString() {
+        // Reemplaza guiones bajos con espacios en la descripción al mostrarla en el combo box
+        return descripcion.replace("_", " ");
+    }
 }

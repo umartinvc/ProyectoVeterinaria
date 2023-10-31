@@ -28,10 +28,13 @@ import proyecto.vistas.MenuVeterinaria;
  */
 public class VisitaVista extends javax.swing.JInternalFrame {
     private List<ServiciosAdicionales> serviciosAdicionales1;
+    private double importe, importeAnteriorTratamiento;
     /**
      * Creates new form VisitaVista
      */
     public VisitaVista() {
+        importe = 0;
+        importeAnteriorTratamiento = 0;
         serviciosAdicionales1 = new ArrayList<>();
         initComponents();
     }
@@ -56,7 +59,6 @@ public class VisitaVista extends javax.swing.JInternalFrame {
         sintomas = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         peso = new javax.swing.JTextField();
-        guardar = new javax.swing.JButton();
         eliminar = new javax.swing.JButton();
         buscarTratamiento = new javax.swing.JButton();
         buscarMascota = new javax.swing.JButton();
@@ -64,6 +66,9 @@ public class VisitaVista extends javax.swing.JInternalFrame {
         serviciosA = new javax.swing.JButton();
         serviciosCombo = new javax.swing.JComboBox<>();
         jLabel6 = new javax.swing.JLabel();
+        guardar = new javax.swing.JButton();
+        jLabel7 = new javax.swing.JLabel();
+        importeTotal = new javax.swing.JTextField();
 
         setClosable(true);
         setIconifiable(true);
@@ -86,13 +91,6 @@ public class VisitaVista extends javax.swing.JInternalFrame {
         jLabel5.setText("Peso: ");
 
         peso.setEditable(false);
-
-        guardar.setText("GUARDAR");
-        guardar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                guardarActionPerformed(evt);
-            }
-        });
 
         eliminar.setText("ELIMINAR");
         eliminar.addActionListener(new java.awt.event.ActionListener() {
@@ -131,6 +129,17 @@ public class VisitaVista extends javax.swing.JInternalFrame {
 
         jLabel6.setText("Servicios Adicionales:");
 
+        guardar.setText("GUARDAR");
+        guardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                guardarActionPerformed(evt);
+            }
+        });
+
+        jLabel7.setText("Importe Total:");
+
+        importeTotal.setEditable(false);
+
         escritorio.setLayer(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
         escritorio.setLayer(codigoTratamiento, javax.swing.JLayeredPane.DEFAULT_LAYER);
         escritorio.setLayer(jLabel2, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -141,7 +150,6 @@ public class VisitaVista extends javax.swing.JInternalFrame {
         escritorio.setLayer(sintomas, javax.swing.JLayeredPane.DEFAULT_LAYER);
         escritorio.setLayer(jLabel5, javax.swing.JLayeredPane.DEFAULT_LAYER);
         escritorio.setLayer(peso, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        escritorio.setLayer(guardar, javax.swing.JLayeredPane.DEFAULT_LAYER);
         escritorio.setLayer(eliminar, javax.swing.JLayeredPane.DEFAULT_LAYER);
         escritorio.setLayer(buscarTratamiento, javax.swing.JLayeredPane.DEFAULT_LAYER);
         escritorio.setLayer(buscarMascota, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -149,6 +157,9 @@ public class VisitaVista extends javax.swing.JInternalFrame {
         escritorio.setLayer(serviciosA, javax.swing.JLayeredPane.DEFAULT_LAYER);
         escritorio.setLayer(serviciosCombo, javax.swing.JLayeredPane.DEFAULT_LAYER);
         escritorio.setLayer(jLabel6, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        escritorio.setLayer(guardar, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        escritorio.setLayer(jLabel7, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        escritorio.setLayer(importeTotal, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout escritorioLayout = new javax.swing.GroupLayout(escritorio);
         escritorio.setLayout(escritorioLayout);
@@ -157,15 +168,15 @@ public class VisitaVista extends javax.swing.JInternalFrame {
             .addGroup(escritorioLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(guardar)
-                        .addGroup(escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel5)))
-                    .addComponent(jLabel6))
+                    .addGroup(escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jLabel1)
+                        .addComponent(jLabel2)
+                        .addComponent(jLabel3)
+                        .addComponent(jLabel4)
+                        .addComponent(jLabel5)
+                        .addComponent(jLabel6)
+                        .addComponent(guardar, javax.swing.GroupLayout.Alignment.TRAILING))
+                    .addComponent(jLabel7))
                 .addGroup(escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(escritorioLayout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -173,6 +184,7 @@ public class VisitaVista extends javax.swing.JInternalFrame {
                             .addComponent(serviciosA)
                             .addGroup(escritorioLayout.createSequentialGroup()
                                 .addGroup(escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(importeTotal, javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(serviciosCombo, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(fecha, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(codigoTratamiento, javax.swing.GroupLayout.Alignment.LEADING)
@@ -216,16 +228,20 @@ public class VisitaVista extends javax.swing.JInternalFrame {
                 .addGroup(escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(peso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addGroup(escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(serviciosCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6))
                 .addGap(18, 18, 18)
+                .addGroup(escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(importeTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel7))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
                 .addComponent(serviciosA)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(guardar)
-                    .addComponent(eliminar))
+                    .addComponent(eliminar)
+                    .addComponent(guardar))
                 .addGap(32, 32, 32))
         );
 
@@ -233,15 +249,14 @@ public class VisitaVista extends javax.swing.JInternalFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(escritorio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(escritorio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(escritorio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         pack();
@@ -262,8 +277,8 @@ public class VisitaVista extends javax.swing.JInternalFrame {
         visita.setFecha(sqlDate);
         visita.setSintomas(Sintomas.buscarSintomas(sintomas.getText()));
         visita.setPeso(Double.parseDouble(peso.getText()));
-        //mascota = mascotaData.buscarMascota(Integer.parseInt(codigoMascota.getText()));
-        Visita visitaEncontrada = visitaData.buscarVisita(visita);
+        visita.setImporteTotal(Double.parseDouble(importeTotal.getText()));
+        Visita visitaEncontrada = visitaData.buscarVisita2(visita);
         
         if(visitaEncontrada == null){
             visitaData.guardarVisita(visita);
@@ -287,7 +302,7 @@ public class VisitaVista extends javax.swing.JInternalFrame {
 
     private void buscarTratamientoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarTratamientoActionPerformed
         // TODO add your handling code here:
-        
+        importe -= importeAnteriorTratamiento;
         ListaDeTratamientosVista lt = new ListaDeTratamientosVista();
         lt.setVisible(true);
         MenuVeterinaria.obtenerEscritorio().add(lt);
@@ -304,6 +319,9 @@ public class VisitaVista extends javax.swing.JInternalFrame {
                 Tratamiento tratamiento1 = lt.obtenerTratamiento();
                 if(tratamiento1 != null){
                     codigoTratamiento.setText(tratamiento1.getCodigo()+"");
+                    importe += tratamiento1.getImporte();
+                    importeAnteriorTratamiento = tratamiento1.getImporte();
+                    importeTotal.setText(importe+"");
                 }
             }
 
@@ -313,6 +331,9 @@ public class VisitaVista extends javax.swing.JInternalFrame {
                 Tratamiento tratamiento1 = lt.obtenerTratamiento();
                 if(tratamiento1 != null){
                     codigoTratamiento.setText(tratamiento1.getCodigo()+"");
+                    importe += tratamiento1.getImporte();
+                    importeAnteriorTratamiento = tratamiento1.getImporte();
+                    importeTotal.setText(importe+"");
                 }
             }
 
@@ -496,12 +517,14 @@ public class VisitaVista extends javax.swing.JInternalFrame {
     private javax.swing.JDesktopPane escritorio;
     private com.toedter.calendar.JDateChooser fecha;
     private javax.swing.JButton guardar;
+    private javax.swing.JTextField importeTotal;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JTextField peso;
     private javax.swing.JButton serviciosA;
     private javax.swing.JComboBox<ServiciosAdicionales> serviciosCombo;
@@ -509,8 +532,11 @@ public class VisitaVista extends javax.swing.JInternalFrame {
     // End of variables declaration//GEN-END:variables
 
     private void cargarComboServicios(){
+        double importeAuxiliar = 0;
         for (ServiciosAdicionales servicioAdicional : serviciosAdicionales1) {
             serviciosCombo.addItem(servicioAdicional);
+            importe += servicioAdicional.getImporte();
+            importeTotal.setText(importe+"");
         }
     }
 }

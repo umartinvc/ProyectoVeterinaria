@@ -33,8 +33,8 @@ public class VisitaData {
     }
     
     public void guardarVisita(Visita visita){
-        String sql = "INSERT INTO visita(codigoTratamiento, codigoMascota, fechaVisita, sintomas, peso)"
-                + "VALUES (?,?,?,?,?)";
+        String sql = "INSERT INTO visita(codigoTratamiento, codigoMascota, fechaVisita, sintomas, peso, importeTotal)"
+                + "VALUES (?,?,?,?,?,?)";
         try {
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setInt(1, visita.getCodigoTratamiento());
@@ -42,6 +42,7 @@ public class VisitaData {
             ps.setDate(3, visita.getFecha());
             ps.setString(4, visita.getSintomas().getDescripcion());
             ps.setDouble(5, visita.getPeso());
+            ps.setDouble(6, visita.getImporteTotal());
             ps.executeUpdate();
             ResultSet rs = ps.getGeneratedKeys();
             if(rs.next()){
@@ -54,7 +55,7 @@ public class VisitaData {
         
     }
     public void modificarVisita(Visita visita){
-        String sql = "UPDATE visita SET codigoTratamiento = ?, codigoMascota = ?, fechaVisita = ?, sintomas = ?, peso = ?"
+        String sql = "UPDATE visita SET codigoTratamiento = ?, codigoMascota = ?, fechaVisita = ?, sintomas = ?, peso = ?, importeTotal = ?"
                 + " WHERE idVisita = ?";
         try {
             PreparedStatement ps = con.prepareStatement(sql);
@@ -63,7 +64,8 @@ public class VisitaData {
             ps.setDate(3, visita.getFecha());
             ps.setString(4, visita.getSintomas().getDescripcion());
             ps.setDouble(5, visita.getPeso());
-            ps.setInt(6, visita.getIdVisita());
+            ps.setDouble(6, visita.getImporteTotal());
+            ps.setInt(7, visita.getIdVisita());
             int exito = ps.executeUpdate();
             if(exito == 1){
                 JOptionPane.showMessageDialog(null, "Visita modificada");
@@ -106,6 +108,34 @@ public class VisitaData {
                 visitaEncontrada.setFecha(rs.getDate("fechaVisita"));
                 visitaEncontrada.setSintomas(Sintomas.buscarSintomas(rs.getString("sintomas")));
                 visitaEncontrada.setPeso(rs.getDouble("peso"));
+                visitaEncontrada.setImporteTotal(rs.getDouble("importeTotal"));
+                return visitaEncontrada;
+            } else {
+                return null;
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al buscar la visita en la tabla Visita");
+            return null;
+        }
+    }
+    public Visita buscarVisita2(Visita visita) {
+        String sql = "SELECT * FROM visita WHERE codigoTratamiento = ? AND codigoMascota = ?";
+
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, visita.getCodigoTratamiento());
+            ps.setInt(2, visita.getCodigoMascota());
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                Visita visitaEncontrada = new Visita();
+                visitaEncontrada.setIdVisita(rs.getInt("idVisita"));
+                visitaEncontrada.setCodigoTratamiento(rs.getInt("codigoTratamiento"));
+                visitaEncontrada.setCodigoMascota(rs.getInt("codigoMascota"));
+                visitaEncontrada.setFecha(rs.getDate("fechaVisita"));
+                visitaEncontrada.setSintomas(Sintomas.buscarSintomas(rs.getString("sintomas")));
+                visitaEncontrada.setPeso(rs.getDouble("peso"));
+                visitaEncontrada.setImporteTotal(rs.getDouble("importeTotal"));
                 return visitaEncontrada;
             } else {
                 return null;

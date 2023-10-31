@@ -206,8 +206,8 @@ public List<Visita> obtenerVisitas(int codigo){
                 Date fecha = rs.getDate("fecha");
                 double peso = rs.getDouble("peso");
                 Sintomas sintomas = Sintomas.buscarSintomas(rs.getString("sintomas"));
-
-                Visita visita = new Visita(idVisita, codigoMascota, codigoTratamiento, fecha, peso, sintomas);
+                double importeTotal = rs.getDouble("importeTotal");
+                Visita visita = new Visita(idVisita, codigoMascota, codigoTratamiento, fecha, peso, sintomas, importeTotal);
                 visitas.add(visita);
             }
 
