@@ -40,14 +40,6 @@ public class MascotasDelClienteVista extends javax.swing.JInternalFrame {
         cargarComboClientes();
         existeCliente = false;
     }
-    public MascotasDelClienteVista(boolean soloMascotas){
-        initComponents();
-        cargarComboClientes();
-        existeCliente = false;
-        if(soloMascotas){
-            elegir.setEnabled(false);
-        }
-    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -77,7 +69,6 @@ public class MascotasDelClienteVista extends javax.swing.JInternalFrame {
         codigo = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
         colorPelo = new javax.swing.JTextField();
-        elegir = new javax.swing.JButton();
         fechaNacimiento = new com.toedter.calendar.JDateChooser();
         jLabel12 = new javax.swing.JLabel();
         clientesCombo = new javax.swing.JComboBox<>();
@@ -128,13 +119,6 @@ public class MascotasDelClienteVista extends javax.swing.JInternalFrame {
 
         colorPelo.setEditable(false);
 
-        elegir.setText("ELEGIR TRATAMIENTO");
-        elegir.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                elegirActionPerformed(evt);
-            }
-        });
-
         jLabel12.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel12.setText("Cliente:");
 
@@ -162,7 +146,6 @@ public class MascotasDelClienteVista extends javax.swing.JInternalFrame {
         escritorio.setLayer(codigo, javax.swing.JLayeredPane.DEFAULT_LAYER);
         escritorio.setLayer(jLabel10, javax.swing.JLayeredPane.DEFAULT_LAYER);
         escritorio.setLayer(colorPelo, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        escritorio.setLayer(elegir, javax.swing.JLayeredPane.DEFAULT_LAYER);
         escritorio.setLayer(fechaNacimiento, javax.swing.JLayeredPane.DEFAULT_LAYER);
         escritorio.setLayer(jLabel12, javax.swing.JLayeredPane.DEFAULT_LAYER);
         escritorio.setLayer(clientesCombo, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -212,8 +195,7 @@ public class MascotasDelClienteVista extends javax.swing.JInternalFrame {
                     .addGroup(escritorioLayout.createSequentialGroup()
                         .addComponent(nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel4))
-                    .addComponent(elegir, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addComponent(jLabel4)))
                 .addGap(18, 18, 18)
                 .addGroup(escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(raza, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -266,9 +248,7 @@ public class MascotasDelClienteVista extends javax.swing.JInternalFrame {
                         .addComponent(jLabel10)
                         .addComponent(peso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(fechaNacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 85, Short.MAX_VALUE)
-                .addComponent(elegir)
-                .addContainerGap())
+                .addContainerGap(48, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -279,7 +259,7 @@ public class MascotasDelClienteVista extends javax.swing.JInternalFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(escritorio)
+            .addComponent(escritorio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -288,75 +268,26 @@ public class MascotasDelClienteVista extends javax.swing.JInternalFrame {
     private void mascotasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mascotasActionPerformed
         // TODO add your handling code here:
         Mascota mascotaSeleccionada = (Mascota)mascotas.getSelectedItem();
-        
-        nombre.setText(mascotaSeleccionada.getAlias());
-        raza.setText(mascotaSeleccionada.getRaza());
-        codigo.setText(mascotaSeleccionada.getCodigo()+"");
-        sexo.setText(mascotaSeleccionada.getSexo());
-        especie.setText(mascotaSeleccionada.getEspecie());
-        colorPelo.setText(mascotaSeleccionada.getColorPelo());
-        fechaNacimiento.setDate(Date.valueOf(mascotaSeleccionada.getFechaNacimiento()));
-        peso.setText(mascotaSeleccionada.getPeso()+"");
-        mascota1 = mascotaSeleccionada;
-        
+        if(mascotaSeleccionada != null){
+            nombre.setText(mascotaSeleccionada.getAlias());
+            raza.setText(mascotaSeleccionada.getRaza());
+            codigo.setText(mascotaSeleccionada.getCodigo()+"");
+            sexo.setText(mascotaSeleccionada.getSexo());
+            especie.setText(mascotaSeleccionada.getEspecie());
+            colorPelo.setText(mascotaSeleccionada.getColorPelo());
+            fechaNacimiento.setDate(Date.valueOf(mascotaSeleccionada.getFechaNacimiento()));
+            peso.setText(mascotaSeleccionada.getPeso()+"");
+            mascota1 = mascotaSeleccionada;
+        }else{
+            
+        }
         
     }//GEN-LAST:event_mascotasActionPerformed
-
-    private void elegirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_elegirActionPerformed
-        // TODO add your handling code here:
-        escritorio.removeAll();
-        escritorio.repaint();
-        ListaDeTratamientosVista ltv= new ListaDeTratamientosVista();
-        ltv.setVisible(true);
-        escritorio.add(ltv);
-        escritorio.moveToFront(ltv);
-        // Agrega un InternalFrameListener al ListaDeTratamientosVista
-        ltv.addInternalFrameListener(new InternalFrameListener() {
-            @Override
-            public void internalFrameOpened(InternalFrameEvent e) {
-                // Este método se llama cuando se abre el JInternalFrame
-            }
-
-            @Override
-            public void internalFrameClosing(InternalFrameEvent e) {
-                // Este método se llama cuando se cierra el JInternalFrame
-                Tratamiento tratamientoElegido = ltv.obtenerTratamiento();
-                VisitaData visitaData = new VisitaData();
-                //visitaData.
-                // Realiza aquí las acciones que deseas cuando se cierra
-                // por ejemplo, actualizaciones o notificaciones.
-            }
-
-            @Override
-            public void internalFrameClosed(InternalFrameEvent e) {
-                // Este método se llama después de que el JInternalFrame se haya cerrado
-            }
-
-            @Override
-            public void internalFrameIconified(InternalFrameEvent e) {
-                // Este método se llama cuando el JInternalFrame se minimiza
-            }
-
-            @Override
-            public void internalFrameDeiconified(InternalFrameEvent e) {
-                // Este método se llama cuando el JInternalFrame se restaura desde la minimización
-            }
-
-            @Override
-            public void internalFrameActivated(InternalFrameEvent e) {
-                // Este método se llama cuando el JInternalFrame se activa (gana el foco)
-            }
-
-            @Override
-            public void internalFrameDeactivated(InternalFrameEvent e) {
-                // Este método se llama cuando el JInternalFrame se desactiva (pierde el foco)
-            }
-        });
-    }//GEN-LAST:event_elegirActionPerformed
 
     private void clientesComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clientesComboActionPerformed
         // TODO add your handling code here:
         Cliente clienteSeleccionado = (Cliente)clientesCombo.getSelectedItem();
+        mascotas.removeAllItems();
         cargarComboMascotas(clienteSeleccionado);
     }//GEN-LAST:event_clientesComboActionPerformed
 
@@ -365,7 +296,6 @@ public class MascotasDelClienteVista extends javax.swing.JInternalFrame {
     private javax.swing.JComboBox<Cliente> clientesCombo;
     private javax.swing.JTextField codigo;
     private javax.swing.JTextField colorPelo;
-    private javax.swing.JButton elegir;
     private javax.swing.JDesktopPane escritorio;
     private javax.swing.JTextField especie;
     private com.toedter.calendar.JDateChooser fechaNacimiento;
@@ -388,7 +318,7 @@ public class MascotasDelClienteVista extends javax.swing.JInternalFrame {
     // End of variables declaration//GEN-END:variables
 
     private void cargarComboMascotas(Cliente cliente){
-        for (Mascota mascota : cliente.getMascotas()) {
+        for (Mascota mascota : clienteData.MascotasdeCliente(cliente.getIdCliente())) {
             mascotas.addItem(mascota);
         }
     }

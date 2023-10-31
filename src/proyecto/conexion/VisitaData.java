@@ -17,6 +17,7 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import proyecto.entidades.Cliente;
 import proyecto.entidades.Mascota;
+import proyecto.entidades.Sintomas;
 import proyecto.entidades.Visita;
 
 /**
@@ -32,17 +33,8 @@ public class VisitaData {
     }
     
     public void guardarVisita(Visita visita){
-        String sql = "INSET INTO visita(codigoTratamiento, codigoMascota, fechaVisita, sintomas, peso)"
+        String sql = "INSERT INTO visita(codigoTratamiento, codigoMascota, fechaVisita, sintomas, peso)"
                 + "VALUES (?,?,?,?,?)";
-        /*boolean existeCliente = false;
-        Cliente cliente1 = new Cliente();
-        for (Cliente cliente : clientes) {
-            if(cliente.getIdCliente() == visita.getMascota().getIdCliente()){
-                existeCliente = true;
-                cliente1 = cliente;
-            }
-        }
-        if(!existeCliente){*/
         try {
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setInt(1, visita.getCodigoTratamiento());
@@ -97,6 +89,33 @@ public class VisitaData {
             JOptionPane.showMessageDialog(null, "Error al accceder a la tabla visita");
         }
     }
+    
+    public Visita buscarVisita(Visita visita) {
+        String sql = "SELECT * FROM visita WHERE idVisita = ?";
+
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, visita.getIdVisita());
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                Visita visitaEncontrada = new Visita();
+                visitaEncontrada.setIdVisita(rs.getInt("idVisita"));
+                visitaEncontrada.setCodigoTratamiento(rs.getInt("codigoTratamiento"));
+                visitaEncontrada.setCodigoMascota(rs.getInt("codigoMascota"));
+                visitaEncontrada.setFecha(rs.getDate("fechaVisita"));
+                visitaEncontrada.setSintomas(Sintomas.buscarSintomas(rs.getString("sintomas")));
+                visitaEncontrada.setPeso(rs.getDouble("peso"));
+                return visitaEncontrada;
+            } else {
+                return null;
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al buscar la visita en la tabla Visita");
+            return null;
+        }
+    }
+
     
     
     
