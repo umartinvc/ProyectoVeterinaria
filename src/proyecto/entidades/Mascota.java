@@ -130,7 +130,9 @@ public class Mascota {
         this.peso = peso;
     }
 
- 
+    public void agregarVisita(Visita visita) {
+        visitas.add(visita);
+    }
 
     public List<Visita> getVisitas() {
         return visitas;
