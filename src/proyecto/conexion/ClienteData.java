@@ -6,10 +6,12 @@
 package proyecto.conexion;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -17,6 +19,8 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import proyecto.entidades.Cliente;
 import proyecto.entidades.Mascota;
+import proyecto.entidades.Sintomas;
+import proyecto.entidades.Visita;
 
 /**
  *
@@ -198,5 +202,52 @@ public class ClienteData {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Mascota","ERROR",JOptionPane.ERROR_MESSAGE);
         }
         return mascotas;
-    } 
+    }
+    public List<Mascota> MascotasdeCliente2(int idCliente) {
+        String sql = "SELECT m.codigo AS mascota_codigo, m.alias, m.sexo, m.especie, m.raza, m.colorPelo, m.fechaNacimiento, m.PesoActual, v.idVisita, v.fechaVisita, v.sintomas, v.peso, v.importeTotal " +
+                     "FROM mascota AS m " +
+                     "LEFT JOIN visita AS v ON m.codigo = v.codigoMascota " +
+                     "WHERE m.idCliente = ?";
+
+        List<Mascota> mascotas = new ArrayList<Mascota>();
+        Mascota mascota = null;
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, idCliente);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                
+                int visitaId = rs.getInt("idVisita");
+
+                mascota = new Mascota();
+                mascota.setAlias(rs.getString("alias"));
+                mascota.setSexo(rs.getString("sexo"));
+                mascota.setEspecie(rs.getString("especie"));
+                mascota.setRaza(rs.getString("raza"));
+                mascota.setColorPelo(rs.getString("colorPelo"));
+                mascota.setFechaNacimiento(rs.getDate("fechaNacimiento").toLocalDate());
+                mascota.setPeso(rs.getDouble("pesoActual"));
+                mascota.setIdCliente(idCliente);
+
+                if (visitaId > 0) {
+                    Visita visitaEncontrada = new Visita();
+                    visitaEncontrada.setIdVisita(rs.getInt("idVisita"));
+                    visitaEncontrada.setCodigoTratamiento(rs.getInt("codigoTratamiento"));
+                    visitaEncontrada.setCodigoMascota(rs.getInt("codigoMascota"));
+                    visitaEncontrada.setFecha(rs.getDate("fechaVisita"));
+                    visitaEncontrada.setSintomas(Sintomas.buscarSintomas(rs.getString("sintomas")));
+                    visitaEncontrada.setPeso(rs.getDouble("peso"));
+                    visitaEncontrada.setImporteTotal(rs.getDouble("importeTotal"));
+                    mascota.agregarVisita(visitaEncontrada);
+                }
+
+                mascotas.add(mascota);
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Mascota", "ERROR", JOptionPane.ERROR_MESSAGE);
+        }
+        return mascotas;
+    }
+
 }
