@@ -154,7 +154,7 @@ public class VisitaData {
             ps.setInt(1, idMascota);
             ResultSet rs = ps.executeQuery();
 
-            if (rs.next()) {
+            while (rs.next()) {
                 Visita visitaEncontrada = new Visita();
                 visitaEncontrada.setIdVisita(rs.getInt("idVisita"));
                 visitaEncontrada.setCodigoTratamiento(rs.getInt("codigoTratamiento"));
