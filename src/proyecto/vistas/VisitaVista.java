@@ -70,6 +70,7 @@ public class VisitaVista extends javax.swing.JInternalFrame {
         jLabel7 = new javax.swing.JLabel();
         importeTotal = new javax.swing.JTextField();
         modificar = new javax.swing.JButton();
+        listadoVisitas = new javax.swing.JButton();
 
         setClosable(true);
         setIconifiable(true);
@@ -148,6 +149,13 @@ public class VisitaVista extends javax.swing.JInternalFrame {
             }
         });
 
+        listadoVisitas.setText("LISTADO DE VISITAS");
+        listadoVisitas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                listadoVisitasActionPerformed(evt);
+            }
+        });
+
         escritorio.setLayer(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
         escritorio.setLayer(codigoTratamiento, javax.swing.JLayeredPane.DEFAULT_LAYER);
         escritorio.setLayer(jLabel2, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -169,47 +177,53 @@ public class VisitaVista extends javax.swing.JInternalFrame {
         escritorio.setLayer(jLabel7, javax.swing.JLayeredPane.DEFAULT_LAYER);
         escritorio.setLayer(importeTotal, javax.swing.JLayeredPane.DEFAULT_LAYER);
         escritorio.setLayer(modificar, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        escritorio.setLayer(listadoVisitas, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout escritorioLayout = new javax.swing.GroupLayout(escritorio);
         escritorio.setLayout(escritorioLayout);
         escritorioLayout.setHorizontalGroup(
             escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(escritorioLayout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel7)
-                    .addGroup(escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(guardar)
-                        .addComponent(jLabel6)))
-                .addGroup(escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, escritorioLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addGroup(escritorioLayout.createSequentialGroup()
+                        .addContainerGap()
                         .addGroup(escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(serviciosA)
-                            .addGroup(escritorioLayout.createSequentialGroup()
-                                .addGroup(escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(importeTotal, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(serviciosCombo, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(fecha, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(codigoTratamiento, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(codigoMascota, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(sintomas, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(peso, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 195, Short.MAX_VALUE))
-                                .addGap(18, 18, 18)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel7)
+                            .addGroup(escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(guardar)
+                                .addComponent(jLabel6)))
+                        .addGroup(escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, escritorioLayout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(buscarTratamiento)
-                                    .addComponent(buscarMascota)
-                                    .addComponent(buscarSintomas)))))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, escritorioLayout.createSequentialGroup()
-                        .addGap(50, 50, 50)
-                        .addComponent(modificar)
-                        .addGap(56, 56, 56)
-                        .addComponent(eliminar)))
+                                    .addComponent(serviciosA)
+                                    .addGroup(escritorioLayout.createSequentialGroup()
+                                        .addGroup(escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                            .addComponent(importeTotal, javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(serviciosCombo, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(fecha, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(codigoTratamiento, javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(codigoMascota, javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(sintomas, javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(peso, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 195, Short.MAX_VALUE))
+                                        .addGap(18, 18, 18)
+                                        .addGroup(escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(buscarTratamiento)
+                                            .addComponent(buscarMascota)
+                                            .addComponent(buscarSintomas)))))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, escritorioLayout.createSequentialGroup()
+                                .addGap(50, 50, 50)
+                                .addComponent(modificar)
+                                .addGap(56, 56, 56)
+                                .addComponent(eliminar))))
+                    .addGroup(escritorioLayout.createSequentialGroup()
+                        .addGap(163, 163, 163)
+                        .addComponent(listadoVisitas)))
                 .addContainerGap(56, Short.MAX_VALUE))
         );
         escritorioLayout.setVerticalGroup(
@@ -253,7 +267,9 @@ public class VisitaVista extends javax.swing.JInternalFrame {
                     .addComponent(modificar)
                     .addComponent(guardar)
                     .addComponent(eliminar))
-                .addContainerGap(55, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(listadoVisitas)
+                .addContainerGap(13, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -542,7 +558,7 @@ public class VisitaVista extends javax.swing.JInternalFrame {
             } else {
                 JOptionPane.showMessageDialog(null, "Operación cancelada.");
             }
-            Visita visitaEncontrada = visitaData.buscarVisita2(visita);
+            Visita visitaEncontrada = visitaData.buscarVisita(visita);
             if(visitaEncontrada != null){
                 visitaData.modificarVisita(visita);
             }else{
@@ -555,6 +571,14 @@ public class VisitaVista extends javax.swing.JInternalFrame {
 
         
     }//GEN-LAST:event_modificarActionPerformed
+
+    private void listadoVisitasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listadoVisitasActionPerformed
+        // TODO add your handling code here:
+        ListaDeVisitasMascota ldvm = new ListaDeVisitasMascota();
+        ldvm.setVisible(true);
+        MenuVeterinaria.obtenerEscritorio().add(ldvm);
+        ldvm.toFront();
+    }//GEN-LAST:event_listadoVisitasActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -575,6 +599,7 @@ public class VisitaVista extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JButton listadoVisitas;
     private javax.swing.JButton modificar;
     private javax.swing.JTextField peso;
     private javax.swing.JButton serviciosA;

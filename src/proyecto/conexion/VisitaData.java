@@ -145,6 +145,32 @@ public class VisitaData {
             return null;
         }
     }
+    
+    public List<Visita> buscarVisitaPorIdMascota(int idMascota) {
+        String sql = "SELECT * FROM visita WHERE codigoMascota = ?";
+        List <Visita> visitas = new ArrayList<>();
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, idMascota);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                Visita visitaEncontrada = new Visita();
+                visitaEncontrada.setIdVisita(rs.getInt("idVisita"));
+                visitaEncontrada.setCodigoTratamiento(rs.getInt("codigoTratamiento"));
+                visitaEncontrada.setCodigoMascota(rs.getInt("codigoMascota"));
+                visitaEncontrada.setFecha(rs.getDate("fechaVisita"));
+                visitaEncontrada.setSintomas(Sintomas.buscarSintomas(rs.getString("sintomas")));
+                visitaEncontrada.setPeso(rs.getDouble("peso"));
+                visitaEncontrada.setImporteTotal(rs.getDouble("importeTotal"));
+                visitas.add(visitaEncontrada);
+                
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al buscar la visita en la tabla Visita");
+        }
+        return visitas;
+    }
 
     
     

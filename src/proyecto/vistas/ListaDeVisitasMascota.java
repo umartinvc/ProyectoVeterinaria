@@ -4,6 +4,8 @@
  */
 package proyecto.vistas;
 
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import proyecto.conexion.ClienteData;
 import proyecto.conexion.MascotaData;
@@ -18,11 +20,14 @@ import proyecto.entidades.Visita;
  */
 public class ListaDeVisitasMascota extends javax.swing.JInternalFrame {
 private DefaultTableModel modelo = new DefaultTableModel();
-private ClienteData clienteData = new ClienteData();
+private ClienteData clienteData;
+private VisitaData visitaData;
     /**
      * Creates new form ListaDeVisitasMascota
      */
     public ListaDeVisitasMascota() {
+        visitaData = new VisitaData();
+        clienteData = new ClienteData();
         initComponents();
         armarCabecera();
         cargarComboClientes();
@@ -41,12 +46,12 @@ private ClienteData clienteData = new ClienteData();
         jLabel3 = new javax.swing.JLabel();
         jDesktopPane1 = new javax.swing.JDesktopPane();
         jLabel1 = new javax.swing.JLabel();
-        mascotas = new javax.swing.JComboBox<>();
         jLabel4 = new javax.swing.JLabel();
+        jComboClientes = new javax.swing.JComboBox<>();
+        jLabel5 = new javax.swing.JLabel();
+        jComboMascotas = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tablaVisitas = new javax.swing.JTable();
-        jLabel12 = new javax.swing.JLabel();
-        clientesCombo = new javax.swing.JComboBox<>();
+        jTVisitas = new javax.swing.JTable();
 
         jLabel2.setText("jLabel2");
 
@@ -59,16 +64,23 @@ private ClienteData clienteData = new ClienteData();
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel1.setText("Listado De Visitas");
 
-        mascotas.addActionListener(new java.awt.event.ActionListener() {
+        jLabel4.setText("Clientes: ");
+
+        jComboClientes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mascotasActionPerformed(evt);
+                jComboClientesActionPerformed(evt);
             }
         });
 
-        jLabel4.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jLabel4.setText("Mascotas:");
+        jLabel5.setText("Mascotas:");
 
-        tablaVisitas.setModel(new javax.swing.table.DefaultTableModel(
+        jComboMascotas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboMascotasActionPerformed(evt);
+            }
+        });
+
+        jTVisitas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -79,122 +91,110 @@ private ClienteData clienteData = new ClienteData();
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(tablaVisitas);
-
-        jLabel12.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jLabel12.setText("Cliente:");
-
-        clientesCombo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                clientesComboActionPerformed(evt);
-            }
-        });
+        jScrollPane1.setViewportView(jTVisitas);
 
         jDesktopPane1.setLayer(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jDesktopPane1.setLayer(mascotas, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jLabel4, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane1.setLayer(jComboClientes, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane1.setLayer(jLabel5, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane1.setLayer(jComboMascotas, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jScrollPane1, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jDesktopPane1.setLayer(jLabel12, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jDesktopPane1.setLayer(clientesCombo, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
         jDesktopPane1.setLayout(jDesktopPane1Layout);
         jDesktopPane1Layout.setHorizontalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 860, Short.MAX_VALUE)
-                .addContainerGap())
-            .addGroup(jDesktopPane1Layout.createSequentialGroup()
                 .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                        .addGap(49, 49, 49)
-                        .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel12))
-                        .addGap(42, 42, 42)
-                        .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(mascotas, 0, 662, Short.MAX_VALUE)
-                            .addComponent(clientesCombo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGap(197, 197, 197)
+                        .addComponent(jLabel1))
                     .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                        .addGap(371, 371, 371)
-                        .addComponent(jLabel1)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(29, 29, 29)
+                        .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 453, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel4)
+                                    .addComponent(jLabel5))
+                                .addGap(25, 25, 25)
+                                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jComboClientes, 0, 357, Short.MAX_VALUE)
+                                    .addComponent(jComboMascotas, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
+                .addContainerGap(45, Short.MAX_VALUE))
         );
         jDesktopPane1Layout.setVerticalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                .addContainerGap()
                 .addComponent(jLabel1)
-                .addGap(21, 21, 21)
-                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel12)
-                    .addComponent(clientesCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(19, 19, 19)
                 .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(mascotas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(27, 27, 27)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(90, Short.MAX_VALUE))
+                    .addComponent(jComboClientes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(jComboMascotas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(24, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jDesktopPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jDesktopPane1)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jDesktopPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jDesktopPane1)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void mascotasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mascotasActionPerformed
+    private void jComboClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboClientesActionPerformed
+        // TODO add your handling code here:
+        //jComboMascotas.removeAllItems();
+        Cliente cliente = new Cliente();
+        cliente = (Cliente)jComboClientes.getSelectedItem();
+        cargarComboMascotas(cliente);
+    }//GEN-LAST:event_jComboClientesActionPerformed
+
+    private void jComboMascotasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboMascotasActionPerformed
         // TODO add your handling code here:
         borrarFilas();
-        MascotaData mascotaData = new MascotaData();
-        Mascota mascotaSeleccionada = (Mascota)mascotas.getSelectedItem();
-        for (Visita visita : mascotaData.obtenerVisitas(mascotaSeleccionada.getCodigo())) {
-            //System.out.println(tratamiento.toString());
-            modelo.addRow(new Object []{
-                visita.getIdVisita(),
-                visita.getCodigoMascota(),
-                visita.getCodigoTratamiento(),
-                visita.getFecha(),
-                visita.getPeso(),
-                visita.getSintomas(),
-                visita.getImporteTotal()
-            });
-            
+        Mascota mascota = (Mascota) jComboMascotas.getSelectedItem();
+        if (mascota != null) {
+            for (Visita visita1 : visitaData.buscarVisitaPorIdMascota(mascota.getCodigo())) {
+                modelo.addRow(new Object[]{
+                    visita1.getIdVisita(),
+                    visita1.getCodigoMascota(),
+                    visita1.getCodigoTratamiento(),
+                    visita1.getFecha(),
+                    visita1.getPeso(),
+                    visita1.getSintomas(),
+                    visita1.getImporteTotal()
+                });
+            }
+        } else {
         }
-
-    }//GEN-LAST:event_mascotasActionPerformed
-
-    private void clientesComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clientesComboActionPerformed
-        // TODO add your handling code here:
-        Cliente clienteSeleccionado = (Cliente)clientesCombo.getSelectedItem();
-        mascotas.removeAllItems();
-        cargarComboMascotas(clienteSeleccionado);
-    }//GEN-LAST:event_clientesComboActionPerformed
+        
+    }//GEN-LAST:event_jComboMascotasActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<Cliente> clientesCombo;
+    private javax.swing.JComboBox<Cliente> jComboClientes;
+    private javax.swing.JComboBox<Mascota> jComboMascotas;
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JComboBox<Mascota> mascotas;
-    private javax.swing.JTable tablaVisitas;
+    private javax.swing.JTable jTVisitas;
     // End of variables declaration//GEN-END:variables
 
     private void armarCabecera(){
@@ -205,24 +205,25 @@ private ClienteData clienteData = new ClienteData();
         modelo.addColumn("Peso");
         modelo.addColumn("Sintomas");
         modelo.addColumn("importe");
-        tablaVisitas.setModel(modelo);
+        jTVisitas.setModel(modelo);
     }
     
     private void borrarFilas() {
-        DefaultTableModel model = (DefaultTableModel) tablaVisitas.getModel();
+        DefaultTableModel model = (DefaultTableModel) jTVisitas.getModel();
         model.setRowCount(0); // Elimina todas las filas de la tabla
     }
     
-    private void cargarComboMascotas(Cliente cliente){
-        for (Mascota mascota : clienteData.MascotasdeCliente2(cliente.getIdCliente())) {
-            mascotas.addItem(mascota);
+    private void cargarComboMascotas(Cliente cliente1){
+        jComboMascotas.removeAllItems();
+        for (Mascota mascota : clienteData.MascotasdeCliente(cliente1.getIdCliente())) {
+            jComboMascotas.addItem(mascota);
         }
     }
     
     private void cargarComboClientes(){
         
         for (Cliente cliente : clienteData.ClientesTodos()) {
-            clientesCombo.addItem(cliente);
+            jComboClientes.addItem(cliente);
         }
         
     }
